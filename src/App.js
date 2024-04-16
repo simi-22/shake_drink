@@ -8,6 +8,7 @@ import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
 import LoginPage from "./pages/LoginPage";
 import GamePage from "./pages/GamePage";
 import SearchPage from "./pages/SearchPage";
+import CustomRecipePage from "./pages/CustomRecipePage";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 				<Route path="search" element={<SearchPage />} />
 			</Route>
+			<Route path="/custom" element={<CustomRecipePage />} />
 		</Routes>
 	);
 }
