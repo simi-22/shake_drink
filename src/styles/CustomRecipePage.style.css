@@ -1,0 +1,132 @@
+.customSection {
+    padding: 40px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.customSection > * {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 레시피 작성하는 영역 */
+.writeSection {
+    width: 70%;
+}
+
+.writeSection > * {
+    margin-bottom: 1em;
+}
+
+.photoContainer {
+    display: flex;
+    flex-direction: column;
+}
+.photoGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 0.5em;
+    gap: 20px;
+}
+.imgBox {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    justify-content: center;
+    text-align: center;
+}
+
+.nameContainer > * {
+    margin: 0.3em;
+}
+
+.itemForm{
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.itemHeader {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.ingredientsSearch {
+    margin-left: 0.5em;
+    padding: 0.5em;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.amount {
+    display: flex;
+}
+
+.amount input {
+    width: 65%;
+}
+
+.amount span {
+    margin-left: 1em;
+}
+
+.amountUnit {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background-color: white;
+    width: 35%;
+    height: 50px;
+    margin: 0.5em 0;
+    padding: 0.8em 0 0 1em;
+}
+
+.amountUnit span {
+    
+}
+
+.buttonClass {
+    color: white;
+    margin-top: 0.3em;
+    background-color: pink;
+    border-radius: 5px;
+    width: 10%;
+    height: 40px;
+    margin-left: 90%;
+}
+
+
+
+/* 레시피 카테고리 셋팅 영역 */
+.settingSection {
+    width: 30%;
+}
+
+/* 공통 사용 스타일 */
+.inputField {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    width: 100%;
+    height: 50px;
+    margin: 0.5em;
+    padding: 1em;
+}
+
+.textField {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+    margin: 0.5em;
+    padding: 1em;
+}
+
+.numChar {
+    display: flex;
+    justify-content: flex-end;
+}
