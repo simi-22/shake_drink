@@ -1,17 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./tailwind.css";
+import { Global } from "@emotion/react";
+import { globalStyles } from "./styles/globalStyles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
 root.render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
+      <Global styles={globalStyles} />
       <App />
     </BrowserRouter>
   </QueryClientProvider>
