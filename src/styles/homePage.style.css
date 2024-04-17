@@ -104,18 +104,23 @@
 인기리스트
 인기리스트
 인기리스트 */
-#popular-list {
+.main-page-list {
 }
-#popular-list > div {
+.main-page-list > div {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 20px;
 }
-#popular-list > div h2 {
+.main-page-list > div h2 {
 	display: inline-block;
 	background-color: #fd4926;
 	color: #fff;
 	padding: 5px 20px;
 	font-size: 30px;
 	box-sizing: border-box;
+}
+.main-card-wrap {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
 }

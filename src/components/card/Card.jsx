@@ -62,16 +62,15 @@ export default Card;
 
 const container = css`
 	position: relative;
-	width: 200px;
-	height: 250px;
+	width: 300px;
 	padding: 10px;
 	border-radius: 15px;
-	background-color: gray;
+	background-color: #fff;
 `;
 
 const imgWrap = css`
 	width: 100%;
-	height: 180px;
+
 	position: relative;
 	cursor: pointer;
 	& > img {
@@ -82,7 +81,6 @@ const imgWrap = css`
 		border-radius: 15px;
 		width: 180px;
 		height: 180px;
-		padding: 10px;
 		color: white;
 		position: absolute;
 		top: 0;

@@ -19,7 +19,8 @@ import banner2 from "../assets/image/cocktail-banner2.png";
 import banner3 from "../assets/image/cocktail-banner3.png";
 import banner4 from "../assets/image/cocktail-banner4.png";
 import banner5 from "../assets/image/cocktail-banner5.png";
-import PopularList from "./component/PopularList";
+import PopularList from "../components/mainList/PopularList";
+import LatestList from "../components/mainList/LatestList";
 
 function HomePage() {
 	let settings = {
@@ -53,14 +54,12 @@ function HomePage() {
 					<img src={Slide3} alt="메인배너이미지3" />
 				</div>
 			</Slider>
-
 			{/* <LoadingPage /> */}
 			{/* <div style={{ display: "flex" }}>
 				<Alcohol />
 				<h1 style={{ color: "red" }}>==NonAlcohol==</h1>
 				<NonAlcohol />
 			</div> */}
-
 			<ul id="home-banner">
 				<li>
 					<img src={banner1} alt="" />
@@ -79,6 +78,7 @@ function HomePage() {
 				</li>
 			</ul>
 			<PopularList />
+			<LatestList />
 		</div>
 	);
 }
