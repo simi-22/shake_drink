@@ -70,9 +70,8 @@ function AppLayout() {
 	const navigate = useNavigate();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const [isLogin, setIsLogin] = useState(false); // 로그인 유무
+	const [isLogin, setIsLogin] = useState(true); // 로그인 유무
 	const [keyword, setKeyword] = useState("");
-	console.log(keyword);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -185,7 +184,7 @@ function AppLayout() {
 						Shake & Drink
 					</Typography>
 					<Box
-						sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, flexDirection: "row-reverse" }}
+						sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
 					>
 						{pages.map((page) => (
 							<Button
