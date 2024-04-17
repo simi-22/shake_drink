@@ -40,7 +40,7 @@ const AppLayout = () => {
 
 						<Nav.Link as={NavLink} to='/detail'className="movies" style={{marginRight:'10px'}}>Detail</Nav.Link>
 						
-						<Nav.Link as={NavLink} to='/mypage' className="mypage" >MyPage</Nav.Link>
+						<Nav.Link as={NavLink} to='/user' className="user" >UserPage</Nav.Link>
 					</Nav>
 					<Form ref={formRef} className="d-flex" 
 						onSubmit={searchByKeyword}>

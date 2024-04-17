@@ -33,10 +33,10 @@ export const useAnalyze = create((set)=>({
 
 // 아이템에 이벤트 리스너를 달아서 해당 아이템이 클릭되었을 때,
 // analyze 함수를 발동시키게 한다.
-// function analyze(item){
-// 	if (item.strCategory ==='Ordinary Drink'){
+// function analyze(category){   //<--category에 item.strCategory 값 들어간다.
+// 	if (category ==='Ordinary Drink'){
 // 		updateA()
-// 	} else if(item.strCategory === 'cocktail'){
+// 	} else if(category === 'cocktail'){
 // 		updateB()
 // 	}
 // }

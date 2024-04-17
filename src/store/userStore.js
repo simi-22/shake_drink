@@ -5,5 +5,6 @@ export const useUser = create((set)=>({
 	id:'',
 	email:'',
 	password:'',
-	setUser:({email, password})=>set({id:v4(), email,password})
+	nickName:'',
+	setUser:({email, password, nickName})=>set({id:v4(), email,password, nickName})
 }))
