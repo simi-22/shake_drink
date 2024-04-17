@@ -38,7 +38,7 @@ const AppLayout = () => {
 							className="home" style={{marginRight:'10px'}}>
 								Home</Nav.Link> 
 
-						<Nav.Link as={NavLink} to='/detail'className="movies" style={{marginRight:'10px'}}>Detail</Nav.Link>
+						<Nav.Link as={NavLink} to='/detail'className="detail" style={{marginRight:'10px'}}>Detail</Nav.Link>
 						
 						<Nav.Link as={NavLink} to='/mypage' className="mypage" >MyPage</Nav.Link>
 					</Nav>
