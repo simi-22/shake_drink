@@ -20,7 +20,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const pages = ["Seach", "community", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
