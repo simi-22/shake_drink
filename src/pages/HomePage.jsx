@@ -14,12 +14,18 @@ import Slide1 from "../assets/image/cocktail-slide-1.jpg";
 import Slide2 from "../assets/image/cocktail-slide-2.jpeg";
 import Slide3 from "../assets/image/cocktail-slide-3.jpg";
 import Poster1 from "../assets/image/cocktail-poster.png";
+import banner1 from "../assets/image/cocktail-banner1.png";
+import banner2 from "../assets/image/cocktail-banner2.png";
+import banner3 from "../assets/image/cocktail-banner3.png";
+import banner4 from "../assets/image/cocktail-banner4.png";
+import banner5 from "../assets/image/cocktail-banner5.png";
+import PopularList from "./component/PopularList";
 
 function HomePage() {
 	let settings = {
 		dots: true,
 		infinite: true,
-		speed: 5000,
+		speed: 2000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		// autoplay: true,
@@ -49,12 +55,30 @@ function HomePage() {
 			</Slider>
 
 			{/* <LoadingPage /> */}
-			<div style={{ display: "flex" }}>
-				==Popular==
-				<PopularCocktail />
-				<h1 style={{ color: "red" }}>==Recent==</h1>
-				<RecentCocktail />
-			</div>
+			{/* <div style={{ display: "flex" }}>
+				<Alcohol />
+				<h1 style={{ color: "red" }}>==NonAlcohol==</h1>
+				<NonAlcohol />
+			</div> */}
+
+			<ul id="home-banner">
+				<li>
+					<img src={banner1} alt="" />
+				</li>
+				<li>
+					<img src={banner2} alt="" />
+				</li>
+				<li>
+					<img src={banner3} alt="" />
+				</li>
+				<li>
+					<img src={banner4} alt="" />
+				</li>
+				<li>
+					<img src={banner5} alt="" />
+				</li>
+			</ul>
+			<PopularList />
 		</div>
 	);
 }
