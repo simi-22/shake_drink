@@ -59,9 +59,18 @@ export const useFavorite = create((set)=>({
 	}),
 	
 	addItem: (item) => set((state) => {
-        const updatedList = [...state.favoriteList, item];
-        return { favoriteList: updatedList};
-    }),
+		// 중복 아이템인지 확인
+		const isDuplicate = state.favoriteList.some((existingItem) => existingItem.id === item.id);
+
+		// 중복 아이템이 아닌 경우에만 아이템을 추가
+		if (!isDuplicate) {
+			const updatedList = [...state.favoriteList, item];
+			return { favoriteList: updatedList };
+		}
+
+		// 중복 아이템인 경우 현재 상태 그대로 반환
+		return state;
+	}),
 	removeItem: (id) => set((state) => {
         const updatedList = state.favoriteList.filter(item => item.id !== id);
         return { favoriteList: updatedList};

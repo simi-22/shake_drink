@@ -60,7 +60,7 @@ function UserPage() {
 		if(checked){
 			addListToCart(favoriteList)
 			setChecked(false)
-			setTotalPrice(0)
+			calculateTotalPrice()
 		}
 	}
 	function payment(){
