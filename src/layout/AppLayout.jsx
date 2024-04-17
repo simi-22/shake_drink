@@ -17,7 +17,7 @@ import {
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 const pages = ["Seach", "Community", "Blog"];
 const settings = ["Profile", "Logout"];
@@ -254,6 +254,7 @@ function AppLayout() {
 					)}
 				</Toolbar>
 			</Container>
+			<Outlet />
 		</AppBar>
 	);
 }
