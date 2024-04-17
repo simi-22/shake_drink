@@ -18,12 +18,11 @@ function App() {
 				<Route path=":id" element={<DetailPage />} />
 				<Route path="user" element={<UserPage />} />
 				<Route path="login" element={<LoginPage />} />
-				<Route path="detail" element={<DetailPage />} />
 				<Route path="game" element={<GamePage />} />
 				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 				<Route path="search" element={<SearchPage />} />
+				<Route path="custom" element={<CustomRecipePage />} />
 			</Route>
-			<Route path="/custom" element={<CustomRecipePage />} />
 		</Routes>
 	);
 }
