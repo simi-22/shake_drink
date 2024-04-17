@@ -60,6 +60,7 @@ function UserPage() {
 		if(checked){
 			addListToCart(favoriteList)
 			setChecked(false)
+			setTotalPrice(0)
 		}
 	}
 	function payment(){
@@ -74,7 +75,7 @@ function UserPage() {
 	}
 	useEffect(()=>{   //수량이 바뀔 때마다 총액계산 다시 하게 한다.
 		calculateTotalPrice()
-	},[countChange])
+	},[countChange, cartList.length])
 
 
 	return (
@@ -163,7 +164,8 @@ function UserPage() {
 										{cartList?.map((item,i)=>
 											<div key={i}>
 												<span>{item.drink}</span>
-												<span><ClearIcon onClick={()=>removeFromCart(item.id)}/></span>
+												<span><ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
+												 }}/></span>
 												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
 											</div>
 									)}
