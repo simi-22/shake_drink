@@ -92,6 +92,7 @@ function AppLayout() {
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
 	};
+
 	// 프로필 메뉴 클로즈 핸들러
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
@@ -214,8 +215,8 @@ function AppLayout() {
 					{isLogin ? (
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title="Open settings">
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+								<IconButton onClick={handleOpenUserMenu}>
+									<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
 								</IconButton>
 							</Tooltip>
 							<Menu
