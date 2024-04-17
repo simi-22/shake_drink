@@ -1,20 +1,23 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import { alpha, styled } from "@mui/material";
+import React, { useState } from "react";
+import {
+	MenuItem,
+	Tooltip,
+	Button,
+	alpha,
+	styled,
+	AppBar,
+	Box,
+	Toolbar,
+	IconButton,
+	Typography,
+	Menu,
+	Container,
+	Avatar,
+} from "@mui/material";
 import InputBase from "@mui/material/InputBase";
+import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const pages = ["Seach", "community", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -65,10 +68,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function AppLayout() {
 	const navigate = useNavigate();
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
-	const [anchorElUser, setAnchorElUser] = React.useState(null);
-	const [isLogin, setIsLogin] = React.useState(false); // 로그인 유무
-	const [keyword, setKeyword] = React.useState("");
+	const [anchorElNav, setAnchorElNav] = useState(null);
+	const [anchorElUser, setAnchorElUser] = useState(null);
+	const [isLogin, setIsLogin] = useState(false); // 로그인 유무
+	const [keyword, setKeyword] = useState("");
 	console.log(keyword);
 
 	const handleSubmit = (e) => {
