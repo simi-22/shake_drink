@@ -8,37 +8,42 @@ const priceList=[
 	10000, 15000, 18000, 20000, 25000
 ]
 const newOrNot=[
-	'Yes', 'No'
+	'New', 'No'
 ]
 const sale =[
-	'Sale', ''
+	'Sale', 'No'
 ]
 
-
-const WishCard = ({item}) => {
-	const {removeItem} = useFavorite()
+const WishCard = ({item, addToCart}) => {
+	const {removeItem, setPrice, setIsNew, setIsSale} = useFavorite()
 	const {deleteItemStatus} = useProduct();
-	const [price, setPrice] = useState(0);
-	const [isNew, setIsNew] = useState('')
-	const [isSale, setIsSale] = useState('')
+	
+	console.log('WishCard item.price :', item.price)
 
 	useEffect(()=>{
-		setPrice(priceList[Math.floor(Math.random()*priceList)])
-		setIsNew(newOrNot[Math.floor(Math.random()*newOrNot)])
-		setIsSale(sale[Math.floor(Math.random()*sale)])
+		const priceIndex =Math.floor(Math.random()*priceList.length)
+		const newOrNotIndex = Math.floor(Math.random()*newOrNot.length)
+		const saleIndex =Math.floor(Math.random()*sale.length)
+		console.log('priceIndex :', priceIndex)
+		setPrice(item.id, priceList[priceIndex])
+		setIsNew(item.id, newOrNot[newOrNotIndex])
+		setIsSale(item.id, sale[saleIndex])
 	},[])
 
+	useEffect(() => {
+		console.log('WishCard item:', item);
+	}, [item]);
+
   return (
-	<div className='card2' >
+	<div className='card2' onClick={()=>addToCart(item)} >
 		<div className='card-img' >
 			<img width="40%"
 				src={item.image} alt=""/>
-			<DeleteIcon className="trash"
+			<DeleteIcon className="trash" style={{zIndex:'2'}}
 				onClick={(e)=>{
 					e.stopPropagation();//이벤트 버블링 차단
 					deleteItemStatus(item.id);  //productList의 item변화시키기
 					removeItem(item.id); //favoriteList에서 item 제거
-					
 				}}
 			/>
 		</div>

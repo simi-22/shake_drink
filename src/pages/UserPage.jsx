@@ -8,35 +8,74 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 import { useFavorite } from "../store/favoriteStore";
 import {useUser} from '../store/userStore'
+import {useCart} from '../store/cartStore';
 import WishCard from "../components/WishCard";
+import {useNavigate} from 'react-router-dom'
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+import Checkbox from '@mui/material/Checkbox';
+// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
 function UserPage() {
-	const {favoriteList, removeItem, addCount, minusCount,totalPrice, setTotalPrice} =useFavorite()
+	const navigate = useNavigate()
+	const {favoriteList} =useFavorite()
+	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {id, email, password, nickName} = useUser()
+	const [totalPrice, setTotalPrice]=useState(0)
+	const [open, setOpen]= useState(false)
+	const [checked, setChecked] = useState(false);
+	const [countChange, setCountChange]= useState(false)
+
+  	const handleChange = (event) => {
+    	setChecked(event.target.checked);
+  	};
 
 	console.log('favoriteList :', favoriteList)
 	
-	function calculate(){
+	function calculateTotalPrice(){
 		let result=0;
-		for(let i=0; i<favoriteList.length; i++){
-			result += favoriteList[i].price * favoriteList[i].count
+		for(let i=0; i<cartList.length; i++){
+			result += cartList[i].price * cartList[i].count
 		}
-		return result;
+		setTotalPrice(result);
 	}
 	function add(id){
 		addCount(id)
-		setTotalPrice(calculate())
+		setCountChange(!countChange)
 	}
 	function minus(id){
 		minusCount(id)
-		setTotalPrice(calculate())
+		setCountChange(!countChange)
 	}
-	useEffect(()=>{
-		setTotalPrice(calculate())
-	},[])
+	function addFavsToCart(){
+		if(checked){
+			addListToCart(favoriteList)
+			setChecked(false)
+		}
+	}
+	function payment(){
+		setOpen(true)
+	}
+	function handleClose(){
+		setOpen(false)
+	}
+	function handleClose2(){
+		setOpen(false)
+		navigate('/')
+	}
+	useEffect(()=>{   //수량이 바뀔 때마다 총액계산 다시 하게 한다.
+		calculateTotalPrice()
+	},[countChange])
+
 
 	return (
 		<>
@@ -95,11 +134,20 @@ function UserPage() {
 								maxWidth='sm'  
 								sx={{border: '2px solid grey'}}
 								>
-								{favoriteList.map((item)=> 
-								   <WishCard key={item.id} item={item} 
-									onClick={()=>removeItem(item.id)}
-								   />
-							)}
+									<Checkbox 
+										checked={checked}
+      									onChange={handleChange}
+      									inputProps={{ 'aria-label': 'controlled' }}
+									/> 전체선택
+									<Button onClick={addFavsToCart}
+										sx={{backgroundColor:'red', color:'black', mx:'10px'}}
+									>Cart에 담기</Button>
+									<div>
+										{favoriteList.map((item)=> 
+										<WishCard key={item.id} item={item} 
+											addToCart={addToCart}
+										/>)}
+									</div>
 							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
@@ -110,12 +158,12 @@ function UserPage() {
 								>
 								<div>
 									<div><ShoppingCartIcon/>Cart</div>
-									<div>total: {favoriteList.length}</div>
-									<div><CheckBoxIcon/>전체선택</div>
+									<div>total: {cartList.length}</div>
 									<div>
-										{favoriteList.map((item,i)=>
+										{cartList?.map((item,i)=>
 											<div key={i}>
-												<div>{item.drink}</div>
+												<span>{item.drink}</span>
+												<span><ClearIcon onClick={()=>removeFromCart(item.id)}/></span>
 												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
 											</div>
 									)}
@@ -128,12 +176,50 @@ function UserPage() {
 								sx={{ border: '2px solid grey' }}
 								>
 									<div>
+										
+										<Button onClick={calculateTotalPrice}
+										sx={{backgroundColor:'green', color:'black'}}>총액계산</Button>
+										<div>
+											{cartList.map((item,i)=>(
+												<div key={i}>
+													<span>{item.price}</span>
+													<span> * {item.count}</span>
+												</div>
+											))}
+										</div>
 										<div>총결제금액: {totalPrice}</div>
-										<Button sx={{backgroundColor:'green', color:'black'}}>결제하기</Button>
+										<Button onClick={payment}
+										sx={{backgroundColor:'green', color:'black'}}>결제하기</Button>
 									</div>
 							</Box>
 						</Grid>
 					</Grid>
+					<div>
+						{open ?  
+						<Dialog
+							open={open}
+							onClose={handleClose}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+							{"Use Google's location service?"}
+							</DialogTitle>
+							<DialogContent>
+							<DialogContentText id="alert-dialog-description">
+								총액: {totalPrice} 입니다. 확정합니까?
+							</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+							<Button onClick={handleClose}>취소</Button>
+							<Button onClick={handleClose2} autoFocus>
+								확인
+							</Button>
+							</DialogActions>
+						</Dialog>
+						: ''}
+					</div>
+					
 				</Container>
 			{/* </CssBaseline> */}
 		</>

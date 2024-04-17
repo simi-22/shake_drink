@@ -21,49 +21,51 @@ export const useFavorite = create((set)=>({
 			count:1,
 		}
 	],
-	totalPrice: 0,
-	setTotalPrice:(val)=>set((state)=>({totalPrice: val})),
-	calculate:()=> set((state)=>{
-		let result =0;
-		for(let i=0; i<state.favoriteList.length; i++){
-			result += state.favoriteList[i].price * state.favoriteList[i].count
-		}
-		return result
+	setPrice:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					price: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
 	}),
+	setIsNew:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					isNew: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
+	}),
+	setIsSale:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					isSale: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
+	}),
+	
 	addItem: (item) => set((state) => {
         const updatedList = [...state.favoriteList, item];
-        const result = state.calculate(updatedList);
-        return { favoriteList: updatedList, totalPrice: result };
+        return { favoriteList: updatedList};
     }),
 	removeItem: (id) => set((state) => {
         const updatedList = state.favoriteList.filter(item => item.id !== id);
-        const result = state.calculate(updatedList);
-        return { favoriteList: updatedList, totalPrice: result };
+        return { favoriteList: updatedList};
     }),
-	addCount:(id) => set((state)=>{
-		const updatedList = state.favoriteList.map(item => {
-			if (item.id === id) {
-				return {
-					...item,
-					count: item.count + 1
-				};
-			}
-			return item;
-		});
-		return { favoriteList: updatedList };
-	}),
-	minusCount:(id) => set((state)=>{
-		const updatedList = state.favoriteList.map(item => {
-			if (item.id === id) {
-				return {
-					...item,
-					count: item.count - 1
-				};
-			}
-			return item;
-		});
-		return { favoriteList: updatedList };
-	}),
 
 	emptyFavoriteList:()=>set((state)=>({favoriteList:[]}))
 
