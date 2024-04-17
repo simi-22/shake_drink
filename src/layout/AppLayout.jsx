@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const pages = ["Seach", "community", "Blog"];
+const pages = ["Seach", "Community", "Blog"];
 const settings = ["Profile", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -122,6 +122,11 @@ function AppLayout() {
 							fontSize: "28px",
 							letterSpacing: ".1rem",
 							color: "#FD4926",
+							borderBottom: "2px solid transparent",
+							transition: "all 0.2s ease",
+							"&:hover": {
+								borderBottom: "2px solid #FD4926",
+							},
 						}}
 					>
 						Shake & Drink
