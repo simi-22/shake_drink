@@ -6,28 +6,36 @@ import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useFavorite } from "../store/favoriteStore";
 import {useUser} from '../store/userStore'
 import WishCard from "../components/WishCard";
 
 
 function UserPage() {
-	const {favoriteList, removeItem} =useFavorite()
+	const {favoriteList, removeItem, addCount, minusCount,totalPrice, setTotalPrice} =useFavorite()
 	const {id, email, password, nickName} = useUser()
-	const [totalPrice, setTotalPrice] = useState(0);
 
 	console.log('favoriteList :', favoriteList)
 	
 	function calculate(){
 		let result=0;
 		for(let i=0; i<favoriteList.length; i++){
-			result += favoriteList[i].price
+			result += favoriteList[i].price * favoriteList[i].count
 		}
 		return result;
 	}
+	function add(id){
+		addCount(id)
+		setTotalPrice(calculate())
+	}
+	function minus(id){
+		minusCount(id)
+		setTotalPrice(calculate())
+	}
 	useEffect(()=>{
-		const result= calculate()
-		setTotalPrice(result)
+		setTotalPrice(calculate())
 	},[])
 
 	return (
@@ -83,17 +91,16 @@ function UserPage() {
 							</Box>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6} >
-							<Box
-								height={400} width='30vw' my={4} p={2}
-								display="flex" alignItems="center" gap={4}
-								sx={{ border: '2px solid grey' }}
+							<Container
+								maxWidth='sm'  
+								sx={{border: '2px solid grey'}}
 								>
 								{favoriteList.map((item)=> 
 								   <WishCard key={item.id} item={item} 
 									onClick={()=>removeItem(item.id)}
 								   />
 							)}
-							</Box>
+							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
 							<Box
@@ -109,7 +116,7 @@ function UserPage() {
 										{favoriteList.map((item,i)=>
 											<div key={i}>
 												<div>{item.drink}</div>
-												<div>수량 1  + -</div>
+												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
 											</div>
 									)}
 									</div>

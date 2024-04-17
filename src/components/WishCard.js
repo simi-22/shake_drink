@@ -31,7 +31,7 @@ const WishCard = ({item}) => {
   return (
 	<div className='card2' >
 		<div className='card-img' >
-			<img width="100%"
+			<img width="40%"
 				src={item.image} alt=""/>
 			<DeleteIcon className="trash"
 				onClick={(e)=>{
