@@ -2,8 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
 import UserPage from "./pages/UserPage";
-// import AppLayout from "./layout/AppLayout";
-import AppLayout from "./layout/AppLayout";
+import AppLayout from "./components/AppLayout";
 
 function App() {
 	return (
