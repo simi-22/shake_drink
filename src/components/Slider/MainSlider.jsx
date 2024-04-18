@@ -12,7 +12,7 @@ const MainSlider = () => {
 		speed: 2000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true,
+		autoplay: true,
 		lazyLoad: "anticipated", //페이지 미리로딩
 	};
 	return (
