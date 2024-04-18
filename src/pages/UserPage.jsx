@@ -13,8 +13,9 @@ import { useFavorite } from "../store/favoriteStore";
 import {useUser} from '../store/userStore'
 import {useCart} from '../store/cartStore';
 import {useOrder} from '../store/orderStore';
+import {useAnalyze} from '../store/analyzeStore'
 import WishCard from "../components/WishCard";
-// import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -29,14 +30,18 @@ import {Form} from 'react-bootstrap'
 
 
 function UserPage() {
+	const navigate = useNavigate()
 	const {favoriteList, emptyFavoriteList} =useFavorite()
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney, minusTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
+	const {firstRatedCategory, ordinaryDrink,cocktail,shake,otherUnknown,cocoa, shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
+
 	const [totalPrice, setTotalPrice]=useState(0)
 	const [open, setOpen]= useState(false) // 결제 확인창
 	const [show, setShow] = useState(false) // 주문내역 창
 	const [showUserDialog, setShowUserDialog] =useState(false) // user Dialog
+	const [showFavorC, setShowFavorC] =useState(false) //FavorCategory Dialog
 	const [checked, setChecked] = useState(false);
 	const [countChange, setCountChange]= useState(false)
 	const [orderedList, setOrderedList] = useState([])
@@ -86,6 +91,14 @@ function UserPage() {
 	function showOrder(){
 		setShow(true)
 	}
+	function showFavorCategory(){
+		setShowFavorC(true)
+	}
+	function showRecommendations(){
+		setShowFavorC(false)
+		navigate(`favor-category/${firstRatedCategory}`)
+		
+	}
 	function handleClose(){ // 취소버튼
 		setOpen(false)
 		
@@ -104,6 +117,9 @@ function UserPage() {
 	}
 	function closeUserDialog(){
 		setShowUserDialog(false)
+	}
+	function closeFavorCategory(){
+		setShowFavorC(false)
 	}
 
 	const handleSubmit=(event)=>{
@@ -175,7 +191,7 @@ function UserPage() {
 										</div>
 										<div style={{margin:'20px 0'}}>
 											<Button variant="contained" onClick={changeUserInfo}>정보변경</Button>
-											<Button variant="contained" onClick={()=>{}} sx={{ml:'10px'}}>문의내역</Button>
+											<Button variant="contained" onClick={showFavorCategory} sx={{ml:'10px'}}>Favor Category</Button>
 											<Button variant="contained" onClick={showOrder} sx={{ml:'10px'}}>주문내역</Button>
 										</div>
 									</div>
@@ -255,8 +271,8 @@ function UserPage() {
 							</Container>
 						</Grid>
 					</Grid>
-					<div>
-						{open ?  
+					<div> 
+						{open ?   // 결제정보 다이알로그  
 						<Dialog
 							open={open}
 							onClose={handleClose}
@@ -281,7 +297,7 @@ function UserPage() {
 						: ''}
 					</div>
 					<div>
-						{show ?  
+						{show ?  // 주문내역 다이알로그
 						<Dialog
 							open={show}
 							onClose={handleShowClose}
@@ -310,7 +326,46 @@ function UserPage() {
 						: ''}
 					</div>
 					<div>
-						{showUserDialog ?  
+						{showFavorC ?  // Favor Category 다이알로그
+						<Dialog
+							open={showFavorC}
+							onClose={closeFavorCategory}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+							{"자주 찾은 Category 정보"}
+							</DialogTitle>
+							<DialogContent>
+							<DialogContentText id="alert-dialog-description">
+								<h3>최애 카테고리: {firstRatedCategory}</h3>
+								<div>
+									<div>ordinary drink : {ordinaryDrink}</div>
+									<div>cocktail : {cocktail}</div>
+									<div>shake : {shake}</div>
+									<div>other /unknown : {otherUnknown}</div>
+									<div>cocoa : {cocoa}</div>
+									<div>shot : {shot}</div>
+									<div>coffee tea : {coffeeTea}</div>
+									<div>homemade liqueur : {homemadeLiqueur}</div>
+									<div>punch : {punch}</div>
+									<div>beer : {beer}</div>
+									<div>soft drink : {softDrink}</div>
+								</div>
+								<Button variant="contained"
+									onClick={showRecommendations}
+								>추천 주류/음료</Button>
+								
+							</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+							<Button onClick={closeFavorCategory} autoFocus>확인</Button>
+							</DialogActions>
+						</Dialog>
+						: ''}
+					</div>
+					<div>
+						{showUserDialog ?  // 유저정보변경 다이알로그
 						<Dialog
 							open={showUserDialog}
 							onClose={closeUserDialog}

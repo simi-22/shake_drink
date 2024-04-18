@@ -13,7 +13,7 @@ const initialState={
 		punch:0, //I
 		beer:0,  //J
 		softDrink:0, //K
-		firstRatedCategory: null
+		firstRatedCategory: 'cocktail'
 }
 
 export const useAnalyze = create((set)=>({
@@ -31,7 +31,7 @@ export const useAnalyze = create((set)=>({
 	// const targetCategory = firstRatedCategory;
 	// 카테고리별 검색 api이용.
 
-	
+
 
 	// updateA:() => set((state)=> ({ordinaryDrink: state.ordinaryDrink +1 })),
 	// updateB:() => set((state)=> ({cocktail: state.cocktail +1 })),
