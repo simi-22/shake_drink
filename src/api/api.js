@@ -1,4 +1,5 @@
 import axios from 'axios'
+const API_KEY = process.env.REACT_APP_API_KEY
 
 export const alcoholApi= axios.create({
 	baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic'
@@ -22,6 +23,18 @@ export const champagneFluteApi= axios.create({
 
 //===================
 
-export const searchApi = axios.create({
-	baseURL: 'http://www.thecocktaildb.com/api/json/v1/1'
+export const popularCocktailApi = axios.create({
+	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/popular.php`,
 })
+
+export const recentCocktailApi = axios.create({
+	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/latest.php`,
+})
+
+export const randomSelectionCocktailApi = axios.create({
+	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/randomselection.php`,
+})
+
+export const DefaultApi = axios.create({
+    baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}`,
+});

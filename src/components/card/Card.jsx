@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { css } from "@emotion/react";
 import HeartIcon from "../../assets/ic-heart.svg";
 import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
+import { useNavigate } from "react-router-dom";
 
 // 재료가져오는 함수
 function getNonNullIngredients(data) {
@@ -17,12 +18,18 @@ function getNonNullIngredients(data) {
 }
 
 function Card({ cockTailData }) {
-	const { strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
+	
+	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
+	const navigate = useNavigate();
+	const navigateToDetailPage = () => {
+		console.log("clickToDetail")
+		navigate(`/${idDrink}`);
+	};
 
 	return (
-		<div css={container}>
+		<div css={container} onClick={navigateToDetailPage}>
 			<div css={imgWrap} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
 				<img src={strDrinkThumb} alt="cocktail" />
 				{hover && (
@@ -85,7 +92,6 @@ const imgWrap = css`
 			gap: 10px;
 		}
 	}
-
 	.like {
 		position: absolute;
 		bottom: 10px;
