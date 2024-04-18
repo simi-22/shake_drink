@@ -99,163 +99,165 @@ function AppLayout() {
 	};
 
 	return (
-		<AppBar
-			position="static"
-			color="inherit"
-			sx={{
-				color: "black",
-			}}
-		>
-			<Container maxWidth="xl">
-				<Toolbar disableGutters>
-					<Typography
-						as={NavLink}
-						to="/"
-						variant="h6"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							mr: 2,
-							display: { xs: "none", md: "flex" },
-							fontWeight: 700,
-							fontSize: "28px",
-							letterSpacing: ".1rem",
-							color: "#FD4926",
-							borderBottom: "2px solid transparent",
-							transition: "all 0.2s ease",
-							"&:hover": {
-								borderBottom: "2px solid #FD4926",
-							},
-						}}
-					>
-						Shake & Drink
-					</Typography>
-
-					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="account of current user"
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							onClick={handleOpenNavMenu}
-							color="inherit"
-						>
-							<MenuIcon />
-						</IconButton>
-						<Menu
-							id="menu-appbar"
-							anchorEl={anchorElNav}
-							anchorOrigin={{
-								vertical: "bottom",
-								horizontal: "left",
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "left",
-							}}
-							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
+		<>
+			<AppBar
+				position="static"
+				color="inherit"
+				sx={{
+					color: "black",
+				}}
+			>
+				<Container maxWidth="xl">
+					<Toolbar disableGutters>
+						<Typography
+							as={NavLink}
+							to="/"
+							variant="h6"
+							noWrap
+							component="a"
+							href="#app-bar-with-responsive-menu"
 							sx={{
-								display: { xs: "block", md: "none" },
+								mr: 2,
+								display: { xs: "none", md: "flex" },
+								fontWeight: 700,
+								fontSize: "28px",
+								letterSpacing: ".1rem",
+								color: "#FD4926",
+								borderBottom: "2px solid transparent",
+								transition: "all 0.2s ease",
+								"&:hover": {
+									borderBottom: "2px solid #FD4926",
+								},
 							}}
 						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
-						</Menu>
-					</Box>
-					<Typography
-						as={NavLink}
-						to="/"
-						variant="h5"
-						noWrap
-						component="a"
-						href="#app-bar-with-responsive-menu"
-						sx={{
-							fontFamily: "Noto Sans, sans-serif",
-							mr: 2,
-							display: { xs: "flex", md: "none" },
-							flexGrow: 1,
-							fontWeight: 700,
-							fontSize: "28px",
-							letterSpacing: ".1rem",
-							color: "#FD4926",
-							textDecoration: "none",
-						}}
-					>
-						Shake & Drink
-					</Typography>
-					<Box
-						sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
-					>
-						{pages.map((page) => (
-							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "inherit", display: "block" }}
+							Shake & Drink
+						</Typography>
+
+						<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+							<IconButton
+								size="large"
+								aria-label="account of current user"
+								aria-controls="menu-appbar"
+								aria-haspopup="true"
+								onClick={handleOpenNavMenu}
+								color="inherit"
 							>
-								{page}
-							</Button>
-						))}
-					</Box>
-
-					<form onSubmit={handleSubmit}>
-						<Search sx={{ mr: "45px", display: { xs: "none", md: "flex" } }}>
-							<SearchIconWrapper type="submit" aria-label="search">
-								<SearchIcon />
-							</SearchIconWrapper>
-							<StyledInputBase
-								placeholder="Search…"
-								inputProps={{ "aria-label": "search" }}
-								value={keyword}
-								onChange={(e) => setKeyword(e.target.value)}
-							/>
-						</Search>
-					</form>
-
-					{isLogin ? (
-						<Box sx={{ flexGrow: 0 }}>
-							<Tooltip title="Open settings">
-								<IconButton onClick={handleOpenUserMenu}>
-									<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
-								</IconButton>
-							</Tooltip>
+								<MenuIcon />
+							</IconButton>
 							<Menu
-								sx={{ mt: "45px" }}
 								id="menu-appbar"
-								anchorEl={anchorElUser}
+								anchorEl={anchorElNav}
 								anchorOrigin={{
-									vertical: "top",
-									horizontal: "right",
+									vertical: "bottom",
+									horizontal: "left",
 								}}
 								keepMounted
 								transformOrigin={{
 									vertical: "top",
-									horizontal: "right",
+									horizontal: "left",
 								}}
-								open={Boolean(anchorElUser)}
-								onClose={handleCloseUserMenu}
+								open={Boolean(anchorElNav)}
+								onClose={handleCloseNavMenu}
+								sx={{
+									display: { xs: "block", md: "none" },
+								}}
 							>
-								{settings.map((setting) => (
-									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Typography textAlign="center">{setting}</Typography>
+								{pages.map((page) => (
+									<MenuItem key={page} onClick={handleCloseNavMenu}>
+										<Typography textAlign="center">{page}</Typography>
 									</MenuItem>
 								))}
 							</Menu>
 						</Box>
-					) : (
-						<Button color="inherit" as={NavLink} to="/login">
-							Login
-						</Button>
-					)}
-				</Toolbar>
-			</Container>
+						<Typography
+							as={NavLink}
+							to="/"
+							variant="h5"
+							noWrap
+							component="a"
+							href="#app-bar-with-responsive-menu"
+							sx={{
+								fontFamily: "Noto Sans, sans-serif",
+								mr: 2,
+								display: { xs: "flex", md: "none" },
+								flexGrow: 1,
+								fontWeight: 700,
+								fontSize: "28px",
+								letterSpacing: ".1rem",
+								color: "#FD4926",
+								textDecoration: "none",
+							}}
+						>
+							Shake & Drink
+						</Typography>
+						<Box
+							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
+						>
+							{pages.map((page) => (
+								<Button
+									key={page}
+									onClick={handleCloseNavMenu}
+									sx={{ my: 2, color: "inherit", display: "block" }}
+								>
+									{page}
+								</Button>
+							))}
+						</Box>
+
+						<form onSubmit={handleSubmit}>
+							<Search sx={{ mr: "45px", display: { xs: "none", md: "flex" } }}>
+								<SearchIconWrapper type="submit" aria-label="search">
+									<SearchIcon />
+								</SearchIconWrapper>
+								<StyledInputBase
+									placeholder="Search…"
+									inputProps={{ "aria-label": "search" }}
+									value={keyword}
+									onChange={(e) => setKeyword(e.target.value)}
+								/>
+							</Search>
+						</form>
+
+						{isLogin ? (
+							<Box sx={{ flexGrow: 0 }}>
+								<Tooltip title="Open settings">
+									<IconButton onClick={handleOpenUserMenu}>
+										<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
+									</IconButton>
+								</Tooltip>
+								<Menu
+									sx={{ mt: "45px" }}
+									id="menu-appbar"
+									anchorEl={anchorElUser}
+									anchorOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									keepMounted
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									open={Boolean(anchorElUser)}
+									onClose={handleCloseUserMenu}
+								>
+									{settings.map((setting) => (
+										<MenuItem key={setting} onClick={handleCloseUserMenu}>
+											<Typography textAlign="center">{setting}</Typography>
+										</MenuItem>
+									))}
+								</Menu>
+							</Box>
+						) : (
+							<Button color="inherit" as={NavLink} to="/login">
+								Login
+							</Button>
+						)}
+					</Toolbar>
+				</Container>
+			</AppBar>
 			<Outlet />
-		</AppBar>
+		</>
 	);
 }
 export default AppLayout;
