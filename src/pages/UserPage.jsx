@@ -12,8 +12,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { useFavorite } from "../store/favoriteStore";
 import {useUser} from '../store/userStore'
 import {useCart} from '../store/cartStore';
+import {useOrder} from '../store/orderStore';
 import WishCard from "../components/WishCard";
-import {useNavigate} from 'react-router-dom'
+// import {useNavigate} from 'react-router-dom'
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -24,17 +25,28 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import CartCard from "../components/CartCard";
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+import {Form} from 'react-bootstrap'
 
 
 function UserPage() {
-	const navigate = useNavigate()
 	const {favoriteList, emptyFavoriteList} =useFavorite()
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
-	const {id, email, password, nickName} = useUser()
+	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney, minusTotalMoney} =useOrder()
+	const {id, email, password, nickName, editUser} = useUser()
 	const [totalPrice, setTotalPrice]=useState(0)
-	const [open, setOpen]= useState(false)
+	const [open, setOpen]= useState(false) // 결제 확인창
+	const [show, setShow] = useState(false) // 주문내역 창
+	const [showUserDialog, setShowUserDialog] =useState(false) // user Dialog
 	const [checked, setChecked] = useState(false);
 	const [countChange, setCountChange]= useState(false)
+	const [orderedList, setOrderedList] = useState([])
+	const [formData, setFormData] = useState({
+		email:'',
+		password:'',
+		nickname:''
+	})
+	// const [orderedMoney, setOrderedMoney] =useState([])
+	
 
   	const handleChange = (event) => {
     	setChecked(event.target.checked);
@@ -66,19 +78,53 @@ function UserPage() {
 			calculateTotalPrice()
 		}
 	}
-	function payment(){
+	function payment(list){
 		setOpen(true)
+		setOrderedList(list)
+		addListToOrder(list)
 	}
-	function handleClose(){
+	function showOrder(){
+		setShow(true)
+	}
+	function handleClose(){ // 취소버튼
 		setOpen(false)
+		
+		removeListFromOrder(orderedList)
 	}
-	function handleClose2(){
+	function handleClose2(){ //확인버튼
 		setOpen(false)
-		navigate('/')
+		addTotalMoney(totalPrice)
+		
 	}
+	function handleShowClose(){
+		setShow(false)
+	}
+	function changeUserInfo(){
+		setShowUserDialog(true)
+	}
+	function closeUserDialog(){
+		setShowUserDialog(false)
+	}
+
+	const handleSubmit=(event)=>{
+		event.preventDefault();
+		// setAuth(true)
+		editUser(formData) // <---임시저장formData <--- form으로부터 입력값.
+		console.log('수정된 user정보:',formData)
+		// setShowUserDialog(false)
+	}
+	const handleUserChange=(event)=>{
+		const {name, value} = event.target
+		setFormData((prev)=>({
+			...prev,
+			[name]: value,    //변수의 값으로 프로퍼티를 만들 경우 
+		}))
+	}
+
 	useEffect(()=>{   //수량이 바뀔 때마다 총액계산 다시 하게 한다.
 		calculateTotalPrice()
-	},[countChange, cartList.length])
+	},[countChange, cartList.length, showUserDialog])
+	//showUserDialog 가 바뀔 때, 화면이 다시 갱신되어 user정보가 바뀌게 함.
 
 
 	return (
@@ -87,27 +133,26 @@ function UserPage() {
 				<Container maxWidth='lg' >
 					<Grid container spacing={2}>
 						<Grid item xs={12} md={6} lg={6}>
-							<Box
-								Container
+							<Container
 								maxWidth='sm'  
 								sx={{border: '2px solid grey', py:'10px',
 									display:'flex',justifyContent:'center', gap:'20px' 
 								}}
 								>
 								<AccountCircleIcon style={{ fontSize: '150px', color:'grey' }} />
-								<div>
+								<div style={{marginTop: '20px'}}>
 									<div>id: {id}</div>
 									<div>@이메일: {email}</div>
 									<div>password: {password}</div>
 									<div>닉네임: {nickName}</div>
 								</div>
-							</Box>
+							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
 							<Box
 								Container
 								maxWidth='sm'  
-								sx={{border: '2px solid grey', py:'10px'}}
+								sx={{border: '2px solid grey', padding:'20px'}}
 								>
 									<div>
 										<div style={{
@@ -128,10 +173,10 @@ function UserPage() {
 												<div>리뷰0개</div>
 											</div>
 										</div>
-										<div>
-											<span>정보변경</span>
-											<span>문의내역</span>
-											<span>주문내역</span>
+										<div style={{margin:'20px 0'}}>
+											<Button variant="contained" onClick={changeUserInfo}>정보변경</Button>
+											<Button variant="contained" onClick={()=>{}} sx={{ml:'10px'}}>문의내역</Button>
+											<Button variant="contained" onClick={showOrder} sx={{ml:'10px'}}>주문내역</Button>
 										</div>
 									</div>
 								
@@ -142,14 +187,14 @@ function UserPage() {
 								maxWidth='sm'  
 								sx={{border: '2px solid grey', py:'10px'}}
 								>
-									<h1>Wish List</h1>
+									<h3>Wish List</h3>
 									<Checkbox 
 										checked={checked}
       									onChange={handleChange}
       									inputProps={{ 'aria-label': 'controlled' }}
 									/> 전체선택
 									<Button onClick={addFavsToCart}
-										sx={{backgroundColor:'red', color:'black', mx:'10px'}}
+										variant="contained" color="error" sx={{ml:'10px'}}
 									>Cart에 담기</Button>
 									<div>
 										{favoriteList.map((item)=> 
@@ -164,9 +209,9 @@ function UserPage() {
 								maxWidth='sm'  
 								sx={{border: '2px solid grey',py:'10px'}}
 								>
-									<h1>Cart</h1>
+									<h3>Cart</h3>
 								<div>
-									<div><ShoppingCartIcon/> total: {cartList.length}</div>
+									<div style={{fontSize:"25px"}}><ShoppingCartIcon/> total: {cartList.length}</div>
 									<div>
 										{cartList?.map((item,i)=>
 											<div key={i} >
@@ -186,7 +231,7 @@ function UserPage() {
 								sx={{border: '2px solid grey', mt:'10px', py:'10px'}}
 								>
 									<div>
-										<div>Payment</div>
+										<h3>Payment</h3>
 										{/* <Button onClick={calculateTotalPrice}
 										sx={{backgroundColor:'green', color:'black'}}>총액계산</Button> */}
 										<div style={{
@@ -196,6 +241,7 @@ function UserPage() {
 											<div>
 												{cartList.map((item,i)=>(
 													<div key={i}>
+														<span>{item.drink}: </span>
 														<span>{item.price}</span>
 														<span> * {item.count}</span>
 													</div>
@@ -203,8 +249,8 @@ function UserPage() {
 											</div>
 											<div>총결제금액: {totalPrice}</div>
 										</div>
-										<Button onClick={payment}
-										sx={{backgroundColor:'green', color:'black'}}>결제하기</Button>
+										<Button onClick={()=>payment(cartList)}
+										variant="contained" color="success">결제하기</Button>
 									</div>
 							</Container>
 						</Grid>
@@ -230,6 +276,97 @@ function UserPage() {
 							<Button onClick={handleClose2} autoFocus>
 								확인
 							</Button>
+							</DialogActions>
+						</Dialog>
+						: ''}
+					</div>
+					<div>
+						{show ?  
+						<Dialog
+							open={show}
+							onClose={handleShowClose}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+							{"주문내역"}
+							</DialogTitle>
+							<DialogContent>
+							<DialogContentText id="alert-dialog-description">
+								<div>
+									{orderList.map((item,i)=>(
+										<div key={i}>
+											<div>{item.drink}: {item.price}*{item.count}원</div>
+										</div>
+									))}
+								</div>
+								<div>Total: {totalMoney} 원</div>
+							</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+							<Button onClick={handleShowClose} autoFocus>확인</Button>
+							</DialogActions>
+						</Dialog>
+						: ''}
+					</div>
+					<div>
+						{showUserDialog ?  
+						<Dialog
+							open={showUserDialog}
+							onClose={closeUserDialog}
+							aria-labelledby="alert-dialog-title"
+							aria-describedby="alert-dialog-description"
+						>
+							<DialogTitle id="alert-dialog-title">
+							{"주문내역"}
+							</DialogTitle>
+							<DialogContent>
+							<DialogContentText id="alert-dialog-description">
+								<Form onSubmit={(event)=>handleSubmit(event)}>
+									<Form.Group className="mb-3" controlId="formBasicEmail">
+										<Form.Label>Email address</Form.Label>
+										<Form.Control 
+											type="email" 
+											placeholder="Email"
+											name='email' 
+											value={formData.email}
+											onChange={handleUserChange}
+											/>
+										<Form.Text className="text-muted">
+											아이디가 아닌 이메일을 입력해주세요.
+										</Form.Text>
+									</Form.Group>
+
+									<Form.Group className="mb-3" controlId="formBasicPassword">
+										<Form.Label>Password</Form.Label>
+										<Form.Control 
+											type="password" 
+											placeholder="Password" 
+											name="password"
+											value={formData.password}
+											onChange={handleUserChange}
+											/>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="formBasicText">
+										<Form.Label>Nickname</Form.Label>
+										<Form.Control 
+											type="text" 
+											placeholder="Nickname" 
+											name="nickname"
+											value={formData.nickname}
+											onChange={handleUserChange}
+											/>
+									</Form.Group>
+									<Form.Group className="mb-3" controlId="formBasicCheckbox">
+										<Form.Check type="checkbox" label="Check me out" />
+									</Form.Group>
+									<Button variant="contained" type="submit"
+									>수정</Button>
+								</Form>
+							</DialogContentText>
+							</DialogContent>
+							<DialogActions>
+							<Button variant="contained" onClick={closeUserDialog} autoFocus>확인</Button>
 							</DialogActions>
 						</Dialog>
 						: ''}

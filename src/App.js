@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
 import UserPage from "./pages/UserPage";
 import AppLayout from "./layout/AppLayout";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 	return (

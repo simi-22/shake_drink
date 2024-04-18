@@ -43,7 +43,8 @@ const WishCard = ({item, addToCart}) => {
 	<div className='card2' onClick={handleClick} 
 		style={{
 			border: '1px solid grey', borderRadius:'10px',
-			marginTop:'10px', padding:'10px'
+			marginTop:'10px', padding:'10px',
+			boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
 		}}
 	>
 		<div className='card-img' >
