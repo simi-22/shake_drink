@@ -1,0 +1,20 @@
+.simulate-Container {
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.simulate-Container > * {
+    margin: 10px;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    aspect-ratio: 1.15;
+}
+
+.simulateSection {
+    width: 40%;
+}
+
+.resultSection {
+    width: 25%;
+}
