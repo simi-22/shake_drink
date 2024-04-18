@@ -29,6 +29,7 @@
     flex-direction: column;
 }
 .photoGrid {
+    margin-left: 0.5em;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     margin-top: 0.5em;
@@ -40,6 +41,7 @@
     border: 1px solid lightgray;
     justify-content: center;
     text-align: center;
+    cursor: pointer;
 }
 
 .nameContainer > * {
@@ -58,6 +60,7 @@
 }
 
 .ingredientsSearch {
+    width: 99%;
     margin-left: 0.5em;
     padding: 0.5em;
     background-color: white;
@@ -83,17 +86,12 @@
     width: 35%;
     height: 50px;
     margin: 0.5em 0;
-    padding: 0.8em 0 0 1em;
-}
-
-.amountUnit span {
-    
 }
 
 .buttonClass {
     color: white;
     margin-top: 0.3em;
-    background-color: pink;
+    background-color: rgba(253, 103, 38, 100);
     border-radius: 5px;
     width: 10%;
     height: 40px;
@@ -105,6 +103,34 @@
 /* 레시피 카테고리 셋팅 영역 */
 .settingSection {
     width: 30%;
+    display: flex;
+    height: 100%;
+}
+
+.infoBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.infoBox img {
+    margin-top: 0.3em;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.settingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.settingBox button {
+    color: white;
+    margin-top: 3em;
+    padding: 20px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: rgba(253, 73, 38, 100);
 }
 
 /* 공통 사용 스타일 */
