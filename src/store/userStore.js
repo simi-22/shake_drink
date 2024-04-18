@@ -12,5 +12,6 @@ export const useUser = create((set)=>({
 		email: email !== undefined ? email : state.email,
         password: password !== undefined ? password : state.password,
         nickName: nickName !== undefined ? nickName : state.nickName
-	}))
+	})),
+	emptyUser:()=> set(({id:'',email:'',password:'',nickname:''}))
 }))
