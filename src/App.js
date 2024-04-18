@@ -9,6 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import GamePage from "./pages/GamePage";
 import SearchPage from "./pages/SearchPage";
 import CustomRecipePage from "./pages/CustomRecipePage";
+import CustomListPage from "./pages/CustomListPage";
 
 function App() {
 	return (
@@ -16,12 +17,14 @@ function App() {
 			<Route path="/" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
 				<Route path=":id" element={<DetailPage />} />
+				<Route path="detail" element={<DetailPage />} />
 				<Route path="user" element={<UserPage />} />
+				<Route path="customlist" element={<CustomListPage />} />
+				<Route path="custom" element={<CustomRecipePage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="game" element={<GamePage />} />
 				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 				<Route path="search" element={<SearchPage />} />
-				<Route path="custom" element={<CustomRecipePage />} />
 			</Route>
 		</Routes>
 	);
