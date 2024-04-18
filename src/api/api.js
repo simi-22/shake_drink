@@ -20,6 +20,9 @@ export const cocktailGlassApi= axios.create({
 export const champagneFluteApi= axios.create({
 	baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=Champagne_flute'
 })
+export const SearchByIngredientApi= axios.create({
+	baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
+})
 
 //===================
 
@@ -35,6 +38,12 @@ export const randomSelectionCocktailApi = axios.create({
 	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/randomselection.php`,
 })
 
+
+
 export const DefaultApi = axios.create({
     baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}`,
 });
+
+
+
+

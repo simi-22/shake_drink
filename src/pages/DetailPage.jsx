@@ -3,41 +3,22 @@ import { useDetailCocktail } from "../hooks/useDetailCocktail";
 import { useParams } from "react-router-dom";
 import { useRecommendCocktail } from "../hooks/useRecommendCocktail";
 import RecommendCocktail from "../components/RecommendCocktail";
+import { useSearchByIngredient } from "../hooks/useSearchByIngredient";
+import DetailCocktail from "../components/DetailCocktail";
+
 
 const DetailPage = () => {
 	const { id } = useParams();
-	const { data } = useDetailCocktail(id);
-	console.log('data',data)
-	const { data: recommendData, isLoading, isError } = useRecommendCocktail(data?.strIngredient1);
+	const { data : detailData } = useDetailCocktail(id);
 
-	// if (isLoading) {
-	// 	return <div>Loading...</div>;
-	// }
-
-	// if (isError) {
-	// 	return <div>Error fetching data</div>;
-	// }
-
+	const { data: recommendData, isLoading, isError } = useSearchByIngredient(detailData?.strIngredient1);
 	console.log("recommendData", recommendData);
-
-	console.log("data", data);
+	// console.log("detailData", detailData);
 
 	return (
 		<div>
-			<div>칵테일 : {data?.strDrink}</div>
-			<div>
-				<img src={data?.strDrinkThumb} />
-			</div>
-			<div>
-				{data?.ingredients.map((item, index) => (
-					<h1>
-						재료{index + 1} {item.ingredient} :{item.measure}
-					</h1>
-				))}
-			</div>
-			<div>레시피 : {data?.strInstructions}</div>
-			<div>컵 : {data?.strGlass}</div>
-			<RecommendCocktail recommendData={recommendData}/>
+			<DetailCocktail detailData={detailData}/>
+			<RecommendCocktail recommendData={recommendData} />
 		</div>
 	);
 };
