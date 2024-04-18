@@ -5,7 +5,6 @@ import coc2 from '../assets/cocktail2.png';
 import coc3 from '../assets/cocktail3.png';
 import recipe from '../assets/Recipe.png';
 import '../styles/CustomRecipePage.style.css';
-import { useListOfIngredient } from '../hooks/useListIngredient';
 
 const CustomRecipePage = () => {
    
