@@ -1,11 +1,4 @@
 import React from "react";
-// import LoadingPage from "./loadingPage/LoadingPage";
-import Alcohol from "../filter/alcohol/Alcohol";
-import NonAlcohol from "../filter/alcohol/NonAlcohol";
-import PopularCocktail from "../components/PopularCocktail";
-import RecentCocktail from "../components/RecentCocktail";
-// import Alcohol from "../filter/alcohol/Alcohol";
-// import NonAlcohol from "../filter/alcohol/NonAlcohol";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
