@@ -1,7 +1,7 @@
 import { Box, Grid, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 
-function SelectList({ data, selected, setSelected }) {
+function SelectList({ data, selected, setSelected, setLevel }) {
 	return (
 		<Box>
 			<Grid container spacing={2}>
@@ -14,6 +14,7 @@ function SelectList({ data, selected, setSelected }) {
 									let newSelected = [...selected];
 									newSelected[index] = 1;
 									setSelected(newSelected);
+									setLevel((prev) => prev - 1);
 								}}
 							>
 								<ListItemText primary={item.strDrink} />
