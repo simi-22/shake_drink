@@ -41,7 +41,7 @@ function Card({ cockTailData }) {
 				)}
 				<img
 					className="like"
-					src={like ? EmptyHeartIcon : HeartIcon}
+					src={like ? HeartIcon : EmptyHeartIcon}
 					alt={like ? "like" : "unlike"}
 					onClick={() => {
 						setLike((prev) => !prev);
