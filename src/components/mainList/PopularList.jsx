@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../card/Card";
 import { usePopularCocktail } from "../../hooks/usePopularCocktail";
 
@@ -27,7 +27,7 @@ const PopularList = () => {
 		<div id="popular-list" className="main-page-list">
 			<div>
 				<h2>Best Cocktail</h2>
-				<ul style={{ height: autoHeight ? "auto" : "1280px", overflow: "hidden" }}>
+				<ul className={autoHeight ? "auto-height" : "init-height"}>
 					{data?.drinks.map((cockTailData, index) => (
 						<Card cockTailData={cockTailData} key={index} />
 					))}

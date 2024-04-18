@@ -81,13 +81,33 @@
 배너
 배너
 배너 */
+#main-banner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#main-banner h3 {
+	text-align: center;
+	font-weight: 300;
+	margin-top: 25px;
+}
+.main-banner-wrap {
+	max-width: 1000px;
+	overflow-x: scroll;
+	text-align: center;
+	margin: 0 auto;
+	margin: 0 20px;
+	box-sizing: border-box;
+	scrollbar-width: none;
+}
+
 #home-page #home-banner {
+	width: 1000px;
 	display: flex;
 	justify-content: center;
-	max-width: 1200px;
 	margin: 0 auto;
-	margin-top: 25px;
-	padding: 0 20px;
+	padding: 0;
+	margin-top: 10px;
 }
 #home-page #home-banner li {
 	height: 100px;
@@ -131,8 +151,13 @@
 }
 
 #popular-list ul {
-	height: 1280px;
 	overflow: hidden;
+}
+.init-height {
+	height: 1280px;
+}
+.auto-height {
+	height: auto;
 }
 /* 그리드
 그리드
@@ -259,4 +284,106 @@
 	border: 1px solid #ccc;
 	padding: 2px 30px;
 	border-radius: 20px;
+}
+
+@media (max-width: 1080px) {
+	#home-page .home-slide .slick-list .slick-track .event p {
+		width: 15rem;
+		height: 20rem;
+	}
+	#home-page .home-slide .slick-list .slick-track .event p:nth-of-type(2) h3 {
+		font-size: 40px;
+	}
+	#main-banner {
+		display: block;
+	}
+	.main-page-list ul {
+		max-width: 1200px;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+	}
+	.init-height {
+		height: 650px;
+	}
+}
+@media (max-width: 800px) {
+	.init-height {
+		height: 550px;
+	}
+	#main-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+	}
+	#main-grid li:nth-child(4) {
+		grid-column-start: 3;
+		grid-column-end: 4;
+		grid-row-start: 2;
+		grid-row-end: 3;
+	}
+	#main-grid li:nth-of-type(7) {
+		display: none;
+	}
+	#main-grid li:nth-of-type(8) {
+		display: none;
+	}
+	#main-grid li:nth-of-type(9) {
+		display: none;
+	}
+	#main-grid li:nth-of-type(10) {
+		display: none;
+	}
+	#main-grid li:nth-of-type(11) {
+		display: none;
+	}
+	#main-grid li:nth-of-type(12) {
+		display: none;
+	}
+}
+@media (max-width: 610px) {
+	#home-page .home-slide .slick-list .slick-track .event p {
+		width: 10rem;
+		height: 15rem;
+	}
+	#home-page .home-slide .slick-list .slick-track .event p:nth-of-type(2) h3 {
+		font-size: 25px;
+	}
+	.main-page-list ul {
+		max-width: 1200px;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+	.main-page-list > div h2 {
+		font-size: 30px;
+		padding: 5px 0;
+	}
+	.init-height {
+		height: 450px;
+	}
+}
+@media (max-width: 490px) {
+	#home-page .home-slide .slick-list .slick-track .event {
+		left: calc(50% - 45vw);
+	}
+	#home-page .home-slide .slick-list .slick-track .event p {
+		width: 10rem;
+		height: 15rem;
+	}
+	#home-page .home-slide .slick-list .slick-track .event p:nth-of-type(2) h3 {
+		font-size: 20px;
+	}
+	#home-page .home-slide .slick-list .slick-track .event p button {
+		width: 120px;
+	}
+	.main-page-list ul {
+		max-width: 1200px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+	.init-height {
+		height: 510px;
+	}
 }

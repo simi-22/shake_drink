@@ -68,6 +68,22 @@ const container = css`
 	width: 20rem;
 	text-align: center;
 	margin: 0 auto;
+	cursor: pointer;
+	@media (max-width: 1080px) {
+		width: 15rem;
+	}
+	@media (max-width: 800px) {
+		width: 12rem;
+	}
+	@media (max-width: 610px) {
+		width: 9rem;
+	}
+	@media (max-width: 490px) {
+		width: 11em;
+	}
+	@media (max-width: 400px) {
+		width: 7em;
+	}
 `;
 
 const imgWrap = css`
