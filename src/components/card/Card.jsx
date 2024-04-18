@@ -18,18 +18,17 @@ function getNonNullIngredients(data) {
 }
 
 function Card({ cockTailData }) {
-	
 	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
 	const navigateToDetailPage = () => {
-		console.log("clickToDetail")
+		console.log("clickToDetail");
 		navigate(`/${idDrink}`);
 	};
 
 	return (
-		<div css={container} onClick={navigateToDetailPage}>
+		<li css={container} onClick={navigateToDetailPage}>
 			<div css={imgWrap} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
 				<img src={strDrinkThumb} alt="cocktail" />
 				{hover && (
@@ -38,23 +37,25 @@ function Card({ cockTailData }) {
 							<div>{strAlcoholic === "Alcoholic" ? "#알콜" : "#무알콜"}</div>
 							<div>{getNonNullIngredients(cockTailData)}</div>
 						</div>
-						<img
-							className="like"
-							src={like ? EmptyHeartIcon : HeartIcon}
-							alt={like ? "like" : "unlike"}
-							onClick={() => {
-								setLike((prev) => !prev);
-							}}
-						/>
 					</div>
 				)}
+				<img
+					className="like"
+					src={like ? EmptyHeartIcon : HeartIcon}
+					alt={like ? "like" : "unlike"}
+					onClick={() => {
+						setLike((prev) => !prev);
+					}}
+				/>
 			</div>
 
 			<div css={contentWrap}>
+				{/* 여기 Best부분 Best일때는 Popular일땐 Best가 latest일땐 New가 뜨게 할 수 있나요?*/}
+				<span>Best</span>
 				<h1>{strDrink}</h1>
 				<p>{strInstructions}</p>
 			</div>
-		</div>
+		</li>
 	);
 }
 
@@ -62,27 +63,28 @@ export default Card;
 
 const container = css`
 	position: relative;
-	width: 300px;
-	padding: 10px;
-	border-radius: 15px;
 	background-color: #fff;
+	box-sizing: border-box;
+	width: 20rem;
+	text-align: center;
+	margin: 0 auto;
 `;
 
 const imgWrap = css`
 	width: 100%;
-
-	position: relative;
-	cursor: pointer;
-	& > img {
-		border-radius: 15px;
+	& > img:nth-of-type(1) {
+		filter: brightness(150%);
+		filter: contrast(80%);
+		filter: saturate(120%);
 	}
 	& > div {
-		background-color: rgb(0, 0, 0, 0.5);
-		border-radius: 15px;
-		width: 180px;
-		height: 180px;
-		color: white;
+		background-color: rgb(255, 255, 255, 0.8);
+		width: 100%;
+		height: 320px;
+		color: black;
 		position: absolute;
+		padding: 20px;
+		box-sizing: border-box;
 		top: 0;
 		& > div {
 			display: flex;
@@ -92,7 +94,7 @@ const imgWrap = css`
 	}
 	.like {
 		position: absolute;
-		bottom: 10px;
+		bottom: 45px;
 		right: 10px;
 	}
 `;
@@ -100,6 +102,12 @@ const imgWrap = css`
 const contentWrap = css`
 	width: 100%;
 	margin-top: 10px;
+	& > span {
+		padding: 2px 2px;
+		background: #ccc;
+		color: #fff;
+		font-size: 12px;
+	}
 	& > h1 {
 		font-weight: 700;
 	}

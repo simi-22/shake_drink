@@ -14,11 +14,11 @@ const LatestList = () => {
 		<div id="LatestList" className="main-page-list">
 			<div>
 				<h2>Most Latest Cocktail</h2>
-				<div>
+				<ul>
 					{data?.drinks.map((cockTailData, index) => (
 						<Card cockTailData={cockTailData} key={index} />
 					))}
-				</div>
+				</ul>
 			</div>
 		</div>
 	);
