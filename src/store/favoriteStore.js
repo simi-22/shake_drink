@@ -75,6 +75,10 @@ export const useFavorite = create((set)=>({
         const updatedList = state.favoriteList.filter(item => item.id !== id);
         return { favoriteList: updatedList};
     }),
+	removeListItems: (list) => set((state) => {
+		const updatedList = state.favoriteList.filter(item => !list.includes(item));
+		return { favoriteList: updatedList };
+	}),
 
 	emptyFavoriteList:()=>set((state)=>({favoriteList:[]}))
 

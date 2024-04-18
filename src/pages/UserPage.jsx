@@ -5,7 +5,7 @@ import PaidIcon from '@mui/icons-material/Paid';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+// import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -22,12 +22,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 import Checkbox from '@mui/material/Checkbox';
+import CartCard from "../components/CartCard";
 // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
 function UserPage() {
 	const navigate = useNavigate()
-	const {favoriteList} =useFavorite()
+	const {favoriteList, emptyFavoriteList} =useFavorite()
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {id, email, password, nickName} = useUser()
 	const [totalPrice, setTotalPrice]=useState(0)
@@ -56,9 +57,11 @@ function UserPage() {
 		minusCount(id)
 		setCountChange(!countChange)
 	}
+
 	function addFavsToCart(){
 		if(checked){
 			addListToCart(favoriteList)
+			emptyFavoriteList()
 			setChecked(false)
 			calculateTotalPrice()
 		}
@@ -85,9 +88,11 @@ function UserPage() {
 					<Grid container spacing={2}>
 						<Grid item xs={12} md={6} lg={6}>
 							<Box
-								height={300} width='30vw' my={4} p={2}
-								display="flex" alignItems="center" gap={4}
-								sx={{ border: '2px solid grey' }}
+								Container
+								maxWidth='sm'  
+								sx={{border: '2px solid grey', py:'10px',
+									display:'flex',justifyContent:'center', gap:'20px' 
+								}}
 								>
 								<AccountCircleIcon style={{ fontSize: '150px', color:'grey' }} />
 								<div>
@@ -100,26 +105,28 @@ function UserPage() {
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
 							<Box
-								height={300} width='30vw' my={4} p={2}
-								display="flex" alignItems="center" gap={4}
-								sx={{ border: '2px solid grey' }}
+								Container
+								maxWidth='sm'  
+								sx={{border: '2px solid grey', py:'10px'}}
 								>
 									<div>
-										<div>
-											<span>
+										<div style={{
+													display:'flex',justifyContent:'start', gap:'20px'
+												}}>
+											<div>
 												<div>
 													<PaidIcon/>
 													<div>포인트 250P</div>
 												</div>
-											</span>
-											<span>
+											</div>
+											<div>
 												<CalendarViewWeekIcon/>
 												<div>쿠폰0장</div>
-											</span>
-											<span>
+											</div>
+											<div>
 												<ModeEditIcon/>
 												<div>리뷰0개</div>
-											</span>
+											</div>
 										</div>
 										<div>
 											<span>정보변경</span>
@@ -133,8 +140,9 @@ function UserPage() {
 						<Grid item xs={12} md={6} lg={6} >
 							<Container
 								maxWidth='sm'  
-								sx={{border: '2px solid grey'}}
+								sx={{border: '2px solid grey', py:'10px'}}
 								>
+									<h1>Wish List</h1>
 									<Checkbox 
 										checked={checked}
       									onChange={handleChange}
@@ -152,48 +160,53 @@ function UserPage() {
 							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
-							<Box
-								height={300} width='30vw' my={4} p={2}
-								display="flex" alignItems="center" gap={4}
-								sx={{ border: '2px solid grey' }}
+							<Container
+								maxWidth='sm'  
+								sx={{border: '2px solid grey',py:'10px'}}
 								>
+									<h1>Cart</h1>
 								<div>
-									<div><ShoppingCartIcon/>Cart</div>
-									<div>total: {cartList.length}</div>
+									<div><ShoppingCartIcon/> total: {cartList.length}</div>
 									<div>
 										{cartList?.map((item,i)=>
-											<div key={i}>
-												<span>{item.drink}</span>
-												<span><ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
-												 }}/></span>
+											<div key={i} >
+												<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
+													<CartCard item={item}/> 
+													<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
+													}}/>
+												</div>
 												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
 											</div>
 									)}
 									</div>
 								</div>
-							</Box>
-							<Box
-								height={100} width='30vw' my={4} p={2}
-								display="flex" alignItems="center" gap={4}
-								sx={{ border: '2px solid grey' }}
+							</Container>
+							<Container
+								maxWidth='sm'  
+								sx={{border: '2px solid grey', mt:'10px', py:'10px'}}
 								>
 									<div>
-										
-										<Button onClick={calculateTotalPrice}
-										sx={{backgroundColor:'green', color:'black'}}>총액계산</Button>
-										<div>
-											{cartList.map((item,i)=>(
-												<div key={i}>
-													<span>{item.price}</span>
-													<span> * {item.count}</span>
-												</div>
-											))}
+										<div>Payment</div>
+										{/* <Button onClick={calculateTotalPrice}
+										sx={{backgroundColor:'green', color:'black'}}>총액계산</Button> */}
+										<div style={{
+											border:'1px solid grey',
+											padding:'5px', margin:'10px 0'
+										}}>
+											<div>
+												{cartList.map((item,i)=>(
+													<div key={i}>
+														<span>{item.price}</span>
+														<span> * {item.count}</span>
+													</div>
+												))}
+											</div>
+											<div>총결제금액: {totalPrice}</div>
 										</div>
-										<div>총결제금액: {totalPrice}</div>
 										<Button onClick={payment}
 										sx={{backgroundColor:'green', color:'black'}}>결제하기</Button>
 									</div>
-							</Box>
+							</Container>
 						</Grid>
 					</Grid>
 					<div>
@@ -205,7 +218,7 @@ function UserPage() {
 							aria-describedby="alert-dialog-description"
 						>
 							<DialogTitle id="alert-dialog-title">
-							{"Use Google's location service?"}
+							{"결제정보"}
 							</DialogTitle>
 							<DialogContent>
 							<DialogContentText id="alert-dialog-description">
