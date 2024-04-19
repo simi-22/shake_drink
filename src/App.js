@@ -12,9 +12,9 @@ function App() {
 			<Route path="/" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
 				<Route path=":id" element={<DetailPage />} />
-				<Route path="user" element={<UserPage />} />	
-			</Route>
-			<Route path="user/favor-category/:id" element={<FavorCategoryDrinks />} />
+				<Route path="user" element={<UserPage />} />
+				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />	
+			</Route>	
 		</Routes>
 	);
 }

@@ -96,7 +96,7 @@ function UserPage() {
 	}
 	function showRecommendations(){
 		setShowFavorC(false)
-		navigate(`favor-category/${firstRatedCategory}`)
+		navigate(`/favor-category/${firstRatedCategory}`)
 		
 	}
 	function handleClose(){ // 취소버튼
