@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 import HeartIcon from "../../assets/ic-heart.svg";
 import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
+import { useFavorite } from "../../store/favoriteStore";
 
 // 재료가져오는 함수
 function getNonNullIngredients(data) {
@@ -19,6 +20,7 @@ function getNonNullIngredients(data) {
 
 function Card({ cockTailData }) {
 	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
+	const {addItem} = useFavorite()
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
@@ -26,6 +28,7 @@ function Card({ cockTailData }) {
 		console.log("clickToDetail");
 		navigate(`/${idDrink}`);
 	};
+	console.log('cockTailData :', cockTailData)
 
 	return (
 		<li css={container} onClick={navigateToDetailPage}>
@@ -45,6 +48,7 @@ function Card({ cockTailData }) {
 					alt={like ? "like" : "unlike"}
 					onClick={() => {
 						setLike((prev) => !prev);
+						addItem(cockTailData)
 					}}
 				/>
 			</div>

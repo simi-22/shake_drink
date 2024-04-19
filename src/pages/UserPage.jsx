@@ -212,7 +212,7 @@ function UserPage() {
 									<Button onClick={addFavsToCart}
 										variant="contained" color="error" sx={{ml:'10px'}}
 									>Cart에 담기</Button>
-									<div>
+									<div style={{display:'flex', gap:'10px'}}>
 										{favoriteList.map((item)=> 
 										<WishCard key={item.id} item={item} 
 											addToCart={addToCart}
@@ -228,7 +228,7 @@ function UserPage() {
 									<h3>Cart</h3>
 								<div>
 									<div style={{fontSize:"25px"}}><ShoppingCartIcon/> total: {cartList.length}</div>
-									<div>
+									<div >
 										{cartList?.map((item,i)=>
 											<div key={i} >
 												<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
@@ -236,7 +236,7 @@ function UserPage() {
 													<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
 													}}/>
 												</div>
-												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
+												<div style={{marginTop:'10px'}}>수량: <AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
 											</div>
 									)}
 									</div>

@@ -1,5 +1,7 @@
 import {useSearchCategoryDrinks} from '../hooks/useCategoryFilter'
 import {useParams} from 'react-router-dom'
+import {Container } from '@mui/material';
+import SimpleCard from '../components/SimpleCard';
 
 const FavorCategoryDrinks= ()=>{
 	// {drinks [{strDrink:'',strDrinkThumb:'' }, {},{}]}
@@ -11,17 +13,19 @@ const FavorCategoryDrinks= ()=>{
 	if(isError){
 		console.log(error.message)
 	}
-	console.log('data :', data)
+	console.log('Favor category data :', data)
 	return(
 		<div>
-			<div>
-				{data?.drinks.map((item, i)=>(
-					<div key={i} style={{margin: '10px'}}>
-						<h2>{item.strDrink}</h2>
-						<img src={item.strDrinkThumb} alt=""  style={{width:'300px'}}/>
-					</div>
-				))}
-			</div>
+			<Container >
+				<div style={{fontSize: '40px', margin:'20px 0'}}>
+					최애 Category Drinks</div>
+				<div style={{display:'flex', justifyContent:'flex-start', flexWrap: 'wrap', gap:'15px', width:'95vw'}}>
+					{data?.drinks.map((item, i)=>(
+						<SimpleCard key={i} item={item} />
+					))}
+				</div>
+					
+			</Container>
 		</div>
 	)
 
