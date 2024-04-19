@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from "react";
 import Card from "../card/Card";
 import { usePopularCocktail } from "../../hooks/usePopularCocktail";
+import { create } from "zustand";
+import { useRef } from "react";
+
+const useStore = create((set) => ({
+	autoHeight: false,
+	isOpen: false,
+	setAutoHeight: (value) => set({ autoHeight: value }),
+	setIsOpen: (value) => set({ isOpen: value }),
+}));
 
 const PopularList = () => {
-	const [autoHeight, setAutoHeight] = useState(false);
-	const [isOpen, setIsOpen] = useState(false);
+	const { autoHeight, isOpen, setAutoHeight, setIsOpen } = useStore();
+
+	//닫기버튼 클릭시 h2태그 위치로 이동
+	const ListRef = useRef(null);
 
 	const { data, isLoading, isError, error } = usePopularCocktail();
 	if (isLoading) {
@@ -19,14 +29,14 @@ const PopularList = () => {
 		setIsOpen(!isOpen);
 
 		if (isOpen) {
-			window.scrollTo({ top: 0, behavior: "smooth" });
+			ListRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	};
 
 	return (
 		<div id="popular-list" className="main-page-list">
 			<div>
-				<h2>Best Cocktail</h2>
+				<h2 ref={ListRef}>Best Cocktail</h2>
 				<ul className={autoHeight ? "auto-height" : "init-height"}>
 					{data?.drinks.map((cockTailData, index) => (
 						<Card cockTailData={cockTailData} labelText="Best" key={index} />

@@ -18,9 +18,10 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import useLogin from "../store/loginStore";
 
-const pages = ["seach", "community", "game"];
-const settings = ["Profile", "Logout"];
+const pages = ["Seach", "Community", "Blog"];
+const settings = ["My Page", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
 	position: "relative",
@@ -70,8 +71,13 @@ function AppLayout() {
 	const navigate = useNavigate();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const [isLogin, setIsLogin] = useState(true); // 로그인 유무
+	const { isLogin, setIsLogin } = useLogin();
 	const [keyword, setKeyword] = useState("");
+
+	const handleLogout = () => {
+		setAnchorElUser(null);
+		setIsLogin(false); // 로그아웃 처리
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -250,9 +256,7 @@ function AppLayout() {
 									{settings.map((setting) => (
 										<MenuItem
 											key={setting}
-											onClick={() => {
-												setAnchorElUser(null);
-											}}
+											onClick={setting === "Logout" ? handleLogout : handleCloseUserMenu}
 										>
 											<Typography textAlign="center">{setting}</Typography>
 										</MenuItem>

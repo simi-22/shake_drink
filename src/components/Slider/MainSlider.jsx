@@ -14,6 +14,7 @@ const MainSlider = () => {
 		slidesToScroll: 1,
 		autoplay: true,
 		lazyLoad: "anticipated", //페이지 미리로딩
+		pauseOnHover: false,
 	};
 	return (
 		<div>
