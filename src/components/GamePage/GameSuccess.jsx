@@ -24,9 +24,11 @@ const container = css`
 		z-index: -1;
 	}
 	& > h1 {
+		padding-top: 100px;
 		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		font-size: 80px;
 	}
 `;

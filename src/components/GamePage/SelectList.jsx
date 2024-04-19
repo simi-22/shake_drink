@@ -1,7 +1,16 @@
 import { Box, Grid, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 
-function SelectList({ data, selected, setSelected, setLevel }) {
+function SelectList({ data, selected, setSelected, setLevel, correctNumber }) {
+	const handlerselecte = (index) => {
+		let newSelected = [...selected];
+		newSelected[index] = 1;
+		setSelected(newSelected);
+		if (index !== correctNumber) {
+			setLevel((prev) => prev - 1);
+		}
+	};
+
 	return (
 		<Box>
 			<Grid container spacing={2}>
@@ -10,12 +19,7 @@ function SelectList({ data, selected, setSelected, setLevel }) {
 						<ListItem>
 							<ListItemButton
 								sx={{ backgroundColor: selected[index] === 1 && "black" }}
-								onClick={() => {
-									let newSelected = [...selected];
-									newSelected[index] = 1;
-									setSelected(newSelected);
-									setLevel((prev) => prev - 1);
-								}}
+								onClick={() => handlerselecte(index)}
 							>
 								<ListItemText primary={item.strDrink} />
 							</ListItemButton>

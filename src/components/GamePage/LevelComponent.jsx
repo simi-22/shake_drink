@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
@@ -7,6 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 function LevelComponent({ title, level, data, levelName }) {
 	function getNonNullIngredients(data) {
 		const ingredients = [];
+
 		for (let i = 1; i <= 15; i++) {
 			const ingredientKey = `strIngredient${i}`;
 			if (data[ingredientKey] !== null) {
@@ -18,14 +18,14 @@ function LevelComponent({ title, level, data, levelName }) {
 
 	const getHint = (data) => {
 		switch (level) {
-			case 6:
+			case 5:
 				return (
 					<ul>
 						<li>{data?.strIngredient1}</li>
 						<li>{data?.strIngredient2}</li>
 					</ul>
 				);
-			case 5:
+			case 4:
 				return (
 					<ul>
 						{getNonNullIngredients(data).map((item) => (
@@ -33,21 +33,19 @@ function LevelComponent({ title, level, data, levelName }) {
 						))}
 					</ul>
 				);
-			case 4:
+			case 3:
 				return (
 					<ul>
 						<li>{data.strAlcoholic}</li>
 						<li>{data.strGlass}</li>
 					</ul>
 				);
-			case 3:
-				return <div>{data.strInstructions}</div>;
 			case 2:
-				return <img css={cocktailImg} src={data.strDrinkThumb} alt="cocktail" />;
+				return <div>{data.strInstructions}</div>;
 			case 1:
-				return <div>{data.strDrink.slice(0, 1)}</div>;
+				return <img css={cocktailImg} src={data.strDrinkThumb} alt="cocktail" />;
 			default:
-				return undefined; // 이 부분을 switch 내부로 이동
+				return undefined;
 		}
 	};
 
@@ -91,6 +89,7 @@ const levelWrap = css`
 `;
 
 const contentWrap = css`
+	padding-top: 20px;
 	height: 100%;
 	display: flex;
 	align-items: center;

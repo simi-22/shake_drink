@@ -9,7 +9,7 @@ import GameSuccess from "../components/GamePage/GameSuccess";
 function GamePage() {
 	const { data, isLoading, isError } = useRandomCocktail();
 	const [selected, setSelected] = useState([0, 0, 0, 0, 0, 0]);
-	const [level, setLevel] = useState(7);
+	const [level, setLevel] = useState(0);
 	const [correctNumber, setCorrectNumber] = useState(null);
 	const [levelName, setLevelName] = useState();
 
@@ -18,17 +18,14 @@ function GamePage() {
 
 	useEffect(() => {
 		switch (level) {
-			case 5:
+			case 4:
 				setLevelName("칵테일 마스터");
 				break;
-			case 4:
+			case 3:
 				setLevelName("칵테일 바 운영");
 				break;
-			case 3:
-				setLevelName("미성년자");
-				break;
 			case 2:
-				setLevelName("응애");
+				setLevelName("소맥파");
 				break;
 			case 1:
 				setLevelName("응애");
@@ -43,12 +40,12 @@ function GamePage() {
 		setCorrectNumber(Math.floor(Math.random() * 5));
 	}, []);
 
-	useEffect(() => {
-		if (selected[correctNumber] === 1) {
-			setLevel(7);
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selected]);
+	// useEffect(() => {
+	// 	if (selected[correctNumber] === 1) {
+	// 		setLevel(7);
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [selected]);
 
 	if (isLoading) {
 		return <div>Loading...</div>;
@@ -68,7 +65,7 @@ function GamePage() {
 						}}
 					/>
 				)}
-				{level === 6 && (
+				{level === 5 && selected[correctNumber] !== 1 && (
 					<LevelComponent
 						level={level}
 						levelName={levelName}
@@ -76,7 +73,7 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{level === 5 && (
+				{level === 4 && selected[correctNumber] !== 1 && (
 					<LevelComponent
 						level={level}
 						levelName={levelName}
@@ -84,7 +81,7 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{level === 4 && (
+				{level === 3 && selected[correctNumber] !== 1 && (
 					<LevelComponent
 						level={level}
 						levelName={levelName}
@@ -92,7 +89,7 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{level === 3 && (
+				{level === 2 && selected[correctNumber] !== 1 && (
 					<LevelComponent
 						level={level}
 						levelName={levelName}
@@ -100,7 +97,7 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{level === 2 && (
+				{level === 1 && selected[correctNumber] !== 1 && (
 					<LevelComponent
 						level={level}
 						levelName={levelName}
@@ -108,18 +105,16 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{level === 1 && (
-					<LevelComponent
-						level={level}
-						levelName={levelName}
-						title="첫 글자는 이거다!"
-						data={data?.drinks[correctNumber]}
-					/>
-				)}
-				{level === 7 && <GameSuccess levelName={levelName} />}
+				{selected[correctNumber] === 1 && <GameSuccess levelName={levelName} />}
 			</Box>
-			{level !== 0 && level !== 7 && (
-				<SelectList data={data} selected={selected} setSelected={setSelected} setLevel={setLevel} />
+			{level !== 0 && selected[correctNumber] !== 1 && (
+				<SelectList
+					data={data}
+					selected={selected}
+					setSelected={setSelected}
+					setLevel={setLevel}
+					correctNumber={correctNumber}
+				/>
 			)}
 		</Container>
 	);
