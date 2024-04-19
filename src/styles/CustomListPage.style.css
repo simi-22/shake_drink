@@ -22,6 +22,23 @@
     margin: 0 20px 20px;
 }
 
+.clickText {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes blink {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
 .customTitle {
     font-size: 25px;
     margin: 20px;
@@ -71,13 +88,34 @@
     padding-left: 0.5em;
 }
 
+.customTextBox {
+    background-color: rgb(198, 99, 244);
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    padding-left: 0.5em;
+}
+
 .customsTitle {
     font-size: 20px
 }
 
 .customsScript {
     font-size: 13px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.faHeart {
+    font-size: 17px;
+    color: white;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
 
 /* 모바일 화면 */
 @media screen and (max-width: 768px) {
@@ -86,6 +124,15 @@
         margin: 0 20px; 
         gap: 10px; 
     }
+    .customsTitle {
+        font-size: 16px
+    }
+    .customsScript {
+        font-size: 10px;
+    }
+    .faHeart {
+        font-size: 13px;
+      }
 }
 
 /* 패드 화면 */
