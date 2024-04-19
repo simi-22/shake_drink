@@ -1,0 +1,62 @@
+#detail-page {
+	width: 100%;
+	overflow: hidden;
+}
+
+.detail-information-container {
+	background-color: #3c3a3a;
+	width: 100%;
+	height: 80vh;
+}
+
+.cocktail-image {
+    margin-left: auto;
+    margin-right: 10px;
+	width: 50vh !important ;
+	height: 50vh
+}
+
+.info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.alcoholic {
+	color: red;
+}
+
+.non-alcoholic {
+	color: green;
+}
+
+.detail-information-container {
+    display: flex;
+    align-items: center;
+}
+
+.cocktail-image {
+    width: 100%;
+    display: block;
+}
+
+.info-container {
+    padding: 20px;
+}
+
+.alcoholic {
+    color: red;
+}
+
+#middle-banner {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.recipe {
+    margin-top: 20px;}
+
+.translation{
+    background-color: white;
+}
