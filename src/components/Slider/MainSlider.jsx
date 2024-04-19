@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import Slide1 from "../../assets/image/cocktail-slide-1.jpg";
-import Slide2 from "../../assets/image/cocktail-slide-2.jpeg";
+import Slide2 from "../../assets/image/cocktail-slide-2.jpg";
 import Slide3 from "../../assets/image/cocktail-slide-3.jpg";
 import Poster1 from "../../assets/image/cocktail-poster.png";
 

@@ -21,47 +21,62 @@ export const useFavorite = create((set)=>({
 			count:1,
 		}
 	],
-	totalPrice: 0,
-	setTotalPrice:(val)=>set((state)=>({totalPrice: val})),
-	calculate:()=> set((state)=>{
-		let result =0;
-		for(let i=0; i<state.favoriteList.length; i++){
-			result += state.favoriteList[i].price * state.favoriteList[i].count
-		}
-		return result
+	setPrice:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					price: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
 	}),
+	setIsNew:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					isNew: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
+	}),
+	setIsSale:(id, val)=> set((state)=>{
+		const updatedList = state.favoriteList.map((item)=>{
+			if(item.id === id){
+				return {
+					...item,
+					isSale: val
+				};
+			}
+			return item;
+		});
+		return {favoriteList: updatedList};
+	}),
+	
 	addItem: (item) => set((state) => {
-        const updatedList = [...state.favoriteList, item];
-        const result = state.calculate(updatedList);
-        return { favoriteList: updatedList, totalPrice: result };
-    }),
+		// 중복 아이템인지 확인
+		const isDuplicate = state.favoriteList.some((existingItem) => existingItem.id === item.id);
+
+		// 중복 아이템이 아닌 경우에만 아이템을 추가
+		if (!isDuplicate) {
+			const updatedList = [...state.favoriteList, item];
+			return { favoriteList: updatedList };
+		}
+
+		// 중복 아이템인 경우 현재 상태 그대로 반환
+		return state;
+	}),
 	removeItem: (id) => set((state) => {
         const updatedList = state.favoriteList.filter(item => item.id !== id);
-        const result = state.calculate(updatedList);
-        return { favoriteList: updatedList, totalPrice: result };
+        return { favoriteList: updatedList};
     }),
-	addCount:(id) => set((state)=>{
-		const updatedList = state.favoriteList.map(item => {
-			if (item.id === id) {
-				return {
-					...item,
-					count: item.count + 1
-				};
-			}
-			return item;
-		});
-		return { favoriteList: updatedList };
-	}),
-	minusCount:(id) => set((state)=>{
-		const updatedList = state.favoriteList.map(item => {
-			if (item.id === id) {
-				return {
-					...item,
-					count: item.count - 1
-				};
-			}
-			return item;
-		});
+	removeListItems: (list) => set((state) => {
+		const updatedList = state.favoriteList.filter(item => !list.some(listItem => listItem.id === item.id));
 		return { favoriteList: updatedList };
 	}),
 

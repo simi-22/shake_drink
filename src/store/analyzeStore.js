@@ -12,22 +12,38 @@ const initialState={
 		homemadeLiqueur:0, //H
 		punch:0, //I
 		beer:0,  //J
-		softDrink:0 //K
+		softDrink:0, //K
+		firstRatedCategory: 'cocktail'
 }
 
 export const useAnalyze = create((set)=>({
 	...initialState,
-	updateA:() => set((state)=> ({ordinaryDrink: state.ordinaryDrink +1 })),
-	updateB:() => set((state)=> ({cocktail: state.cocktail +1 })),
-	updateC:() => set((state)=> ({shake: state.shake +1 })),
-	updateD:() => set((state)=> ({otherUnknown: state.otherUnknown +1 })),
-	updateE:() => set((state)=> ({cocoa: state.cocoa +1 })),
-	updateF:() => set((state)=> ({shot: state.shot +1 })),
-	updateG:() => set((state)=> ({coffeeTea: state.coffeeTea +1 })),
-	updateH:() => set((state)=> ({homemadeLiqueur: state.homemadeLiqueur +1 })),
-	updateI:() => set((state)=> ({punch: state.punch +1 })),
-	updateJ:() => set((state)=> ({beer: state.beer +1 })),
-	updateK:() => set((state)=> ({softDrink: state.softDrink +1 })),
+	updateState: (key) => set((state) => ({ [key]: state[key] + 1 })),
+	setFirstRatedCategory: () => set((state) => {
+		// 모든 카테고리 중 value최대값 찾기
+        const maxCount = Math.max(...Object.values(state)); 
+		// 최대값과 일치하는 카테고리 찾기
+        const firstRatedCategory2 = Object.keys(state).find(key => state[key] === maxCount); 
+        return { firstRatedCategory: firstRatedCategory2 }; // 일등 카테고리 반환
+    })
+	// import {useAnalyze} from '../store/analyzeStore'
+	// const {firstRatedCategory} = useAnalyze()
+	// const targetCategory = firstRatedCategory;
+	// 카테고리별 검색 api이용.
+
+
+
+	// updateA:() => set((state)=> ({ordinaryDrink: state.ordinaryDrink +1 })),
+	// updateB:() => set((state)=> ({cocktail: state.cocktail +1 })),
+	// updateC:() => set((state)=> ({shake: state.shake +1 })),
+	// updateD:() => set((state)=> ({otherUnknown: state.otherUnknown +1 })),
+	// updateE:() => set((state)=> ({cocoa: state.cocoa +1 })),
+	// updateF:() => set((state)=> ({shot: state.shot +1 })),
+	// updateG:() => set((state)=> ({coffeeTea: state.coffeeTea +1 })),
+	// updateH:() => set((state)=> ({homemadeLiqueur: state.homemadeLiqueur +1 })),
+	// updateI:() => set((state)=> ({punch: state.punch +1 })),
+	// updateJ:() => set((state)=> ({beer: state.beer +1 })),
+	// updateK:() => set((state)=> ({softDrink: state.softDrink +1 })),
 }))
 
 
