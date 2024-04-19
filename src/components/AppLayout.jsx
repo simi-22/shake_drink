@@ -85,6 +85,11 @@ function AppLayout() {
 		setKeyword("");
 	};
 
+	// 프로필 메뉴 클로즈 핸들러
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
+	};
+
 	return (
 		<>
 			<AppBar
