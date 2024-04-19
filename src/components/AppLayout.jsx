@@ -75,6 +75,7 @@ function AppLayout() {
 	const [keyword, setKeyword] = useState("");
 
 	const handleLogout = () => {
+		setAnchorElUser(null);
 		setIsLogin(false); // 로그아웃 처리
 	};
 
@@ -167,12 +168,21 @@ function AppLayout() {
 									display: { xs: "block", md: "none" },
 								}}
 							>
-								{settings.map((setting, index) => (
+								{pages.map((page) => (
 									<MenuItem
-										key={setting}
-										onClick={index === 1 ? handleLogout : handleCloseUserMenu}
+										key={page}
+										onClick={() => {
+											setAnchorElNav(null);
+										}}
 									>
-										<Typography textAlign="center">{setting}</Typography>
+										<Typography
+											textAlign="center"
+											onClick={() => {
+												navigate(`/${page}`);
+											}}
+										>
+											{page}
+										</Typography>
 									</MenuItem>
 								))}
 							</Menu>
