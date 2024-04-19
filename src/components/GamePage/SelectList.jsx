@@ -18,9 +18,8 @@ function SelectList({ data, selected, setSelected, setLevel, correctNumber }) {
 					<Grid item xs={6} key={index}>
 						<ListItem>
 							<ListItemButton
-								disabled={selected[index] === 1}
-								// sx={{ backgroundColor: selected[index] === 1 && "black" }}
 								onClick={() => handlerselecte(index)}
+								disabled={selected[index] === 1}
 							>
 								<ListItemText primary={item.strDrink} />
 							</ListItemButton>
