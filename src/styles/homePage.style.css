@@ -135,6 +135,11 @@
 	margin: 0 20px;
 	box-sizing: border-box;
 	scrollbar-width: none;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.main-banner-wrap::-webkit-scrollbar {
+	display: none; /* Chrome , Safari , Opera */
 }
 
 #home-page #home-banner {
