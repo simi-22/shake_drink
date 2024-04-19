@@ -79,25 +79,6 @@ function AppLayout() {
 		setKeyword("");
 	};
 
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
-
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenUserMenu = (event) => {
-		setAnchorElUser(event.currentTarget);
-	};
-
-	// 프로필 메뉴 클로즈 핸들러
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
-
 	return (
 		<>
 			<AppBar
