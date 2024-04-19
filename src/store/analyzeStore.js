@@ -19,13 +19,41 @@ const initialState={
 export const useAnalyze = create((set)=>({
 	...initialState,
 	updateState: (key) => set((state) => ({ [key]: state[key] + 1 })),
+	
+
 	setFirstRatedCategory: () => set((state) => {
-		// 모든 카테고리 중 value최대값 찾기
-        const maxCount = Math.max(...Object.values(state)); 
+		// 숫자로 변환할 수 있는 속성만 필터링하여 최대값 찾기
+    	const numericValues = Object.values(state).filter(value => typeof value === 'number');
+    	const maxCount = Math.max(...numericValues);
+
+		// 모든 카테고리 중 value최대값 찾기 (문제는 firstRatedCategory는 문자이다.)
+        // const maxCount = Math.max(...Object.values(state)); 
+		// console.log('최대카운트:', maxCount)
 		// 최대값과 일치하는 카테고리 찾기
-        const firstRatedCategory2 = Object.keys(state).find(key => state[key] === maxCount); 
+        const firstRatedCategory2 = Object.keys(state).find(key => state[key] === maxCount);
+		console.log('최대값...: ', firstRatedCategory2)
         return { firstRatedCategory: firstRatedCategory2 }; // 일등 카테고리 반환
-    })
+    }),
+	// analyze:(key)=>set((state)=>{state.updateState(key); state.setFirstRatedCategory()})
+	analyze: (key) =>
+		set((state) => {
+		// 상태 업데이트
+		const updatedState = {
+			...state,
+			[key]: state[key] + 1,
+		};
+
+		// 최대 카테고리 설정
+		const maxCount = Math.max(...Object.values(updatedState));
+		const firstRatedCategory2 = Object.keys(updatedState).find(
+			(key) => updatedState[key] === maxCount
+		);
+
+		return {
+			...updatedState,
+			firstRatedCategory: firstRatedCategory2,
+		};
+	}),
 	// import {useAnalyze} from '../store/analyzeStore'
 	// const {firstRatedCategory} = useAnalyze()
 	// const targetCategory = firstRatedCategory;

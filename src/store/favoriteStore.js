@@ -10,6 +10,7 @@ export const useFavorite = create((set)=>({
 			isNew:'New',
 			isSale:'Sale',
 			count:1,
+			strCategory:'cocktail'
 		},
 		{
 			id: "11118",
@@ -19,6 +20,7 @@ export const useFavorite = create((set)=>({
 			isNew:'',
 			isSale:'',
 			count:1,
+			strCategory:'cocktail'
 		}
 	],
 	setPrice:(id, val)=> set((state)=>{

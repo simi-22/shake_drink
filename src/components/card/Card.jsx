@@ -5,6 +5,7 @@ import HeartIcon from "../../assets/ic-heart.svg";
 import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
 import { useFavorite } from "../../store/favoriteStore";
+import { useAnalyze } from "../../store/analyzeStore";
 
 // 재료가져오는 함수
 function getNonNullIngredients(data) {
@@ -19,16 +20,16 @@ function getNonNullIngredients(data) {
 }
 
 function Card({ cockTailData }) {
+	const {updateState} = useAnalyze()
 	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
 	const {addItem} = useFavorite()
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
 	const navigateToDetailPage = () => {
-		console.log("clickToDetail");
+		updateState(cockTailData.strCategory)
 		navigate(`/${idDrink}`);
 	};
-	console.log('cockTailData :', cockTailData)
 
 	return (
 		<li css={container} onClick={navigateToDetailPage}>

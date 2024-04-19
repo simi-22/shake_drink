@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container, Grid, Box, CssBaseline, Button} from '@mui/material';
+import {Container, Grid, Button} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaidIcon from '@mui/icons-material/Paid';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
@@ -25,7 +25,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import Checkbox from '@mui/material/Checkbox';
 import CartCard from "../components/CartCard";
-// const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 import {Form} from 'react-bootstrap'
 
 
@@ -33,9 +32,9 @@ function UserPage() {
 	const navigate = useNavigate()
 	const {favoriteList, emptyFavoriteList} =useFavorite()
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
-	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney, minusTotalMoney} =useOrder()
+	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
-	const {firstRatedCategory, ordinaryDrink,cocktail,shake,otherUnknown,cocoa, shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
+	const {firstRatedCategory, updateState, setFirstRatedCategory,ordinaryDrink,cocktail,shake,otherUnknown,cocoa,shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
 
 	const [totalPrice, setTotalPrice]=useState(0)
 	const [open, setOpen]= useState(false) // 결제 확인창
@@ -50,7 +49,6 @@ function UserPage() {
 		password:'',
 		nickname:''
 	})
-	// const [orderedMoney, setOrderedMoney] =useState([])
 	
 
   	const handleChange = (event) => {
@@ -104,10 +102,16 @@ function UserPage() {
 		
 		removeListFromOrder(orderedList)
 	}
-	function handleClose2(){ //확인버튼
+	function handleClose2(list){ //확인버튼
 		setOpen(false)
 		addTotalMoney(totalPrice)
-		
+		console.log('전달 리스트:', list)
+		list.forEach(item =>{
+			updateState(item.strCategory)
+		})
+	}
+	function getFirstItem(){
+		setFirstRatedCategory()
 	}
 	function handleShowClose(){
 		setShow(false)
@@ -144,9 +148,8 @@ function UserPage() {
 
 
 	return (
-		<>
-			{/* <CssBaseline> */}
-				<Container maxWidth='lg' >
+		<div>
+				<Container maxWidth='lg'>
 					<Grid container spacing={2}>
 						<Grid item xs={12} md={6} lg={6}>
 							<Container
@@ -165,7 +168,7 @@ function UserPage() {
 							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6}>
-							<Box
+							<Container
 								Container
 								maxWidth='sm'  
 								sx={{border: '2px solid grey', padding:'20px'}}
@@ -196,7 +199,7 @@ function UserPage() {
 										</div>
 									</div>
 								
-							</Box>
+							</Container>
 						</Grid>
 						<Grid item xs={12} md={6} lg={6} >
 							<Container
@@ -289,7 +292,7 @@ function UserPage() {
 							</DialogContent>
 							<DialogActions>
 							<Button onClick={handleClose}>취소</Button>
-							<Button onClick={handleClose2} autoFocus>
+							<Button onClick={()=>handleClose2(cartList)} autoFocus>
 								확인
 							</Button>
 							</DialogActions>
@@ -338,23 +341,34 @@ function UserPage() {
 							</DialogTitle>
 							<DialogContent>
 							<DialogContentText id="alert-dialog-description">
-								<h3>최애 카테고리: {firstRatedCategory}</h3>
 								<div>
-									<div>ordinary drink : {ordinaryDrink}</div>
-									<div>cocktail : {cocktail}</div>
-									<div>shake : {shake}</div>
-									<div>other /unknown : {otherUnknown}</div>
-									<div>cocoa : {cocoa}</div>
-									<div>shot : {shot}</div>
-									<div>coffee tea : {coffeeTea}</div>
-									<div>homemade liqueur : {homemadeLiqueur}</div>
-									<div>punch : {punch}</div>
-									<div>beer : {beer}</div>
-									<div>soft drink : {softDrink}</div>
+									<p>최애 카테고리: {firstRatedCategory}</p>
+									<div>
+										<div>ordinary drink : {ordinaryDrink}</div>
+										<div>cocktail : {cocktail}</div>
+										<div>shake : {shake}</div>
+										<div>other /unknown : {otherUnknown}</div>
+										<div>cocoa : {cocoa}</div>
+										<div>shot : {shot}</div>
+										<div>coffee tea : {coffeeTea}</div>
+										<div>homemade liqueur : {homemadeLiqueur}</div>
+										<div>punch : {punch}</div>
+										<div>beer : {beer}</div>
+										<div>soft drink : {softDrink}</div>
+									</div>
+									<Button variant="contained"
+									style={{marginTop:'10px'}}
+										onClick={getFirstItem}
+									>최애 category 산출</Button>
+									
+									<Button variant="contained"
+									color="success"
+									style={{marginLeft:'10px',
+									  marginTop:'10px'
+									}}
+										onClick={showRecommendations}
+									>추천 주류/음료</Button>
 								</div>
-								<Button variant="contained"
-									onClick={showRecommendations}
-								>추천 주류/음료</Button>
 								
 							</DialogContentText>
 							</DialogContent>
@@ -428,8 +442,7 @@ function UserPage() {
 					</div>
 					
 				</Container>
-			{/* </CssBaseline> */}
-		</>
+		</div>
 	);
 }
 
