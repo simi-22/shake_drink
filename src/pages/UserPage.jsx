@@ -4,6 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaidIcon from '@mui/icons-material/Paid';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -14,6 +15,8 @@ import {useUser} from '../store/userStore'
 import {useCart} from '../store/cartStore';
 import {useOrder} from '../store/orderStore';
 import {useAnalyze} from '../store/analyzeStore'
+import { usePoint } from "../store/pointStore";
+import { useBookmark } from "../store/bookmarkStore";
 import WishCard from "../components/WishCard";
 import {useNavigate} from 'react-router-dom'
 
@@ -26,6 +29,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Checkbox from '@mui/material/Checkbox';
 import CartCard from "../components/CartCard";
 import {Form} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 
 function UserPage() {
@@ -35,12 +39,16 @@ function UserPage() {
 	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
 	const {firstRatedCategory, updateState, setFirstRatedCategory,ordinaryDrink,cocktail,shake,otherUnknown,cocoa,shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
+	const {point, coupon, addPoint, addCoupon} = usePoint()
+	const {bookmarkList} = useBookmark()
 
 	const [totalPrice, setTotalPrice]=useState(0)
 	const [open, setOpen]= useState(false) // 결제 확인창
 	const [show, setShow] = useState(false) // 주문내역 창
 	const [showUserDialog, setShowUserDialog] =useState(false) // user Dialog
 	const [showFavorC, setShowFavorC] =useState(false) //FavorCategory Dialog
+	const [book, setBook] = useState(false) // Bookmark dialog
+
 	const [checked, setChecked] = useState(false);
 	const [countChange, setCountChange]= useState(false)
 	const [orderedList, setOrderedList] = useState([])
@@ -97,6 +105,9 @@ function UserPage() {
 		navigate(`/favor-category/${firstRatedCategory}`)
 		
 	}
+	function showBookmark(){
+		setBook(true)
+	}
 	function handleClose(){ // 취소버튼
 		setOpen(false)
 		
@@ -105,10 +116,15 @@ function UserPage() {
 	function handleClose2(list){ //확인버튼
 		setOpen(false)
 		addTotalMoney(totalPrice)
+		addPoint(totalPrice/100)
+		addCoupon(Math.ceil(totalPrice/10000))
 		console.log('전달 리스트:', list)
 		list.forEach(item =>{
 			updateState(item.strCategory)
 		})
+	}
+	function handleBookClose(){
+		setBook(false)
 	}
 	function getFirstItem(){
 		setFirstRatedCategory()
@@ -179,17 +195,43 @@ function UserPage() {
 											}}>
 										<div>
 											<div>
-												<PaidIcon/>
-												<div>포인트 250P</div>
+												<div style={{width:'80px',
+													textAlign:'center'
+												}}>
+													<PaidIcon
+													sx={{ '&:hover': { color: '#004cff' } }} 
+													/>
+												</div>
+												
+												<div>포인트 
+													<span style={{color:'#004cff'}}>{point}P</span>
+												</div>
 											</div>
 										</div>
 										<div>
-											<CalendarViewWeekIcon/>
-											<div>쿠폰0장</div>
+											<div style={{width:'60px',
+													textAlign:'center'
+												}}>
+													<CalendarViewWeekIcon
+													sx={{ '&:hover': { color: '#004cff' } }} 
+													/>
+											</div>
+											
+											<div>쿠폰
+												<span style={{color:'#004cff'}}>{coupon}장</span>
+											</div>
 										</div>
 										<div>
-											<ModeEditIcon/>
-											<div>리뷰0개</div>
+											<div style={{width:'60px',
+													textAlign:'center'
+												}}>
+													<BookmarkIcon 
+													sx={{ '&:hover': { color: '#004cff' } }} 
+													onClick={showBookmark}/>
+											</div>
+											<div>북마크
+												<span style={{color:'#004cff'}}>{bookmarkList.length}개</span>
+											</div>
 										</div>
 									</div>
 									<div style={{margin:'20px 0'}}>
@@ -436,6 +478,36 @@ function UserPage() {
 						</DialogContent>
 						<DialogActions>
 						<Button variant="contained" onClick={closeUserDialog} autoFocus>확인</Button>
+						</DialogActions>
+					</Dialog>
+					: ''}
+				</div>
+				<div>
+					{book ?  // 북마크 다이알로그
+					<Dialog
+						open={book}
+						onClose={handleBookClose}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle id="alert-dialog-title">
+						{"북마크"}
+						</DialogTitle>
+						<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							<div>
+								{bookmarkList.map((item,i)=>(
+									<div key={i}>
+										<div>음료 : {item.title}</div>
+										<span>링크 :</span> 
+										 <Link to={item.url} style={{color:'red', borderBottom:'1px solid red'}}>{item.url}</Link>
+									</div>
+								))}
+							</div>
+						</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+						<Button onClick={handleBookClose} autoFocus>확인</Button>
 						</DialogActions>
 					</Dialog>
 					: ''}
