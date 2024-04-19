@@ -29,7 +29,7 @@ const PopularList = () => {
 				<h2>Best Cocktail</h2>
 				<ul className={autoHeight ? "auto-height" : "init-height"}>
 					{data?.drinks.map((cockTailData, index) => (
-						<Card cockTailData={cockTailData} key={index} />
+						<Card cockTailData={cockTailData} labelText="Best" key={index} />
 					))}
 				</ul>
 			</div>

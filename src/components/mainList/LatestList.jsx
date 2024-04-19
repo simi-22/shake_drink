@@ -16,7 +16,7 @@ const LatestList = () => {
 				<h2>Most Latest Cocktail</h2>
 				<ul>
 					{data?.drinks.map((cockTailData, index) => (
-						<Card cockTailData={cockTailData} key={index} />
+						<Card cockTailData={cockTailData} labelText="New" key={index} />
 					))}
 				</ul>
 			</div>
