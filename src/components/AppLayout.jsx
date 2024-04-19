@@ -85,25 +85,6 @@ function AppLayout() {
 		setKeyword("");
 	};
 
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
-
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenUserMenu = (event) => {
-		setAnchorElUser(event.currentTarget);
-	};
-
-	// 프로필 메뉴 클로즈 핸들러
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
-
 	return (
 		<>
 			<AppBar
@@ -145,7 +126,9 @@ function AppLayout() {
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
-								onClick={handleOpenNavMenu}
+								onClick={(e) => {
+									setAnchorElNav(e.currentTarget);
+								}}
 								color="inherit"
 							>
 								<MenuIcon />
@@ -163,7 +146,9 @@ function AppLayout() {
 									horizontal: "left",
 								}}
 								open={Boolean(anchorElNav)}
-								onClose={handleCloseNavMenu}
+								onClose={() => {
+									setAnchorElNav(null);
+								}}
 								sx={{
 									display: { xs: "block", md: "none" },
 								}}
@@ -214,7 +199,10 @@ function AppLayout() {
 							{pages.map((page) => (
 								<Button
 									key={page}
-									onClick={handleCloseNavMenu}
+									onClick={() => {
+										navigate(`/${page}`);
+										setAnchorElNav(null);
+									}}
 									sx={{ my: 2, color: "inherit", display: "block" }}
 								>
 									{page}
@@ -239,7 +227,11 @@ function AppLayout() {
 						{isLogin ? (
 							<Box sx={{ flexGrow: 0 }}>
 								<Tooltip title="Open settings">
-									<IconButton onClick={handleOpenUserMenu}>
+									<IconButton
+										onClick={(e) => {
+											setAnchorElUser(e.currentTarget);
+										}}
+									>
 										<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
 									</IconButton>
 								</Tooltip>
@@ -257,7 +249,9 @@ function AppLayout() {
 										horizontal: "right",
 									}}
 									open={Boolean(anchorElUser)}
-									onClose={handleCloseUserMenu}
+									onClose={() => {
+										setAnchorElUser(null);
+									}}
 								>
 									{settings.map((setting) => (
 										<MenuItem

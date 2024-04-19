@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AppLayout from "./components/AppLayout";
 import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
 import LoginPage from "./pages/LoginPage";
+import GamePage from "./pages/GamePage";
 
 function App() {
 	return (
@@ -15,7 +16,9 @@ function App() {
 				<Route path=":id" element={<DetailPage />} />
 				<Route path="user" element={<UserPage />} />
 				<Route path="login" element={<LoginPage />} />
-				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
+				<Route path="detail" element={<DetailPage />} />
+				<Route path="user" element={<UserPage />} />
+				<Route path="game" element={<GamePage />} />
 			</Route>
 		</Routes>
 	);
