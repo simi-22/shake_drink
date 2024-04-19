@@ -70,10 +70,13 @@ export const contentWrap = css`
 	}
 `;
 
-export const labelWrap = css`
+export const labelWrap = (labelText) => css`
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
+	& > div {
+		visibility: ${!labelText && "hidden"};
+	}
 	& > img {
 		z-index: 10;
 	}

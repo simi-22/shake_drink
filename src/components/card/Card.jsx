@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
-import { css } from "@emotion/react";
+import { useState } from "react";
 import HeartIcon from "../../assets/ic-heart.svg";
 import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +44,7 @@ function Card({ cockTailData, labelText }) {
 			</div>
 
 			<div css={contentWrap}>
-				<div css={labelWrap}>
+				<div css={labelWrap(labelText)}>
 					<Chip label={labelText} size="small" color="error" variant="outlined" />
 					<img
 						className="like"
