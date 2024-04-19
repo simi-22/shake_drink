@@ -14,7 +14,7 @@ const PopularList = () => {
 	const { autoHeight, isOpen, setAutoHeight, setIsOpen } = useStore();
 
 	//닫기버튼 클릭시 h2태그 위치로 이동
-	const h2Ref = useRef(null);
+	const ListRef = useRef(null);
 
 	const { data, isLoading, isError, error } = usePopularCocktail();
 	if (isLoading) {
@@ -29,14 +29,14 @@ const PopularList = () => {
 		setIsOpen(!isOpen);
 
 		if (isOpen) {
-			h2Ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+			ListRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
 		}
 	};
 
 	return (
 		<div id="popular-list" className="main-page-list">
 			<div>
-				<h2 ref={h2Ref}>Best Cocktail</h2>
+				<h2 ref={ListRef}>Best Cocktail</h2>
 				<ul className={autoHeight ? "auto-height" : "init-height"}>
 					{data?.drinks.map((cockTailData, index) => (
 						<Card cockTailData={cockTailData} key={index} />
