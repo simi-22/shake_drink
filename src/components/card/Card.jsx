@@ -10,7 +10,7 @@ function getNonNullIngredients(data) {
 	const ingredients = [];
 	for (let i = 1; i <= 15; i++) {
 		const ingredientKey = `strIngredient${i}`;
-		if (data[ingredientKey] !== null) {
+		if (data[ingredientKey] !== null && data[ingredientKey] !== "") {
 			ingredients.push(`#${data[ingredientKey]}  `);
 		}
 	}
@@ -18,17 +18,18 @@ function getNonNullIngredients(data) {
 }
 
 function Card({ cockTailData }) {
+	const navigate = useNavigate();
 	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
-	const navigate = useNavigate();
-	const navigateToDetailPage = () => {
-		console.log("clickToDetail");
-		navigate(`/${idDrink}`);
-	};
 
 	return (
-		<li css={container} onClick={navigateToDetailPage}>
+		<li
+			css={container}
+			onClick={() => {
+				navigate(`/${idDrink}`);
+			}}
+		>
 			<div css={imgWrap} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
 				<img src={strDrinkThumb} alt="cocktail" />
 				{hover && (
@@ -43,7 +44,8 @@ function Card({ cockTailData }) {
 					className="like"
 					src={like ? HeartIcon : EmptyHeartIcon}
 					alt={like ? "like" : "unlike"}
-					onClick={() => {
+					onClick={(e) => {
+						e.stopPropagation();
 						setLike((prev) => !prev);
 					}}
 				/>
@@ -112,6 +114,7 @@ const imgWrap = css`
 		position: absolute;
 		bottom: 45px;
 		right: 10px;
+		z-index: 10;
 	}
 `;
 
