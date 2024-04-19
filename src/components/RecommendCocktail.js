@@ -38,21 +38,25 @@ const RecommendCocktail = ({ searchByIngredientData, base }) => {
         <Collapse in={open}>
           <Card>
             <CardContent>
-              <Carousel
-                responsive={responsive}
-                infinite={true}
-                containerClass="carousel-container"
-                itemClass="carousel-item-padding-40-px"
-                centerMode={true}
-              >
-                {searchByIngredientData?.map((recommendData) => (
-                  <RecommendCard
-                    cockTailData={recommendData}
-                    key={recommendData.idDrink}
-                    base={base}
-                  />
-                ))}
-              </Carousel>
+              {searchByIngredientData && searchByIngredientData.length > 0 ? (
+                <Carousel
+                  responsive={responsive}
+                  infinite={true}
+                  containerClass="carousel-container"
+                  itemClass="carousel-item-padding-40-px"
+                  centerMode={true}
+                >
+                  {searchByIngredientData.map((recommendData) => (
+                    <RecommendCard
+                      cockTailData={recommendData}
+                      key={recommendData.idDrink}
+                      base={base}
+                    />
+                  ))}
+                </Carousel>
+              ) : (
+                <div>No Similar data available</div>
+              )}
             </CardContent>
           </Card>
         </Collapse>

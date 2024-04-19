@@ -1,6 +1,7 @@
 import React from "react";
 import midBanner from "../assets/image/jazzbanner.png";
 import { Grid, Typography, Box } from "@mui/material";
+import Paper from "@mui/material/Paper";
 
 const DetailCocktail = ({ detailData }) => {
 	console.log("detailData", detailData);
@@ -35,9 +36,7 @@ const DetailCocktail = ({ detailData }) => {
 			<div id="middle-banner">
 				<img src={midBanner} alt="재즈페스티벌" />
 			</div>
-			<Typography variant="body1" style={{ marginTop: "20px" }}>
-				레시피 : {detailData?.strInstructions}
-			</Typography>
+			<Paper>레시피 : {detailData?.strInstructions}</Paper>
 		</div>
 	);
 };
