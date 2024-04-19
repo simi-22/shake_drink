@@ -22,7 +22,7 @@ function GamePage() {
 				setLevelName("칵테일 마스터");
 				break;
 			case 3:
-				setLevelName("칵테일 바 운영");
+				setLevelName("칵테일 바 단골");
 				break;
 			case 2:
 				setLevelName("소맥파");
@@ -40,13 +40,6 @@ function GamePage() {
 		setCorrectNumber(Math.floor(Math.random() * 5));
 	}, []);
 
-	// useEffect(() => {
-	// 	if (selected[correctNumber] === 1) {
-	// 		setLevel(7);
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [selected]);
-
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}
@@ -57,7 +50,7 @@ function GamePage() {
 
 	return (
 		<Container maxWidth="sm" sx={{ mt: "30px" }}>
-			<Box sx={{ width: "100%", height: "300px", mb: "30px" }}>
+			<Box sx={{ width: "100%", height: "250px", mb: "30px" }}>
 				{level === 0 && (
 					<GameTitle
 						onNext={() => {
@@ -105,7 +98,9 @@ function GamePage() {
 						data={data?.drinks[correctNumber]}
 					/>
 				)}
-				{selected[correctNumber] === 1 && <GameSuccess levelName={levelName} />}
+				{selected[correctNumber] === 1 && (
+					<GameSuccess levelName={levelName} setLevel={setLevel} setSelected={setSelected} />
+				)}
 			</Box>
 			{level !== 0 && selected[correctNumber] !== 1 && (
 				<SelectList
