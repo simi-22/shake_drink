@@ -8,9 +8,9 @@ export const useCart = create((set)=>({
 
 		// 중복 아이템이 아닌 경우에만 아이템을 추가
 		if (!isDuplicate) {
-			const updatedList = [...state.cartList, item];
+			const updatedList = [...state.cartList, {...item}];
 			return { cartList: updatedList };
-		}
+		} // item 참조 깨기 위해 {...item}
 
 		// 중복 아이템인 경우 현재 상태 그대로 반환
 		return state;

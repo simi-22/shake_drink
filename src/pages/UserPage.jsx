@@ -500,7 +500,7 @@ function UserPage() {
 									<div key={i}>
 										<div>음료 : {item.title}</div>
 										<span>링크 :</span> 
-										 <Link to={item.url} style={{color:'red', borderBottom:'1px solid red'}}>{item.url}</Link>
+										 <Link to={item.path} style={{color:'red', borderBottom:'1px solid red'}}>{item.path}</Link>
 									</div>
 								))}
 							</div>
