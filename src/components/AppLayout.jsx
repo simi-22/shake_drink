@@ -70,7 +70,7 @@ function AppLayout() {
 	const navigate = useNavigate();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const [isLogin, setIsLogin] = useState(true); // 로그인 유무
+	const [isLogin, setIsLogin] = useState(false); // 로그인 유무
 	const [keyword, setKeyword] = useState("");
 
 	const handleSubmit = (e) => {
