@@ -5,21 +5,33 @@ import { useRecommendCocktail } from "../hooks/useRecommendCocktail";
 import RecommendCocktail from "../components/RecommendCocktail";
 import { useSearchByIngredient } from "../hooks/useSearchByIngredient";
 import DetailCocktail from "../components/DetailCocktail";
-
+import LoadingPage from "./loadingPage/LoadingPage"
 
 const DetailPage = () => {
 	const { id } = useParams();
-	const { data : detailData } = useDetailCocktail(id);
+	const { data: detailData , isLoading: detailLoading} = useDetailCocktail(id);
 
-	const { data: recommendData, isLoading, isError } = useSearchByIngredient(detailData?.strIngredient1);
-	console.log("recommendData", recommendData);
-	// console.log("detailData", detailData);
+	const {
+		data: searchByIngredientData,
+		isLoading,
+		isError,
+	} = useSearchByIngredient(detailData?.strIngredient1,id);
+	const base = detailData?.strIngredient1
+	console.log("searchByIngredientData",searchByIngredientData)
+
 
 	return (
 		<div>
-			<DetailCocktail detailData={detailData}/>
-			<RecommendCocktail recommendData={recommendData} />
-		</div>
+        {/* 로딩 페이지를 먼저 보여주고, detailLoading과 isLoading이 모두 false인 경우에만 컴포넌트를 보여줌 */}
+        {detailLoading || isLoading ? (
+            <LoadingPage />
+        ) : (
+            <div>
+                <DetailCocktail detailData={detailData} />
+                <RecommendCocktail searchByIngredientData={searchByIngredientData} base={base} />
+            </div>
+        )}
+    </div>
 	);
 };
 

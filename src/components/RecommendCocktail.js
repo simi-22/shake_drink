@@ -1,11 +1,11 @@
 import React from "react";
-import Card from "./card/Card";
+import RecommendCard from "./card/RecommendCard";
 
-const RecommendCocktail = ({recommendData}) => {
+const RecommendCocktail = ({ searchByIngredientData, base }) => {
 	return (
 		<div>
-			{recommendData?.map((cockTailData, index) => (
-				<Card cockTailData={cockTailData} key={index} />
+			{searchByIngredientData?.map((recommendData) => (
+				<RecommendCard cockTailData={recommendData} key={recommendData.idDrink} base={base} />
 			))}
 		</div>
 	);

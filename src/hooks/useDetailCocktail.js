@@ -7,7 +7,7 @@ const fetchDetailCocktail = (id) => {
 
 export const useDetailCocktail = (id) => {
   return useQuery({
-    queryKey: ["cocktail-detail"],
+    queryKey: ["cocktail-detail",id],
     queryFn: () => fetchDetailCocktail(id),
     select: (result) => {
         const drink = result.data.drinks[0];

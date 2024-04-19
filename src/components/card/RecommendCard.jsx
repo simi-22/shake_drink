@@ -6,19 +6,9 @@ import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
 
 // 재료가져오는 함수
-function getNonNullIngredients(data) {
-	const ingredients = [];
-	for (let i = 1; i <= 15; i++) {
-		const ingredientKey = `strIngredient${i}`;
-		if (data[ingredientKey] !== null) {
-			ingredients.push(`#${data[ingredientKey]}  `);
-		}
-	}
-	return ingredients;
-}
 
-function Card({ cockTailData }) {
-	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
+function RecommendCard({ cockTailData , base}) {
+	const { idDrink, strDrink, strDrinkThumb } = cockTailData;
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
 	const navigate = useNavigate();
@@ -35,8 +25,9 @@ function Card({ cockTailData }) {
 				{hover && (
 					<div>
 						<div>
-							<div>{strAlcoholic === "Alcoholic" ? "#알콜" : "#무알콜"}</div>
-							<div>{getNonNullIngredients(cockTailData)}</div>
+							<div>{`#${strDrink}`}</div>
+                            <div>{`#${base} base cocktail`}</div>
+							
 						</div>
 					</div>
 				)}
@@ -52,15 +43,15 @@ function Card({ cockTailData }) {
 
 			<div css={contentWrap}>
 				{/* 여기 Best부분 Best일때는 Popular일땐 Best가 latest일땐 New가 뜨게 할 수 있나요?*/}
-				<span>Best</span>
+				<span>Recommendation</span>
 				<h1>{strDrink}</h1>
-				<p>{strInstructions}</p>
+				<p>　</p>
 			</div>
 		</li>
 	);
 }
 
-export default Card;
+export default RecommendCard;
 
 const container = css`
 	position: relative;

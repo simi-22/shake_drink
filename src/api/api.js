@@ -38,3 +38,15 @@ export const randomSelectionCocktailApi = axios.create({
 export const DefaultApi = axios.create({
 	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}`,
 });
+
+export const SearchByIngredientApi= axios.create({
+	baseURL: 'https://www.thecocktaildb.com/api/json/v1/1/filter.php'
+})
+
+export const latestCocktailApi = axios.create({
+	baseURL: `https://www.thecocktaildb.com/api/json/v2/${API_KEY}/latest.php`,
+});
+
+export const searchApi = axios.create({
+	baseURL: "https://www.thecocktaildb.com/api/json/v1/1",
+});
