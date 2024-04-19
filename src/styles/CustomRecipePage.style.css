@@ -1,5 +1,5 @@
 .customSection {
-    padding: 40px;
+    padding: 0 40px;
     display: flex;
     width: 100%;
     height: 100%;
@@ -43,7 +43,17 @@
     text-align: center;
     cursor: pointer;
 }
+.clicked {
+    border: 2px solid transparent;
+    animation: borderAnimation 2s linear infinite;
+}
 
+@keyframes borderAnimation {
+    0% {border-color: rgba(253, 103, 38, 0);}
+    25% {border-color: rgba(253, 103, 38, 0.5); }
+    50% {border-color: rgba(253, 103, 38, 1);}
+    75% { border-color: rgba(253, 103, 38, 0.5);}
+}
 .nameContainer > * {
     margin: 0.3em;
 }
@@ -60,11 +70,8 @@
 }
 
 .ingredientsSearch {
-    width: 99%;
-    margin-left: 0.5em;
+    width: 100%;
     padding: 0.5em;
-    background-color: white;
-    border-radius: 10px;
 }
 
 .amount {
@@ -72,7 +79,11 @@
 }
 
 .amount input {
-    width: 65%;
+    width: 62%;
+    border-radius: 5px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    height: 20px;
 }
 
 .amount span {
@@ -80,12 +91,15 @@
 }
 
 .amountUnit {
-    border: 1px solid lightgray;
     border-radius: 10px;
-    background-color: white;
     width: 35%;
     height: 50px;
     margin: 0.5em 0;
+}
+
+.addedIngredients{
+    margin: 1em;
+    color: rgba(253, 103, 38, 100);
 }
 
 .buttonClass {
