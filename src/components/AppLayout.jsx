@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
-const pages = ["Seach", "Community", "Blog"];
+const pages = ["seach", "community", "game"];
 const settings = ["Profile", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -139,7 +139,9 @@ function AppLayout() {
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
-								onClick={handleOpenNavMenu}
+								onClick={(e) => {
+									setAnchorElNav(e.currentTarget);
+								}}
 								color="inherit"
 							>
 								<MenuIcon />
@@ -157,14 +159,28 @@ function AppLayout() {
 									horizontal: "left",
 								}}
 								open={Boolean(anchorElNav)}
-								onClose={handleCloseNavMenu}
+								onClose={() => {
+									setAnchorElNav(null);
+								}}
 								sx={{
 									display: { xs: "block", md: "none" },
 								}}
 							>
 								{pages.map((page) => (
-									<MenuItem key={page} onClick={handleCloseNavMenu}>
-										<Typography textAlign="center">{page}</Typography>
+									<MenuItem
+										key={page}
+										onClick={() => {
+											setAnchorElNav(null);
+										}}
+									>
+										<Typography
+											textAlign="center"
+											onClick={() => {
+												navigate(`/${page}`);
+											}}
+										>
+											{page}
+										</Typography>
 									</MenuItem>
 								))}
 							</Menu>
@@ -196,7 +212,10 @@ function AppLayout() {
 							{pages.map((page) => (
 								<Button
 									key={page}
-									onClick={handleCloseNavMenu}
+									onClick={() => {
+										navigate(`/${page}`);
+										setAnchorElNav(null);
+									}}
 									sx={{ my: 2, color: "inherit", display: "block" }}
 								>
 									{page}
@@ -221,7 +240,11 @@ function AppLayout() {
 						{isLogin ? (
 							<Box sx={{ flexGrow: 0 }}>
 								<Tooltip title="Open settings">
-									<IconButton onClick={handleOpenUserMenu}>
+									<IconButton
+										onClick={(e) => {
+											setAnchorElUser(e.currentTarget);
+										}}
+									>
 										<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
 									</IconButton>
 								</Tooltip>
@@ -239,10 +262,17 @@ function AppLayout() {
 										horizontal: "right",
 									}}
 									open={Boolean(anchorElUser)}
-									onClose={handleCloseUserMenu}
+									onClose={() => {
+										setAnchorElUser(null);
+									}}
 								>
 									{settings.map((setting) => (
-										<MenuItem key={setting} onClick={handleCloseUserMenu}>
+										<MenuItem
+											key={setting}
+											onClick={() => {
+												setAnchorElUser(null);
+											}}
+										>
 											<Typography textAlign="center">{setting}</Typography>
 										</MenuItem>
 									))}
