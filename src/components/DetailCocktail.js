@@ -1,14 +1,15 @@
 import React from "react";
 import midBanner from "../assets/image/jazzbanner.png";
-<<<<<<< HEAD
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import Paper from "@mui/material/Paper";
-=======
-import { Grid, Typography } from "@mui/material";
->>>>>>> a6c43538a10ecc01392a8f6640d3a650ea76e7d8
-
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import ingredientCocktail from "../assets/image/ingredient-cocktail.jpg";
+import receiptCocktail from "../assets/image/receipt-cocktail.jpg";
 const DetailCocktail = ({ detailData }) => {
 	console.log("detailData", detailData);
+
 	return (
 		<div>
 			<Grid container className="detail-information-container" spacing={2}>
@@ -27,6 +28,9 @@ const DetailCocktail = ({ detailData }) => {
 					</div>
 
 					<div className="detailcontent">{detailData?.strInstructions}</div>
+					<FormGroup>
+						<FormControlLabel control={<Switch defaultChecked />} label="한글 번역" />
+					</FormGroup>
 
 					{/* <div variant="body1">Cup : {detailData?.strGlass}</div>
 					<div>
@@ -39,10 +43,40 @@ const DetailCocktail = ({ detailData }) => {
 					<button className="translation">번역</button> */}
 				</Grid>
 			</Grid>
+			<div></div>
+			<div className="ingredient-paper-area">
+				<Paper
+					elevation={12}
+					className="ingredient-paper"
+					style={{
+						backgroundImage: `url(${ingredientCocktail})`,
+						backgroundSize: "cover",
+						backgroundPosition: "center",
+					}}
+				>
+					<h3>재료 정보</h3>
+					{detailData?.ingredients.map((item) => (
+						<div className="ingredient-div" key={item.id}>
+							<div className="item-ingredient">{item.ingredient}</div>
+							<div className="item-measure">{item.measure}</div>
+						</div>
+					))}
+				</Paper>
+			</div>
 			<div id="middle-banner">
 				<img src={midBanner} alt="재즈페스티벌" />
 			</div>
-			<Paper>레시피 : {detailData?.strInstructions}</Paper>
+			<Paper
+				elevation={12}
+				className="explanation-paper"
+				style={{
+					backgroundImage: `url(${receiptCocktail})`,
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			>
+				<div className="explanation-div">{detailData?.strInstructions}</div>
+			</Paper>
 		</div>
 	);
 };

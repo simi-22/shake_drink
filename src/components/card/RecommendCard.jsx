@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 // 재료가져오는 함수
 
-function RecommendCard({ cockTailData , base}) {
+function RecommendCard({ cockTailData, base }) {
 	const { idDrink, strDrink, strDrinkThumb } = cockTailData;
 	const [like, setLike] = useState(false);
 	const [hover, setHover] = useState(false);
@@ -16,7 +16,6 @@ function RecommendCard({ cockTailData , base}) {
 		console.log("clickToDetail");
 		navigate(`/${idDrink}`);
 	};
-	
 
 	return (
 		<li css={container} onClick={navigateToDetailPage}>
@@ -26,8 +25,7 @@ function RecommendCard({ cockTailData , base}) {
 					<div>
 						<div>
 							<div>{`#${strDrink}`}</div>
-                            <div>{`#${base} base cocktail`}</div>
-							
+							<div>{`#${base} base cocktail`}</div>
 						</div>
 					</div>
 				)}
@@ -112,7 +110,7 @@ const contentWrap = css`
 	margin-top: 10px;
 	& > span {
 		padding: 2px 2px;
-		background: #ccc;
+		background: #ff000061;
 		color: #fff;
 		font-size: 12px;
 	}
@@ -127,4 +125,3 @@ const contentWrap = css`
 		white-space: nowrap;
 	}
 `;
-

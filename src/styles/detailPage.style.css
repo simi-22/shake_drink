@@ -71,3 +71,70 @@
 .translation {
 	background-color: white;
 }
+
+.ingredient-paper-area {
+	display: flex;
+	justify-content: center;
+}
+
+.ingredient-paper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80% !important;
+	text-align: center;
+	margin: 0 auto;
+	height: 80vh;
+}
+
+.ingredient-div {
+	display: flex;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.item-ingredient {
+	color: rgb(109, 196, 55);
+	margin-left: 33%;
+	border-bottom: 2px solid rgb(109, 196, 55);
+}
+
+.item-measure {
+	color: rgb(254, 51, 15);
+	position: absolute;
+	right: 0;
+	margin-right: 36%;
+	border-bottom: 2px solid rgb(208, 68, 68);
+}
+
+.unit-btn {
+	color: black !important;
+	font-weight: bold !important;
+	border-width: 2px !important;
+}
+
+.explanation-paper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80% !important;
+	text-align: center;
+	margin: 0 auto;
+	height: 80vh;
+}
+
+.ingredient-paper h3 {
+	font-weight: bolder;
+}
+
+.similar-cocktail {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 30px;
+}
+
+.similar-cocktail h1 {
+	font-size: x-large;
+	color: #ff0000c5;
+	font-weight: bolder;
+}
