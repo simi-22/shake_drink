@@ -149,299 +149,299 @@ function UserPage() {
 
 	return (
 		<div>
-				<Container maxWidth='lg'>
-					<Grid container spacing={2}>
-						<Grid item xs={12} md={6} lg={6}>
-							<Container
-								maxWidth='sm'  
-								sx={{border: '2px solid grey', py:'10px',
-									display:'flex',justifyContent:'center', gap:'20px' 
-								}}
-								>
-								<AccountCircleIcon style={{ fontSize: '150px', color:'grey' }} />
-								<div style={{marginTop: '20px'}}>
-									<div>id: {id}</div>
-									<div>@이메일: {email}</div>
-									<div>password: {password}</div>
-									<div>닉네임: {nickName}</div>
-								</div>
-							</Container>
-						</Grid>
-						<Grid item xs={12} md={6} lg={6}>
-							<Container
-								Container
-								maxWidth='sm'  
-								sx={{border: '2px solid grey', padding:'20px'}}
-								>
-									<div>
-										<div style={{
-													display:'flex',justifyContent:'start', gap:'20px'
-												}}>
-											<div>
-												<div>
-													<PaidIcon/>
-													<div>포인트 250P</div>
-												</div>
-											</div>
-											<div>
-												<CalendarViewWeekIcon/>
-												<div>쿠폰0장</div>
-											</div>
-											<div>
-												<ModeEditIcon/>
-												<div>리뷰0개</div>
-											</div>
-										</div>
-										<div style={{margin:'20px 0'}}>
-											<Button variant="contained" onClick={changeUserInfo}>정보변경</Button>
-											<Button variant="contained" onClick={showFavorCategory} sx={{ml:'10px'}}>Favor Category</Button>
-											<Button variant="contained" onClick={showOrder} sx={{ml:'10px'}}>주문내역</Button>
-										</div>
-									</div>
-								
-							</Container>
-						</Grid>
-						<Grid item xs={12} md={6} lg={6} >
-							<Container
-								maxWidth='sm'  
-								sx={{border: '2px solid grey', py:'10px'}}
-								>
-									<h3>Wish List</h3>
-									<Checkbox 
-										checked={checked}
-      									onChange={handleChange}
-      									inputProps={{ 'aria-label': 'controlled' }}
-									/> 전체선택
-									<Button onClick={addFavsToCart}
-										variant="contained" color="error" sx={{ml:'10px'}}
-									>Cart에 담기</Button>
-									<div style={{display:'flex', gap:'10px'}}>
-										{favoriteList.map((item)=> 
-										<WishCard key={item.id} item={item} 
-											addToCart={addToCart}
-										/>)}
-									</div>
-							</Container>
-						</Grid>
-						<Grid item xs={12} md={6} lg={6}>
-							<Container
-								maxWidth='sm'  
-								sx={{border: '2px solid grey',py:'10px'}}
-								>
-									<h3>Cart</h3>
-								<div>
-									<div style={{fontSize:"25px"}}><ShoppingCartIcon/> total: {cartList.length}</div>
-									<div >
-										{cartList?.map((item,i)=>
-											<div key={i} >
-												<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
-													<CartCard item={item}/> 
-													<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
-													}}/>
-												</div>
-												<div style={{marginTop:'10px'}}>수량: <AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
-											</div>
-									)}
-									</div>
-								</div>
-							</Container>
-							<Container
-								maxWidth='sm'  
-								sx={{border: '2px solid grey', mt:'10px', py:'10px'}}
-								>
-									<div>
-										<h3>Payment</h3>
-										{/* <Button onClick={calculateTotalPrice}
-										sx={{backgroundColor:'green', color:'black'}}>총액계산</Button> */}
-										<div style={{
-											border:'1px solid grey',
-											padding:'5px', margin:'10px 0'
-										}}>
-											<div>
-												{cartList.map((item,i)=>(
-													<div key={i}>
-														<span>{item.drink}: </span>
-														<span>{item.price}</span>
-														<span> * {item.count}</span>
-													</div>
-												))}
-											</div>
-											<div>총결제금액: {totalPrice}</div>
-										</div>
-										<Button onClick={()=>payment(cartList)}
-										variant="contained" color="success">결제하기</Button>
-									</div>
-							</Container>
-						</Grid>
+			<Container>
+				<Grid container spacing={2}>
+					<Grid item xs={12} md={6} lg={6}>
+						<Container
+							maxWidth='lg'  
+							sx={{border: '2px solid grey', py:'10px',
+								display:'flex',justifyContent:'center', gap:'20px' 
+							}}
+							>
+							<AccountCircleIcon style={{ fontSize: '150px', color:'grey' }} />
+							<div style={{marginTop: '20px'}}>
+								<div>id: {id}</div>
+								<div>@이메일: {email}</div>
+								<div>password: {password}</div>
+								<div>닉네임: {nickName}</div>
+							</div>
+						</Container>
 					</Grid>
-					<div> 
-						{open ?   // 결제정보 다이알로그  
-						<Dialog
-							open={open}
-							onClose={handleClose}
-							aria-labelledby="alert-dialog-title"
-							aria-describedby="alert-dialog-description"
-						>
-							<DialogTitle id="alert-dialog-title">
-							{"결제정보"}
-							</DialogTitle>
-							<DialogContent>
-							<DialogContentText id="alert-dialog-description">
-								총액: {totalPrice} 입니다. 확정합니까?
-							</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-							<Button onClick={handleClose}>취소</Button>
-							<Button onClick={()=>handleClose2(cartList)} autoFocus>
-								확인
-							</Button>
-							</DialogActions>
-						</Dialog>
-						: ''}
-					</div>
-					<div>
-						{show ?  // 주문내역 다이알로그
-						<Dialog
-							open={show}
-							onClose={handleShowClose}
-							aria-labelledby="alert-dialog-title"
-							aria-describedby="alert-dialog-description"
-						>
-							<DialogTitle id="alert-dialog-title">
-							{"주문내역"}
-							</DialogTitle>
-							<DialogContent>
-							<DialogContentText id="alert-dialog-description">
+					<Grid item xs={12} md={6} lg={6}>
+						<Container
+							Container
+							maxWidth='lg'  
+							sx={{border: '2px solid grey', padding:'20px'}}
+							>
 								<div>
-									{orderList.map((item,i)=>(
-										<div key={i}>
-											<div>{item.drink}: {item.price}*{item.count}원</div>
+									<div style={{
+												display:'flex',justifyContent:'start', gap:'20px'
+											}}>
+										<div>
+											<div>
+												<PaidIcon/>
+												<div>포인트 250P</div>
+											</div>
 										</div>
-									))}
-								</div>
-								<div>Total: {totalMoney} 원</div>
-							</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-							<Button onClick={handleShowClose} autoFocus>확인</Button>
-							</DialogActions>
-						</Dialog>
-						: ''}
-					</div>
-					<div>
-						{showFavorC ?  // Favor Category 다이알로그
-						<Dialog
-							open={showFavorC}
-							onClose={closeFavorCategory}
-							aria-labelledby="alert-dialog-title"
-							aria-describedby="alert-dialog-description"
-						>
-							<DialogTitle id="alert-dialog-title">
-							{"자주 찾은 Category 정보"}
-							</DialogTitle>
-							<DialogContent>
-							<DialogContentText id="alert-dialog-description">
-								<div>
-									<p>최애 카테고리: {firstRatedCategory}</p>
-									<div>
-										<div>ordinary drink : {ordinaryDrink}</div>
-										<div>cocktail : {cocktail}</div>
-										<div>shake : {shake}</div>
-										<div>other /unknown : {otherUnknown}</div>
-										<div>cocoa : {cocoa}</div>
-										<div>shot : {shot}</div>
-										<div>coffee tea : {coffeeTea}</div>
-										<div>homemade liqueur : {homemadeLiqueur}</div>
-										<div>punch : {punch}</div>
-										<div>beer : {beer}</div>
-										<div>soft drink : {softDrink}</div>
+										<div>
+											<CalendarViewWeekIcon/>
+											<div>쿠폰0장</div>
+										</div>
+										<div>
+											<ModeEditIcon/>
+											<div>리뷰0개</div>
+										</div>
 									</div>
-									<Button variant="contained"
-									style={{marginTop:'10px'}}
-										onClick={getFirstItem}
-									>최애 category 산출</Button>
-									
-									<Button variant="contained"
-									color="success"
-									style={{marginLeft:'10px',
-									  marginTop:'10px'
-									}}
-										onClick={showRecommendations}
-									>추천 주류/음료</Button>
+									<div style={{margin:'20px 0'}}>
+										<Button variant="contained" onClick={changeUserInfo}>정보변경</Button>
+										<Button variant="contained" onClick={showFavorCategory} sx={{ml:'10px'}}>Favor Category</Button>
+										<Button variant="contained" onClick={showOrder} sx={{ml:'10px'}}>주문내역</Button>
+									</div>
 								</div>
+							
+						</Container>
+					</Grid>
+					<Grid item xs={12} md={6} lg={6} >
+						<Container
+							maxWidth='lg'  
+							sx={{border: '2px solid grey', py:'10px'}}
+							>
+								<h3>Wish List</h3>
+								<Checkbox 
+									checked={checked}
+									onChange={handleChange}
+									inputProps={{ 'aria-label': 'controlled' }}
+								/> 전체선택
+								<Button onClick={addFavsToCart}
+									variant="contained" color="error" sx={{ml:'10px'}}
+								>Cart에 담기</Button>
+								<div style={{display:'flex', gap:'10px'}}>
+									{favoriteList.map((item)=> 
+									<WishCard key={item.id} item={item} 
+										addToCart={addToCart}
+									/>)}
+								</div>
+						</Container>
+					</Grid>
+					<Grid item xs={12} md={6} lg={6}>
+						<Container
+							maxWidth='lg'  
+							sx={{border: '2px solid grey',py:'10px'}}
+							>
+								<h3>Cart</h3>
+							<div>
+								<div style={{fontSize:"25px"}}><ShoppingCartIcon/> total: {cartList.length}</div>
+								<div >
+									{cartList?.map((item,i)=>
+										<div key={i} >
+											<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
+												<CartCard item={item}/> 
+												<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
+												}}/>
+											</div>
+											<div style={{marginTop:'10px'}}>수량: <AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
+										</div>
+								)}
+								</div>
+							</div>
+						</Container>
+						<Container
+							maxWidth='lg'  
+							sx={{border: '2px solid grey', mt:'10px', py:'10px'}}
+							>
+								<div>
+									<h3>Payment</h3>
+									{/* <Button onClick={calculateTotalPrice}
+									sx={{backgroundColor:'green', color:'black'}}>총액계산</Button> */}
+									<div style={{
+										border:'1px solid grey',
+										padding:'5px', margin:'10px 0'
+									}}>
+										<div>
+											{cartList.map((item,i)=>(
+												<div key={i}>
+													<span>{item.drink}: </span>
+													<span>{item.price}</span>
+													<span> * {item.count}</span>
+												</div>
+											))}
+										</div>
+										<div>총결제금액: {totalPrice}</div>
+									</div>
+									<Button onClick={()=>payment(cartList)}
+									variant="contained" color="success">결제하기</Button>
+								</div>
+						</Container>
+					</Grid>
+				</Grid>
+				<div> 
+					{open ?   // 결제정보 다이알로그  
+					<Dialog
+						open={open}
+						onClose={handleClose}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle id="alert-dialog-title">
+						{"결제정보"}
+						</DialogTitle>
+						<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							총액: {totalPrice} 입니다. 확정합니까?
+						</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+						<Button onClick={handleClose}>취소</Button>
+						<Button onClick={()=>handleClose2(cartList)} autoFocus>
+							확인
+						</Button>
+						</DialogActions>
+					</Dialog>
+					: ''}
+				</div>
+				<div>
+					{show ?  // 주문내역 다이알로그
+					<Dialog
+						open={show}
+						onClose={handleShowClose}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle id="alert-dialog-title">
+						{"주문내역"}
+						</DialogTitle>
+						<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							<div>
+								{orderList.map((item,i)=>(
+									<div key={i}>
+										<div>{item.drink}: {item.price}*{item.count}원</div>
+									</div>
+								))}
+							</div>
+							<div>Total: {totalMoney} 원</div>
+						</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+						<Button onClick={handleShowClose} autoFocus>확인</Button>
+						</DialogActions>
+					</Dialog>
+					: ''}
+				</div>
+				<div>
+					{showFavorC ?  // Favor Category 다이알로그
+					<Dialog
+						open={showFavorC}
+						onClose={closeFavorCategory}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle id="alert-dialog-title">
+						{"자주 찾은 Category 정보"}
+						</DialogTitle>
+						<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							<div>
+								<p>최애 카테고리: {firstRatedCategory}</p>
+								<div>
+									<div>ordinary drink : {ordinaryDrink}</div>
+									<div>cocktail : {cocktail}</div>
+									<div>shake : {shake}</div>
+									<div>other /unknown : {otherUnknown}</div>
+									<div>cocoa : {cocoa}</div>
+									<div>shot : {shot}</div>
+									<div>coffee tea : {coffeeTea}</div>
+									<div>homemade liqueur : {homemadeLiqueur}</div>
+									<div>punch : {punch}</div>
+									<div>beer : {beer}</div>
+									<div>soft drink : {softDrink}</div>
+								</div>
+								<Button variant="contained"
+								style={{marginTop:'10px'}}
+									onClick={getFirstItem}
+								>최애 category 산출</Button>
 								
-							</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-							<Button onClick={closeFavorCategory} autoFocus>확인</Button>
-							</DialogActions>
-						</Dialog>
-						: ''}
-					</div>
-					<div>
-						{showUserDialog ?  // 유저정보변경 다이알로그
-						<Dialog
-							open={showUserDialog}
-							onClose={closeUserDialog}
-							aria-labelledby="alert-dialog-title"
-							aria-describedby="alert-dialog-description"
-						>
-							<DialogTitle id="alert-dialog-title">
-							{"주문내역"}
-							</DialogTitle>
-							<DialogContent>
-							<DialogContentText id="alert-dialog-description">
-								<Form onSubmit={(event)=>handleSubmit(event)}>
-									<Form.Group className="mb-3" controlId="formBasicEmail">
-										<Form.Label>Email address</Form.Label>
-										<Form.Control 
-											type="email" 
-											placeholder="Email"
-											name='email' 
-											value={formData.email}
-											onChange={handleUserChange}
-											/>
-										<Form.Text className="text-muted">
-											아이디가 아닌 이메일을 입력해주세요.
-										</Form.Text>
-									</Form.Group>
+								<Button variant="contained"
+								color="success"
+								style={{marginLeft:'10px',
+									marginTop:'10px'
+								}}
+									onClick={showRecommendations}
+								>추천 주류/음료</Button>
+							</div>
+							
+						</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+						<Button onClick={closeFavorCategory} autoFocus>확인</Button>
+						</DialogActions>
+					</Dialog>
+					: ''}
+				</div>
+				<div>
+					{showUserDialog ?  // 유저정보변경 다이알로그
+					<Dialog
+						open={showUserDialog}
+						onClose={closeUserDialog}
+						aria-labelledby="alert-dialog-title"
+						aria-describedby="alert-dialog-description"
+					>
+						<DialogTitle id="alert-dialog-title">
+						{"주문내역"}
+						</DialogTitle>
+						<DialogContent>
+						<DialogContentText id="alert-dialog-description">
+							<Form onSubmit={(event)=>handleSubmit(event)}>
+								<Form.Group className="mb-3" controlId="formBasicEmail">
+									<Form.Label>Email address</Form.Label>
+									<Form.Control 
+										type="email" 
+										placeholder="Email"
+										name='email' 
+										value={formData.email}
+										onChange={handleUserChange}
+										/>
+									<Form.Text className="text-muted">
+										아이디가 아닌 이메일을 입력해주세요.
+									</Form.Text>
+								</Form.Group>
 
-									<Form.Group className="mb-3" controlId="formBasicPassword">
-										<Form.Label>Password</Form.Label>
-										<Form.Control 
-											type="password" 
-											placeholder="Password" 
-											name="password"
-											value={formData.password}
-											onChange={handleUserChange}
-											/>
-									</Form.Group>
-									<Form.Group className="mb-3" controlId="formBasicText">
-										<Form.Label>Nickname</Form.Label>
-										<Form.Control 
-											type="text" 
-											placeholder="Nickname" 
-											name="nickname"
-											value={formData.nickname}
-											onChange={handleUserChange}
-											/>
-									</Form.Group>
-									<Form.Group className="mb-3" controlId="formBasicCheckbox">
-										<Form.Check type="checkbox" label="Check me out" />
-									</Form.Group>
-									<Button variant="contained" type="submit"
-									>수정</Button>
-								</Form>
-							</DialogContentText>
-							</DialogContent>
-							<DialogActions>
-							<Button variant="contained" onClick={closeUserDialog} autoFocus>확인</Button>
-							</DialogActions>
-						</Dialog>
-						: ''}
-					</div>
-					
-				</Container>
+								<Form.Group className="mb-3" controlId="formBasicPassword">
+									<Form.Label>Password</Form.Label>
+									<Form.Control 
+										type="password" 
+										placeholder="Password" 
+										name="password"
+										value={formData.password}
+										onChange={handleUserChange}
+										/>
+								</Form.Group>
+								<Form.Group className="mb-3" controlId="formBasicText">
+									<Form.Label>Nickname</Form.Label>
+									<Form.Control 
+										type="text" 
+										placeholder="Nickname" 
+										name="nickname"
+										value={formData.nickname}
+										onChange={handleUserChange}
+										/>
+								</Form.Group>
+								<Form.Group className="mb-3" controlId="formBasicCheckbox">
+									<Form.Check type="checkbox" label="Check me out" />
+								</Form.Group>
+								<Button variant="contained" type="submit"
+								>수정</Button>
+							</Form>
+						</DialogContentText>
+						</DialogContent>
+						<DialogActions>
+						<Button variant="contained" onClick={closeUserDialog} autoFocus>확인</Button>
+						</DialogActions>
+					</Dialog>
+					: ''}
+				</div>
+				
+			</Container>
 		</div>
 	);
 }
