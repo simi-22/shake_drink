@@ -5,16 +5,20 @@ import { useNavigate } from "react-router-dom";
 import naver from "../assets/image/naver.png";
 import kakao from "../assets/image/kakao.png";
 import eventBanner from "../assets/image/summer-sale-poster.jpg";
+import useLogin from "../store/loginStore";
 
 const LoginPage = () => {
 	const navigate = useNavigate();
 
 	const [id, setId] = useState();
 	const [password, setPassword] = useState();
+	const { isLogin, setIsLogin } = useLogin();
 
 	//login 폼 새로고침 막기
 	const userLogin = (event) => {
 		event.preventDefault();
+		console.log("login");
+		setIsLogin(true);
 		navigate("/");
 	};
 
@@ -24,20 +28,8 @@ const LoginPage = () => {
 			<div id="login-page">
 				<div className="login-box" css={leftBox}>
 					<form onSubmit={(event) => userLogin(event)}>
-						<input
-							type="text"
-							placeholder="아이디"
-							onChange={(event) => {
-								setId(event.target.value);
-							}}
-						/>
-						<input
-							type="password"
-							placeholder="비밀번호"
-							onChange={(event) => {
-								setPassword(event.target.value);
-							}}
-						/>
+						<input type="text" placeholder="아이디" />
+						<input type="password" placeholder="비밀번호" />
 						<button type="submit">로그인</button>
 						<div>
 							<div>
@@ -118,6 +110,7 @@ const leftBox = css`
 		border-radius: 5px;
 		color: #fff;
 		margin-bottom: 10px;
+		cursor: pointer;
 	}
 	& > form > div {
 		display: flex;
@@ -161,6 +154,7 @@ const leftBox = css`
 		width: 140px;
 		text-align: center;
 		border: 1px solid #ebebeb;
+		cursor: pointer;
 	}
 	@media (max-width: 746px) {
 		width: 100%;
