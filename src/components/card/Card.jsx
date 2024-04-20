@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeartIcon from "../../assets/ic-heart.svg";
 import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +21,26 @@ function getNonNullIngredients(data) {
 function Card({ cockTailData, labelText }) {
 	const navigate = useNavigate();
 	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
-	const [like, setLike] = useState(false);
+
+	// localStorage에서 'likes' 데이터 가져오기 및 초기 like 상태 설정
+	const likesData = JSON.parse(localStorage.getItem("likes") || "[]");
+	const isLiked = likesData.includes(idDrink);
+
+	const [like, setLike] = useState(isLiked);
 	const [hover, setHover] = useState(false);
+
+	useEffect(() => {
+		const uniqueLikes = new Set(likesData);
+
+		if (like) {
+			uniqueLikes.add(idDrink);
+		} else {
+			uniqueLikes.delete(idDrink);
+		}
+
+		const updatedLikes = [...uniqueLikes];
+		localStorage.setItem("likes", JSON.stringify(updatedLikes));
+	}, [like, idDrink, likesData]);
 
 	return (
 		<li
@@ -35,10 +53,8 @@ function Card({ cockTailData, labelText }) {
 				<img src={strDrinkThumb} alt="cocktail" />
 				{hover && (
 					<div>
-						<div>
-							<div>{strAlcoholic === "Alcoholic" ? "#알콜" : "#무알콜"}</div>
-							<div>{getNonNullIngredients(cockTailData)}</div>
-						</div>
+						<div>{strAlcoholic === "Alcoholic" ? "#알콜" : "#무알콜"}</div>
+						<div>{getNonNullIngredients(cockTailData)}</div>
 					</div>
 				)}
 			</div>
