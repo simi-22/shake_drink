@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Collapse, Button, Card, CardContent } from "@mui/material";
 
 const RecommendCocktail = ({ searchByIngredientData, base }) => {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState(true);
 
 	const handleToggle = () => {
 		setOpen(!open);
