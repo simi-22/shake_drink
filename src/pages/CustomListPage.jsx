@@ -23,12 +23,15 @@ const CustomListPage = () => {
     }
     
     //state 리스트
-    const[isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(new Array(drinkData.drinks.length).fill(false));
 
-    //함수
-    const handleLikeClick = (e)=>{
-      e.stopPropagation(); // 이벤트 버블링 방지
-      setIsLiked(!isLiked);
+    // 함수
+    const handleLikeClick = (idx) => {
+        setIsLiked(prevState => {
+            const newState = [...prevState];
+            newState[idx] = !newState[idx];
+            return newState;
+        });
     }
     
     const imagesToShow = [coc1, coc2, coc3, coc4, coc5, coc6, coc4, coc5, coc6, coc1, coc3, coc5, coc2];
@@ -46,18 +49,28 @@ const CustomListPage = () => {
 
       <div className='customItemSection'>
         {/* 업로드된 데이터 */}
-        {drinkData.drinks.reverse().map((index) => (
+        {drinkData.drinks.reverse().map((index, idx) => (
             <div key={index} className='sample'>
             <div className='imageBox'>
-              <img src={index.strImageSource} alt='이미지'/>
+            <img 
+                src={
+                    index.strImageSource === 0 ? coc1 :
+                    index.strImageSource === 1 ? coc2 :
+                    index.strImageSource === 2 ? coc3 :
+                    index.strImageSource === 3 ? coc4 :
+                    index.strImageSource === null ? coc1 :
+                    index.strImageSource
+                } 
+                alt='이미지'
+            />
             </div>
             <div className='customTextBox'>
               <div className='customsTitle'>{index.strDrink}</div>
               <div className='customsScript'>
                 <div>{index.strInstructions}</div>
-                {/* <button className='faHeart' onClick={handleLikeClick}>
-                  <FontAwesomeIcon icon={isLiked? faSolidHeart : faHeart} color={isLiked ? 'red' : 'white'}/>
-                </button> */}
+                <button className='faHeart' onClick={()=>handleLikeClick(idx+13)}>
+                  <FontAwesomeIcon icon={isLiked[idx+13]? faSolidHeart : faHeart} color={isLiked[idx+13] ? 'red' : 'white'}/>
+                </button>
               </div>
             </div>
           </div>
@@ -73,8 +86,8 @@ const CustomListPage = () => {
               <div className='customsTitle'>cocktailName</div>
               <div className='customsScript'>
                 <div className='scriptDiv'>cocktailScript</div>
-                <button className='faHeart' onClick={handleLikeClick}>
-                  <FontAwesomeIcon icon={isLiked? faSolidHeart : faHeart} color={isLiked ? 'red' : 'white'}/>
+                <button className='faHeart' onClick={()=>handleLikeClick(index)}>
+                  <FontAwesomeIcon icon={isLiked[index]? faSolidHeart : faHeart} color={isLiked[index] ? 'red' : 'white'}/>
                 </button>
               </div>
             </div>

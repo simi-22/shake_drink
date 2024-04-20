@@ -56,7 +56,8 @@ const CustomRecipePage = () => {
     const handleOnChange = (e)=>{
         if(e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
-            setSelectedImage(e.target.files[0]);
+            setSelectedImage(e.target.files[0]); // 선택된 이미지 파일 이름 보여주려고 셋팅
+            setClickedImageIndex(null); // 파일 업로드시 클릭된 이미지 상태 해제
             const reader = new FileReader();
             reader.onload = function (e) {
                 const imageData = e.target.result;
@@ -74,6 +75,7 @@ const CustomRecipePage = () => {
     }
     const removeFile = ()=>{
         setSelectedFile(null);
+        setSelectedImage(null);
     }
 
     // Data URI를 Blob 객체로 변환하는 함수
@@ -108,6 +110,7 @@ const CustomRecipePage = () => {
 
     const handleImageClick = (imageString, index) => {
         setClickedImageIndex(index);
+        removeFile();
     };
 
     const handleUpload = () => {
@@ -134,7 +137,7 @@ const CustomRecipePage = () => {
             strMeasure4: `${ingredients[3]?.amount || null} ${ingredients[3]?.unit || null}`,
             strMeasure5: `${ingredients[4]?.amount || null} ${ingredients[4]?.unit || null}`,
             strMeasure6: `${ingredients[5]?.amount || null} ${ingredients[5]?.unit || null}`,
-            strImageSource: selectedFile, 
+            strImageSource: selectedFile !== null ? selectedFile : clickedImageIndex,
             strRecipe: recipeDescription, 
         };
         // 새로운 객체를 기존 데이터에 추가
@@ -251,7 +254,17 @@ const CustomRecipePage = () => {
                 <ToggleButton value="Optional alcohol">Optional alcohol</ToggleButton>
             </ToggleButtonGroup>
             </div>
-            <button onClick={handleUpload}>UPLOAD</button>
+            <button onClick={handleUpload} disabled={
+                alcohol === null ||
+                selectedGlass === null ||
+                selectedCategory === null ||
+                selectedIngredient === null ||
+                selectedUnit === null ||
+                cocktailName === '' ||
+                englishName === '' ||
+                description === '' ||
+                recipeDescription === ''
+            }>UPLOAD</button>
         </div>
       </div>
     </div>
