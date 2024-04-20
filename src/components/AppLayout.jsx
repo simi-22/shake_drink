@@ -19,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useLogin from "../store/loginStore";
+import Logo from "../assets/image/Logo.png";
 
 const pages = ["Seach", "Community", "Blog"];
 const settings = ["My Page", "Logout"];
@@ -101,30 +102,16 @@ function AppLayout() {
 			>
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
-						<Typography
+						<Box
+							noWrap
+							sx={{
+								display: { xs: "none", md: "flex" },
+							}}
 							as={NavLink}
 							to="/"
-							variant="h6"
-							noWrap
-							component="a"
-							href="#app-bar-with-responsive-menu"
-							sx={{
-								mr: 2,
-								display: { xs: "none", md: "flex" },
-								fontWeight: 700,
-								fontSize: "28px",
-								letterSpacing: ".1rem",
-								color: "#FD4926",
-								borderBottom: "2px solid transparent",
-								transition: "all 0.2s ease",
-								"&:hover": {
-									borderBottom: "2px solid #FD4926",
-								},
-							}}
 						>
-							Shake & Drink
-						</Typography>
-
+							<img src={Logo} alt="logo" />
+						</Box>
 						<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 							<IconButton
 								size="large"
@@ -177,27 +164,17 @@ function AppLayout() {
 								))}
 							</Menu>
 						</Box>
-						<Typography
-							as={NavLink}
-							to="/"
-							variant="h5"
+						<Box
 							noWrap
-							component="a"
-							href="#app-bar-with-responsive-menu"
 							sx={{
-								fontFamily: "Noto Sans, sans-serif",
-								mr: 2,
 								display: { xs: "flex", md: "none" },
 								flexGrow: 1,
-								fontWeight: 700,
-								fontSize: "28px",
-								letterSpacing: ".1rem",
-								color: "#FD4926",
-								textDecoration: "none",
 							}}
+							as={NavLink}
+							to="/"
 						>
-							Shake & Drink
-						</Typography>
+							<img src={Logo} alt="logo" />
+						</Box>
 						<Box
 							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
 						>
