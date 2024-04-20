@@ -72,59 +72,10 @@
 	background-color: white;
 }
 
-.ingredient-paper-area {
-	display: flex;
-	justify-content: center;
-}
-
-.ingredient-paper {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 80% !important;
-	text-align: center;
-	margin: 0 auto;
-	height: 80vh;
-}
-
-.ingredient-div {
-	display: flex;
-	margin-top: 2%;
-	margin-bottom: 2%;
-}
-
-.item-ingredient {
-	color: rgb(109, 196, 55);
-	margin-left: 33%;
-	border-bottom: 2px solid rgb(109, 196, 55);
-}
-
-.item-measure {
-	color: rgb(254, 51, 15);
-	position: absolute;
-	right: 0;
-	margin-right: 36%;
-	border-bottom: 2px solid rgb(208, 68, 68);
-}
-
 .unit-btn {
 	color: black !important;
 	font-weight: bold !important;
 	border-width: 2px !important;
-}
-
-.explanation-paper {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 80% !important;
-	text-align: center;
-	margin: 0 auto;
-	height: 80vh;
-}
-
-.ingredient-paper h3 {
-	font-weight: bolder;
 }
 
 .similar-cocktail {
@@ -137,4 +88,88 @@
 	font-size: x-large;
 	color: #ff0000c5;
 	font-weight: bolder;
+}
+
+.explanation-paper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 70vw;
+	max-height: 90vh;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.explanation-paper-img-container {
+	position: relative;
+	width: 100%;
+}
+
+.explanation-paper-img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.explanation-div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 5px;  
+	text-align: center;
+	z-index: 1;
+	font-size: 2.3vw; /* 텍스트의 크기를 vw로 설정 */
+}
+
+
+.ingredient-paper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 70vw;
+	/* max-height: 90vh; */
+	margin: 0 auto;
+	overflow: hidden;
+	
+}
+
+.ingredient-paper-img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.ingredient-div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	/* transform: translate(-50%, -50%); */
+	/* padding: 20px;   */
+	text-align: center;
+	/* z-index: 1; */
+}
+
+
+
+.item-ingredient {
+	color: rgb(109, 196, 55);
+	/* margin-left: 33%; */
+	transform: translateX(-80%);
+	border-bottom: 2px solid rgb(109, 196, 55);
+}
+
+.item-measure {
+	color: rgb(254, 51, 15);
+	position: absolute;
+	transform: translateX(-20%);
+	/* margin-right: 36%; */
+	border-bottom: 2px solid rgb(208, 68, 68);
+}
+.ingredient-paper h3 {
+	position: absolute;
+	font-weight: bolder;
+    margin-bottom: 20px; /* 재료 정보 제목과 재료들 사이의 간격 조절 */
 }

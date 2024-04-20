@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useRef } from "react";
 import midBanner from "../assets/image/jazzbanner.png";
 import { Grid } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import FormGroup from "@mui/material/FormGroup";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+import Stack from "@mui/material/Stack";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import ingredientCocktail from "../assets/image/ingredient-cocktail.jpg";
-import receiptCocktail from "../assets/image/receipt-cocktail.jpg";
+import receiptCocktail2 from "../assets/image/receipt-cocktail2.jpg";
 const DetailCocktail = ({ detailData }) => {
 	console.log("detailData", detailData);
-
+	const inputForm1 = useRef();
+	const inputForm2 = useRef();
+	const onMoveToForm1 = () => {
+		inputForm1.current.scrollIntoView({ behavior: "smooth", block: "start" });
+	};
+	const onMoveToForm2 = () => {
+		inputForm2.current.scrollIntoView({ behavior: "smooth", block: "start" });
+	};
 	return (
 		<div>
 			<Grid container className="detail-information-container" spacing={2}>
@@ -26,8 +36,22 @@ const DetailCocktail = ({ detailData }) => {
 						<span className="title">한글칵테일</span>
 						<span className="secondTitle">{detailData?.strDrink}</span>
 					</div>
+					<div>
+						<Button variant="contained" onClick={onMoveToForm1} endIcon={<SendIcon />}>
+							ingredient
+						</Button>
+					</div>
 
-					<div className="detailcontent">{detailData?.strInstructions}</div>
+					<div>
+						<Button
+							variant="contained"
+							onClick={onMoveToForm2}
+							endIcon={<SendIcon />}
+							color="error"
+						>
+							receipt
+						</Button>
+					</div>
 					<FormGroup>
 						<FormControlLabel control={<Switch defaultChecked />} label="한글 번역" />
 					</FormGroup>
@@ -43,17 +67,10 @@ const DetailCocktail = ({ detailData }) => {
 					<button className="translation">번역</button> */}
 				</Grid>
 			</Grid>
-			<div></div>
-			<div className="ingredient-paper-area">
-				<Paper
-					elevation={12}
-					className="ingredient-paper"
-					style={{
-						backgroundImage: `url(${ingredientCocktail})`,
-						backgroundSize: "cover",
-						backgroundPosition: "center",
-					}}
-				>
+
+			<Paper elevation={12} className="ingredient-paper" ref={inputForm1}>
+				<div className="explanation-paper-img-container">
+					<img src={ingredientCocktail} className="ingredient-paper-img" />
 					<h3>재료 정보</h3>
 					{detailData?.ingredients.map((item) => (
 						<div className="ingredient-div" key={item.id}>
@@ -61,21 +78,17 @@ const DetailCocktail = ({ detailData }) => {
 							<div className="item-measure">{item.measure}</div>
 						</div>
 					))}
-				</Paper>
-			</div>
+				</div>
+			</Paper>
+
 			<div id="middle-banner">
 				<img src={midBanner} alt="재즈페스티벌" />
 			</div>
-			<Paper
-				elevation={12}
-				className="explanation-paper"
-				style={{
-					backgroundImage: `url(${receiptCocktail})`,
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			>
-				<div className="explanation-div">{detailData?.strInstructions}</div>
+			<Paper elevation={12} className="explanation-paper" ref={inputForm2}>
+				<div className="explanation-paper-img-container">
+					<img src={receiptCocktail2} className="explanation-paper-img" />
+					<div className="explanation-div">{detailData?.strInstructions}</div>
+				</div>
 			</Paper>
 		</div>
 	);
