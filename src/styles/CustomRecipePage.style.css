@@ -154,6 +154,7 @@
 
 .alcoholic button {
     background-color: rgb(204, 138, 255);
+    width: 100%;
     padding: 10px 13.5px;
     margin-top: 1em;
     font-size: 10px;
@@ -181,4 +182,17 @@
 .numChar {
     display: flex;
     justify-content: flex-end;
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 1268px) {
+    .customSection {
+        flex-direction: column;
+    }
+    .writeSection {
+        width: 100%;
+    }
+    .settingSection {
+        width: 100%;
+    }
 }
