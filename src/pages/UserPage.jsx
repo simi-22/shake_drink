@@ -38,7 +38,8 @@ function UserPage() {
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
-	const {firstRatedCategory, updateState, setFirstRatedCategory,ordinaryDrink,cocktail,shake,otherUnknown,cocoa,shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
+	const {firstRatedCategory, "Ordinary Drink":ordinaryDrink, "Cocktail":cocktail, "Shake":shake, "Other / Unknown":otherUnknown, "Cocoa":cocoa, "Shot":shot, "Coffee / Tea":coffeeTea, "Homemade Liqueur":homemadeLiqueur, "Punch / Party Drink":punch, "Beer":beer, "Soft Drink":softDrink} = useAnalyze()
+
 	const {point, coupon, addPoint, addCoupon} = usePoint()
 	const {bookmarkList} = useBookmark()
 
@@ -259,7 +260,7 @@ function UserPage() {
 								>Cart에 담기</Button>
 								<div style={{display:'flex', gap:'10px'}}>
 									{favoriteList.map((item)=> 
-									<WishCard key={item.id} item={item} 
+									<WishCard key={item.idDrink} item={item} 
 										addToCart={addToCart}
 									/>)}
 								</div>
@@ -278,10 +279,10 @@ function UserPage() {
 										<div key={i} >
 											<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
 												<CartCard item={item}/> 
-												<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
+												<ClearIcon onClick={()=>{removeFromCart(item.idDrink); calculateTotalPrice();
 												}}/>
 											</div>
-											<div style={{marginTop:'10px'}}>수량: <AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
+											<div style={{marginTop:'10px'}}>수량: <AddCircleOutlineIcon onClick={()=>add(item.idDrink)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.idDrink)}/></div>
 										</div>
 								)}
 								</div>
@@ -302,7 +303,7 @@ function UserPage() {
 										<div>
 											{cartList.map((item,i)=>(
 												<div key={i}>
-													<span>{item.drink}: </span>
+													<span>{item.strDrink}: </span>
 													<span>{item.price}</span>
 													<span> * {item.count}</span>
 												</div>
@@ -357,7 +358,7 @@ function UserPage() {
 							<div>
 								{orderList.map((item,i)=>(
 									<div key={i}>
-										<div>{item.drink}: {item.price}*{item.count}원</div>
+										<div>{item.strDrink}: {item.price}*{item.count}원</div>
 									</div>
 								))}
 							</div>
@@ -498,7 +499,7 @@ function UserPage() {
 							<div>
 								{bookmarkList.map((item,i)=>(
 									<div key={i}>
-										<div>음료 : {item.title}</div>
+										<div>음료 : {item.strDrink}</div>
 										<span>링크 :</span> 
 										 <Link to={item.path} style={{color:'red', borderBottom:'1px solid red'}}>{item.path}</Link>
 									</div>
