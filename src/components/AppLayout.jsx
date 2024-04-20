@@ -251,7 +251,11 @@ function AppLayout() {
 									{settings.map((setting) => (
 										<MenuItem
 											key={setting}
-											onClick={setting === "Logout" ? handleLogout : handleCloseUserMenu}
+											onClick={() => {
+												if (setting === "My Page") navigate("/user");
+												if (setting === "Logout") handleLogout();
+												handleCloseUserMenu();
+											}}
 										>
 											<Typography textAlign="center">{setting}</Typography>
 										</MenuItem>
