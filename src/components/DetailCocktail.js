@@ -31,7 +31,7 @@ const style = {
 	// p: 10,
 };
 
-const DetailCocktail = ({ detailData }) => {
+const DetailCocktail = ({ detailData , detailsData }) => {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -53,7 +53,7 @@ const DetailCocktail = ({ detailData }) => {
 				aria-describedby="modal-modal-description"
 			>
 				<Box sx={style}>
-					<Video strVideo={detailData.strVideo} />
+					<Video strVideo={detailData.strVideo?detailData.strVideo:null} />
 					{/* <Typography id="modal-modal-title" variant="h6" component="h2"></Typography>
 					<Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography> */}
 				</Box>

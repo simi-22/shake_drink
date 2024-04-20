@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 
 const Video = ({strVideo}) => {
     const regex = /[?&]v=([^&]+)/;
-    const match = strVideo.match(regex);
+    const match = strVideo?.match(regex);
     const videoId = match && match[1];
     console.log('videoId',videoId)
   

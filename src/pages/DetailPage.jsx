@@ -6,11 +6,18 @@ import { useSearchByIngredient } from "../hooks/useSearchByIngredient";
 import DetailCocktail from "../components/DetailCocktail";
 import LoadingPage from "./loadingPage/LoadingPage";
 import "../styles/detailPage.style.css";
+import { useLocation } from "react-router-dom"; // 추가된 부분
+import { useRef } from "react";
 
 const DetailPage = () => {
+	const location = useLocation();
+    const detailsData = location.state;
 	const { id } = useParams();
-	const { data: detailData, isLoading: detailLoading } = useDetailCocktail(id);
-
+	let { data: detailData, isLoading: detailLoading } = useDetailCocktail(id);
+	if(detailData==undefined){
+		detailData=detailsData
+	}
+	console.log('detailData10',detailData)
 	const {
 		data: searchByIngredientData,
 		isLoading,
@@ -18,6 +25,7 @@ const DetailPage = () => {
 	} = useSearchByIngredient(detailData?.strIngredient1, id);
 	const base = detailData?.strIngredient1;
 	console.log("searchByIngredientData", searchByIngredientData);
+	const inputForm = useRef();
 
 	return (
 		<div id="detail-page">
@@ -26,7 +34,7 @@ const DetailPage = () => {
 				<LoadingPage />
 			) : (
 				<div>
-					<DetailCocktail detailData={detailData} />
+					<DetailCocktail detailData={detailData} detailsData={detailsData} />
 					<RecommendCocktail searchByIngredientData={searchByIngredientData} base={base} />
 				</div>
 			)}

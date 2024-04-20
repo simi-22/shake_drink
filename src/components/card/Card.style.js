@@ -4,9 +4,9 @@ export const container = css`
 	position: relative;
 	background-color: #fff;
 	box-sizing: border-box;
-	width: 20rem;
+	width: 22rem;
 	text-align: center;
-	margin: 0 auto;
+
 	cursor: pointer;
 	@media (max-width: 1080px) {
 		width: 15rem;
@@ -35,7 +35,7 @@ export const imgWrap = css`
 	& > div {
 		background-color: rgb(255, 255, 255, 0.8);
 		width: 100%;
-		height: 320px;
+		height: 100%;
 		color: black;
 		position: absolute;
 		padding: 20px;
@@ -51,7 +51,7 @@ export const imgWrap = css`
 
 export const contentWrap = css`
 	width: 100%;
-	margin-top: 10px;
+	padding: 4px 8px;
 	& > span {
 		padding: 2px 2px;
 		background: #ccc;
