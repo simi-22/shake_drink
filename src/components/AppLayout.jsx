@@ -19,8 +19,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useLogin from "../store/loginStore";
+import Logo from "../assets/image/Logo.png";
 
-const pages = ["Seach", "Community", "Blog"];
+const pages = ["search", "community", "game"];
 const settings = ["My Page", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -75,6 +76,7 @@ function AppLayout() {
 	const [keyword, setKeyword] = useState("");
 
 	const handleLogout = () => {
+		setAnchorElUser(null);
 		setIsLogin(false); // 로그아웃 처리
 	};
 
@@ -85,20 +87,6 @@ function AppLayout() {
 	};
 	const goToUserPage = () => {
 		navigate("/user");
-	};
-
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
-
-	// 탭 메뉴 오픈 핸들러
-	const handleOpenUserMenu = (event) => {
-		setAnchorElUser(event.currentTarget);
 	};
 
 	// 프로필 메뉴 클로즈 핸들러
@@ -117,37 +105,25 @@ function AppLayout() {
 			>
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
-						<Typography
+						<Box
+							noWrap
+							sx={{
+								display: { xs: "none", md: "flex" },
+							}}
 							as={NavLink}
 							to="/"
-							variant="h6"
-							noWrap
-							component="a"
-							href="#app-bar-with-responsive-menu"
-							sx={{
-								mr: 2,
-								display: { xs: "none", md: "flex" },
-								fontWeight: 700,
-								fontSize: "28px",
-								letterSpacing: ".1rem",
-								color: "#FD4926",
-								borderBottom: "2px solid transparent",
-								transition: "all 0.2s ease",
-								"&:hover": {
-									borderBottom: "2px solid #FD4926",
-								},
-							}}
 						>
-							Shake & Drink
-						</Typography>
-
+							<img src={Logo} alt="logo" />
+						</Box>
 						<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 							<IconButton
 								size="large"
 								aria-label="account of current user"
 								aria-controls="menu-appbar"
 								aria-haspopup="true"
-								onClick={handleOpenNavMenu}
+								onClick={(e) => {
+									setAnchorElNav(e.currentTarget);
+								}}
 								color="inherit"
 							>
 								<MenuIcon />
@@ -165,51 +141,66 @@ function AppLayout() {
 									horizontal: "left",
 								}}
 								open={Boolean(anchorElNav)}
-								onClose={handleCloseNavMenu}
+								onClose={() => {
+									setAnchorElNav(null);
+								}}
 								sx={{
 									display: { xs: "block", md: "none" },
 								}}
 							>
-								{settings.map((setting, index) => (
+								{pages.map((page) => (
 									<MenuItem
-										key={setting}
-										onClick={
-											index === 1 ? handleLogout : index === 0 ? goToUserPage : handleCloseUserMenu
-										}
+										key={page}
+										onClick={() => {
+											setAnchorElNav(null);
+										}}
 									>
-										<Typography textAlign="center">{setting}</Typography>
+										<Typography
+											textAlign="center"
+											onClick={() => {
+												let url;
+												if (page === "community") {
+													url = "customlist";
+												} else {
+													url = page;
+												}
+												navigate(`/${url}`);
+												setAnchorElNav(null);
+											}}
+										>
+											{page}
+										</Typography>
 									</MenuItem>
 								))}
 							</Menu>
 						</Box>
-						<Typography
-							as={NavLink}
-							to="/"
-							variant="h5"
+						<Box
 							noWrap
-							component="a"
-							href="#app-bar-with-responsive-menu"
 							sx={{
-								fontFamily: "Noto Sans, sans-serif",
-								mr: 2,
 								display: { xs: "flex", md: "none" },
 								flexGrow: 1,
-								fontWeight: 700,
-								fontSize: "28px",
-								letterSpacing: ".1rem",
-								color: "#FD4926",
-								textDecoration: "none",
 							}}
+							as={NavLink}
+							to="/"
 						>
-							Shake & Drink
-						</Typography>
+							<img src={Logo} alt="logo" />
+						</Box>
 						<Box
 							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
 						>
 							{pages.map((page) => (
 								<Button
 									key={page}
-									onClick={handleCloseNavMenu}
+									onClick={() => {
+										let url;
+										if (page === "community") {
+											url = "customlist";
+										} else {
+											url = page;
+										}
+										navigate(`/${url}`);
+										setAnchorElNav(null);
+									}}
 									sx={{ my: 2, color: "inherit", display: "block" }}
 								>
 									{page}
@@ -234,7 +225,11 @@ function AppLayout() {
 						{isLogin ? (
 							<Box sx={{ flexGrow: 0 }}>
 								<Tooltip title="Open settings">
-									<IconButton onClick={handleOpenUserMenu}>
+									<IconButton
+										onClick={(e) => {
+											setAnchorElUser(e.currentTarget);
+										}}
+									>
 										<Avatar src="/broken-image.jpg" sx={{ width: 30, height: 30 }} />
 									</IconButton>
 								</Tooltip>
@@ -252,12 +247,18 @@ function AppLayout() {
 										horizontal: "right",
 									}}
 									open={Boolean(anchorElUser)}
-									onClose={handleCloseUserMenu}
+									onClose={() => {
+										setAnchorElUser(null);
+									}}
 								>
 									{settings.map((setting) => (
 										<MenuItem
 											key={setting}
-											onClick={setting === "Logout" ? handleLogout : handleCloseUserMenu}
+											onClick={() => {
+												if (setting === "My Page") navigate("/user");
+												if (setting === "Logout") handleLogout();
+												handleCloseUserMenu();
+											}}
 										>
 											<Typography textAlign="center">{setting}</Typography>
 										</MenuItem>
