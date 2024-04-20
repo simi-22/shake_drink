@@ -40,7 +40,7 @@ function Card({ cockTailData, labelText }) {
 
 		const updatedLikes = [...uniqueLikes];
 		localStorage.setItem("likes", JSON.stringify(updatedLikes));
-	}, [like, idDrink]);
+	}, [like, idDrink, likesData]);
 
 	return (
 		<li
