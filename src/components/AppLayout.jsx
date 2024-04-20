@@ -21,7 +21,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useLogin from "../store/loginStore";
 import Logo from "../assets/image/Logo.png";
 
-const pages = ["Seach", "Community", "Blog"];
+const pages = ["seach", "community", "game"];
 const settings = ["My Page", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
@@ -155,7 +155,14 @@ function AppLayout() {
 										<Typography
 											textAlign="center"
 											onClick={() => {
-												navigate(`/${page}`);
+												let url;
+												if (page === "community") {
+													url = "customlist";
+												} else {
+													url = page;
+												}
+												navigate(`/${url}`);
+												setAnchorElNav(null);
 											}}
 										>
 											{page}
@@ -182,7 +189,13 @@ function AppLayout() {
 								<Button
 									key={page}
 									onClick={() => {
-										navigate(`/${page}`);
+										let url;
+										if (page === "community") {
+											url = "customlist";
+										} else {
+											url = page;
+										}
+										navigate(`/${url}`);
 										setAnchorElNav(null);
 									}}
 									sx={{ my: 2, color: "inherit", display: "block" }}
