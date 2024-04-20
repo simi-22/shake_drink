@@ -233,10 +233,10 @@ function UserPage() {
 											<div key={i} >
 												<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
 													<CartCard item={item}/> 
-													<ClearIcon onClick={()=>{removeFromCart(item.id); calculateTotalPrice();
+													<ClearIcon onClick={()=>{removeFromCart(item.idDrink); calculateTotalPrice();
 													}}/>
 												</div>
-												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.id)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.id)}/></div>
+												<div>수량:<AddCircleOutlineIcon onClick={()=>add(item.idDrink)}/> {item.count} <RemoveCircleOutlineIcon onClick={()=>minus(item.idDrink)}/></div>
 											</div>
 									)}
 									</div>
