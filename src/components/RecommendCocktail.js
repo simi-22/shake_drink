@@ -41,9 +41,8 @@ const RecommendCocktail = ({ searchByIngredientData, base }) => {
 						<CardContent>
 							{searchByIngredientData && searchByIngredientData.length > 0 ? (
 								<>
-									<div className="similar-cocktail">
-										<h1>Similar cocktail made with a base</h1>
-									</div>
+									
+									<div id="container"><h1 class="style-1">Similar</h1></div>
 									<Carousel
 										responsive={responsive}
 										infinite={true}
