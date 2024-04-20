@@ -15,6 +15,10 @@
     flex-direction: column;
 }
 
+.customSection > .writeSection {
+    padding: 1em 1.8em 1em 1em;
+}
+
 /* 레시피 작성하는 영역 */
 .writeSection {
     width: 70%;
@@ -54,14 +58,12 @@
     50% {border-color: rgba(253, 103, 38, 1);}
     75% { border-color: rgba(253, 103, 38, 0.5);}
 }
-.nameContainer > * {
-    margin: 0.3em;
-}
 
 .itemForm{
     background-color: rgb(236, 236, 236);
     border-radius: 10px;
     padding: 10px;
+    margin: 0.3em 0.1em 0.3em 0.6em;
 }
 
 .itemHeader {
@@ -119,6 +121,9 @@
     width: 30%;
     display: flex;
     height: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .infoBox {
@@ -146,6 +151,10 @@
     width: 100%;
     border-radius: 8px;
     background-color: rgba(253, 73, 38, 100);
+}
+
+.settingBox button:disabled {
+    background-color: gray;
 }
 
 .alcoholic {
