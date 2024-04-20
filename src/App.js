@@ -17,8 +17,8 @@ function App() {
 				<Route path="user" element={<UserPage />} />
 				<Route path="login" element={<LoginPage />} />
 				<Route path="detail" element={<DetailPage />} />
-				<Route path="user" element={<UserPage />} />
 				<Route path="game" element={<GamePage />} />
+				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 			</Route>
 		</Routes>
 	);
