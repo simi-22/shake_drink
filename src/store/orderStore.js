@@ -30,7 +30,7 @@ export const useOrder = create((set)=>({
 	// 	return { orderList: [...state.orderList, ...filteredList] };
 	// }),
 	removeListFromOrder:(list) => set((state) => {
-		const updatedList = state.orderList.filter(item => !list.some(listItem => listItem.id === item.id));
+		const updatedList = state.orderList.filter(item => !list.some(listItem => listItem.idDrink === item.idDrink));
 		return { orderList: updatedList };
 	}),
 	
