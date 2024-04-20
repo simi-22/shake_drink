@@ -10,13 +10,6 @@
 	align-items: center;
 }
 
-.cocktail-image {
-	margin-left: auto;
-	margin-right: 10px;
-	width: 50vh !important ;
-	height: 50vh;
-}
-
 .badgeWrap {
 	display: flex;
 	gap: 6px;
@@ -33,12 +26,6 @@
 	margin-right: 6px;
 }
 
-.detail-content {
-	margin-top: 6px;
-	width: 300px;
-	height: 300px;
-}
-
 .detailcontent {
 	line-height: 1.8;
 	white-space: pre-wrap;
@@ -51,12 +38,38 @@
 	color: rgb(110, 110, 110);
 }
 
+.cocktail-image-wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	@media (min-width: 600px) {
+		display: flex;
+		justify-content: flex-end;
+	}
+}
+
 .cocktail-image {
-	width: 300px;
-	height: 300px;
-	display: block;
+	width: 80%;
 	border-radius: 15px;
 	filter: saturate(120%);
+	@media (min-width: 600px) {
+		width: 300px;
+		height: 300px;
+		display: block;
+	}
+}
+
+.detail-content {
+	width: 80%;
+	margin-top: 6px;
+	@media (max-width: 600px) {
+		margin: 0 auto;
+	}
+	@media (min-width: 600px) {
+		max-width: 300px;
+		height: 300px;
+		display: block;
+	}
 }
 
 #middle-banner {
@@ -117,12 +130,11 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	padding: 5px;  
+	padding: 5px;
 	text-align: center;
 	z-index: 1;
 	font-size: 2.3vw; /* 텍스트의 크기를 vw로 설정 */
 }
-
 
 .ingredient-paper {
 	position: relative;
@@ -133,7 +145,6 @@
 	/* max-height: 90vh; */
 	margin: 0 auto;
 	overflow: hidden;
-	
 }
 
 .ingredient-paper-img {
@@ -152,8 +163,6 @@
 	/* z-index: 1; */
 }
 
-
-
 .item-ingredient {
 	color: rgb(109, 196, 55);
 	/* margin-left: 33%; */
@@ -171,5 +180,5 @@
 .ingredient-paper h3 {
 	position: absolute;
 	font-weight: bolder;
-    margin-bottom: 20px; /* 재료 정보 제목과 재료들 사이의 간격 조절 */
+	margin-bottom: 20px; /* 재료 정보 제목과 재료들 사이의 간격 조절 */
 }
