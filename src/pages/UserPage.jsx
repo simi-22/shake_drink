@@ -3,7 +3,7 @@ import {Container, Grid, Button} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaidIcon from '@mui/icons-material/Paid';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+// import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -38,7 +38,7 @@ function UserPage() {
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
-	const {firstRatedCategory, "Ordinary Drink":ordinaryDrink, "Cocktail":cocktail, "Shake":shake, "Other / Unknown":otherUnknown, "Cocoa":cocoa, "Shot":shot, "Coffee / Tea":coffeeTea, "Homemade Liqueur":homemadeLiqueur, "Punch / Party Drink":punch, "Beer":beer, "Soft Drink":softDrink} = useAnalyze()
+	const {firstRatedCategory, "Ordinary Drink":ordinaryDrink, "Cocktail":cocktail, "Shake":shake, "Other / Unknown":otherUnknown, "Cocoa":cocoa, "Shot":shot, "Coffee / Tea":coffeeTea, "Homemade Liqueur":homemadeLiqueur, "Punch / Party Drink":punch, "Beer":beer, "Soft Drink":softDrink, updateState, setFirstRatedCategory} = useAnalyze()
 
 	const {point, coupon, addPoint, addCoupon} = usePoint()
 	const {bookmarkList} = useBookmark()
