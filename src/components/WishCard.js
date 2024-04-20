@@ -23,16 +23,16 @@ const WishCard = ({item, addToCart}) => {
 
 	function handleClick(){
 		addToCart(item)
-		removeItem(item.id)
+		removeItem(item.idDrink)
 	}
 	useEffect(()=>{
 		const priceIndex =Math.floor(Math.random()*priceList.length)
 		const newOrNotIndex = Math.floor(Math.random()*newOrNot.length)
 		const saleIndex =Math.floor(Math.random()*sale.length)
 		console.log('priceIndex :', priceIndex)
-		setPrice(item.id, priceList[priceIndex])
-		setIsNew(item.id, newOrNot[newOrNotIndex])
-		setIsSale(item.id, sale[saleIndex])
+		setPrice(item.idDrink, priceList[priceIndex])
+		setIsNew(item.idDrink, newOrNot[newOrNotIndex])
+		setIsSale(item.idDrink, sale[saleIndex])
 	},[])
 
 	useEffect(() => {
@@ -49,17 +49,17 @@ const WishCard = ({item, addToCart}) => {
 	>
 		<div className='card-img' >
 			<img width="40%"
-				src={item.image} alt=""/>
+				src={item.strDrinkThumb} alt=""/>
 			<DeleteIcon className="trash" style={{zIndex:'2'}}
 				onClick={(e)=>{
 					e.stopPropagation();//이벤트 버블링 차단
-					deleteItemStatus(item.id);  //productList의 item변화시키기
-					removeItem(item.id); //favoriteList에서 item 제거
+					deleteItemStatus(item.idDrink);  //productList의 item변화시키기
+					removeItem(item.idDrink); //favoriteList에서 item 제거
 				}}
 			/>
 		</div>
 		<div className='card-text'>
-			<div>{item.drink}</div>
+			<div>{item.strDrink}</div>
 			<div>₩ {item.price}</div>
 			<div style={{display:'flex', justifyContent:'start', gap:'5px'}}>
 				<span>{item.isNew==='New'? 

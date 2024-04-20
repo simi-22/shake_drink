@@ -35,7 +35,7 @@ function UserPage() {
 	const {cartList, addToCart, addListToCart, removeFromCart, addCount, minusCount} = useCart()
 	const {orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney, minusTotalMoney} =useOrder()
 	const {id, email, password, nickName, editUser} = useUser()
-	const {firstRatedCategory, ordinaryDrink,cocktail,shake,otherUnknown,cocoa, shot,coffeeTea,homemadeLiqueur,punch,beer,softDrink} = useAnalyze()
+	const {firstRatedCategory, "Ordinary Drink":ordinaryDrink, "Cocktail":cocktail, "Shake":shake, "Other / Unknown":otherUnknown, "Cocoa":cocoa, "Shot":shot, "Coffee / Tea":coffeeTea, "Homemade Liqueur":homemadeLiqueur, "Punch / Party Drink":punch, "Beer":beer, "Soft Drink":softDrink} = useAnalyze()
 
 	const [totalPrice, setTotalPrice]=useState(0)
 	const [open, setOpen]= useState(false) // 결제 확인창
@@ -214,7 +214,7 @@ function UserPage() {
 									>Cart에 담기</Button>
 									<div>
 										{favoriteList.map((item)=> 
-										<WishCard key={item.id} item={item} 
+										<WishCard key={item.idDrink} item={item} 
 											addToCart={addToCart}
 										/>)}
 									</div>
@@ -257,7 +257,7 @@ function UserPage() {
 											<div>
 												{cartList.map((item,i)=>(
 													<div key={i}>
-														<span>{item.drink}: </span>
+														<span>{item.strDrink}: </span>
 														<span>{item.price}</span>
 														<span> * {item.count}</span>
 													</div>
@@ -312,7 +312,7 @@ function UserPage() {
 								<div>
 									{orderList.map((item,i)=>(
 										<div key={i}>
-											<div>{item.drink}: {item.price}*{item.count}원</div>
+											<div>{item.strDrink}: {item.price}*{item.count}원</div>
 										</div>
 									))}
 								</div>

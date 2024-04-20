@@ -2,18 +2,18 @@ import {create} from 'zustand'
 // import {produce} from 'immer';
 
 const initialState={
-		ordinaryDrink:0, //A
-		cocktail:0, //B
-		shake:0, //C
-		otherUnknown:0, //D
-		cocoa:0, //E
-		shot:0,  //F
-		coffeeTea:0, //G
-		homemadeLiqueur:0, //H
-		punch:0, //I
-		beer:0,  //J
-		softDrink:0, //K
-		firstRatedCategory: 'cocktail'
+		"Ordinary Drink":0, //A
+		"Cocktail":0, //B
+		"Shake":0, //C
+		"Other / Unknown":0, //D
+		"Cocoa":0, //E
+		"Shot":0,  //F
+		"Coffee / Tea":0, //G
+		"Homemade Liqueur":0, //H
+		"Punch / Party Drink":0, //I
+		"Beer":0,  //J
+		"Soft Drink":0, //K
+		"firstRatedCategory": 'cocktail'
 }
 
 export const useAnalyze = create((set)=>({
