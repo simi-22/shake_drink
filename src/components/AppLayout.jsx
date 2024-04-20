@@ -21,7 +21,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useLogin from "../store/loginStore";
 import Logo from "../assets/image/Logo.png";
 
-const pages = ["seach", "community", "game"];
+const pages = ["search", "community", "game"];
 const settings = ["My Page", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
