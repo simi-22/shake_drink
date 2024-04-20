@@ -47,7 +47,7 @@ export const useFavorite = create((set)=>({
 	}),
 	setIsSale:(id, val)=> set((state)=>{
 		const updatedList = state.favoriteList.map((item)=>{
-			if(item.id === id){
+			if(item.idDrink === id){
 				return {
 					...item,
 					isSale: val
