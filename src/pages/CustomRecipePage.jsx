@@ -230,6 +230,7 @@ const CustomRecipePage = () => {
 						></Select>
 						<div className="amount">
 							<input
+								type="number"
 								className="inputField"
 								value={selectedAmount}
 								placeholder="용량"
