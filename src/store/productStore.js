@@ -13,14 +13,14 @@ export const useProduct = create((set)=>({
 	deleteItemStatus:(id)=>{
 		set((state) => ({
 			productList: state.productList.map((item) =>
-				item.id === id ? { ...item, status: '' } : item
+				item.idDrink === id ? { ...item, status: '' } : item
 			)
 		}))
 	},
 	setItemCount:(id, count)=>{
 		set((state) => ({
 			productList: state.productList.map((item) =>
-				item.id === id ? { ...item, "count": count } : item
+				item.idDrink === id ? { ...item, "count": count } : item
 			)
 		}))
 	}

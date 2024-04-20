@@ -16,8 +16,8 @@ export const useBookmark = create((set)=>({
 	addBookmark:(item)=> set((state)=>{
 		const newItem ={
 			title: item.strDrink,
-			url: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${item.id}`,
-			path: `/${item.id}`
+			url: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${item.idDrink}`,
+			path: `/${item.idDrink}`
 		}
 		return {
 			bookmarkList: [
