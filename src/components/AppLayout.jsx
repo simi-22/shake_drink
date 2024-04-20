@@ -18,8 +18,8 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import useLogin from "../store/loginStore";
 import Logo from "../assets/image/Logo.png";
+import loginStore from "../store/loginStore";
 
 const pages = ["search", "community", "game"];
 const settings = ["My Page", "Logout"];
@@ -72,12 +72,13 @@ function AppLayout() {
 	const navigate = useNavigate();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const { isLogin, setIsLogin } = useLogin();
 	const [keyword, setKeyword] = useState("");
+
+	const { isLogin, setIsLogin, setIsLogout } = loginStore((state) => state);
 
 	const handleLogout = () => {
 		setAnchorElUser(null);
-		setIsLogin(false); // 로그아웃 처리
+		setIsLogout();
 	};
 
 	const handleSubmit = (e) => {
