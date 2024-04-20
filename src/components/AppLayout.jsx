@@ -83,6 +83,9 @@ function AppLayout() {
 		navigate(`/search?s=${keyword}`);
 		setKeyword("");
 	};
+	const goToUserPage = () => {
+		navigate("/user");
+	};
 
 	// 탭 메뉴 오픈 핸들러
 	const handleOpenNavMenu = (event) => {
@@ -170,7 +173,9 @@ function AppLayout() {
 								{settings.map((setting, index) => (
 									<MenuItem
 										key={setting}
-										onClick={index === 1 ? handleLogout : handleCloseUserMenu}
+										onClick={
+											index === 1 ? handleLogout : index === 0 ? goToUserPage : handleCloseUserMenu
+										}
 									>
 										<Typography textAlign="center">{setting}</Typography>
 									</MenuItem>
