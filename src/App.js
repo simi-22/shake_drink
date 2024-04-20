@@ -14,7 +14,7 @@ import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
 function App() {
 	return (
 		<Routes>
-			<Route path='/' element={<AppLayout/>}>
+			<Route path="/" element={<AppLayout />}>
 				<Route index element={<HomePage />} />
 				<Route path=":id" element={<DetailPage />} />
 				<Route path="detail" element={<DetailPage />} />
