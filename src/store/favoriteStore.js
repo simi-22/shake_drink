@@ -3,29 +3,27 @@ import {create} from 'zustand'
 export const useFavorite = create((set)=>({
 	favoriteList: [
 		{
-			id: "11007",
-			drink:"Margarita",
-			image:'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
+			idDrink: "11007",
+			strDrink:"Margarita",
+			strDrinkThumb:'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
 			price:15000,
 			isNew:'New',
 			isSale:'Sale',
 			count:1,
-			strCategory:'cocktail'
 		},
 		{
-			id: "11118",
-			drink:"Blue Margarita",
-			image:'https://www.thecocktaildb.com/images/media/drink/bry4qh1582751040.jpg',
+			idDrink: "11118",
+			strDrink:"Blue Margarita",
+			strDrinkThumb:'https://www.thecocktaildb.com/images/media/drink/bry4qh1582751040.jpg',
 			price:10000,
 			isNew:'',
 			isSale:'',
 			count:1,
-			strCategory:'cocktail'
 		}
 	],
 	setPrice:(id, val)=> set((state)=>{
 		const updatedList = state.favoriteList.map((item)=>{
-			if(item.id === id){
+			if(item.idDrink === id){
 				return {
 					...item,
 					price: val
@@ -37,7 +35,7 @@ export const useFavorite = create((set)=>({
 	}),
 	setIsNew:(id, val)=> set((state)=>{
 		const updatedList = state.favoriteList.map((item)=>{
-			if(item.id === id){
+			if(item.idDrink === id){
 				return {
 					...item,
 					isNew: val
@@ -49,7 +47,7 @@ export const useFavorite = create((set)=>({
 	}),
 	setIsSale:(id, val)=> set((state)=>{
 		const updatedList = state.favoriteList.map((item)=>{
-			if(item.id === id){
+			if(item.idDrink === id){
 				return {
 					...item,
 					isSale: val
@@ -62,11 +60,11 @@ export const useFavorite = create((set)=>({
 	
 	addItem: (item) => set((state) => {
 		// 중복 아이템인지 확인
-		const isDuplicate = state.favoriteList.some((existingItem) => existingItem.id === item.id);
-
+		const isDuplicate = state.favoriteList.some((existingItem) => existingItem.idDrink === item.idDrink);
 		// 중복 아이템이 아닌 경우에만 아이템을 추가
 		if (!isDuplicate) {
-			const updatedList = [...state.favoriteList, item];
+			const updatedList = [...state.favoriteList, {...item, count:1}];
+			console.log('추가 아이템 : ', item.strDrink)
 			return { favoriteList: updatedList };
 		}
 
@@ -74,11 +72,11 @@ export const useFavorite = create((set)=>({
 		return state;
 	}),
 	removeItem: (id) => set((state) => {
-        const updatedList = state.favoriteList.filter(item => item.id !== id);
+        const updatedList = state.favoriteList.filter(item => item.idDrink !== id);
         return { favoriteList: updatedList};
     }),
 	removeListItems: (list) => set((state) => {
-		const updatedList = state.favoriteList.filter(item => !list.some(listItem => listItem.id === item.id));
+		const updatedList = state.favoriteList.filter(item => !list.some(listItem => listItem.idDrink === item.idDrink));
 		return { favoriteList: updatedList };
 	}),
 

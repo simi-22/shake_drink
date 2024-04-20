@@ -1,86 +1,61 @@
 import {create} from 'zustand'
-// import {produce} from 'immer';
 
-const initialState={
-		ordinaryDrink:0, //A
-		cocktail:0, //B
-		shake:0, //C
-		otherUnknown:0, //D
-		cocoa:0, //E
-		shot:0,  //F
-		coffeeTea:0, //G
-		homemadeLiqueur:0, //H
-		punch:0, //I
-		beer:0,  //J
-		softDrink:0, //K
-		firstRatedCategory: 'cocktail'
-}
+export const useCart = create((set)=>({
+	cartList: [],
+	addToCart: (item) => set((state) => {
+		// 중복 아이템인지 확인
+		const isDuplicate = state.cartList.some((existingItem) => existingItem.idDrink === item.idDrink);
 
-export const useAnalyze = create((set)=>({
-	...initialState,
-	updateState: (key) => set((state) => ({ [key]: state[key] + 1 })),
-	
+		// 중복 아이템이 아닌 경우에만 아이템을 추가
+		if (!isDuplicate) {
+			const updatedList = [...state.cartList, {...item}];
+			return { cartList: updatedList };
+		}
 
-	setFirstRatedCategory: () => set((state) => {
-		// 숫자로 변환할 수 있는 속성만 필터링하여 최대값 찾기
-    	const numericValues = Object.values(state).filter(value => typeof value === 'number');
-    	const maxCount = Math.max(...numericValues);
-
-		// 모든 카테고리 중 value최대값 찾기 (문제는 firstRatedCategory는 문자이다.)
-        // const maxCount = Math.max(...Object.values(state)); 
-		// console.log('최대카운트:', maxCount)
-		// 최대값과 일치하는 카테고리 찾기
-        const firstRatedCategory2 = Object.keys(state).find(key => state[key] === maxCount);
-		console.log('최대값...: ', firstRatedCategory2)
-        return { firstRatedCategory: firstRatedCategory2 }; // 일등 카테고리 반환
-    }),
-	// analyze:(key)=>set((state)=>{state.updateState(key); state.setFirstRatedCategory()})
-	analyze: (key) =>
-		set((state) => {
-		// 상태 업데이트
-		const updatedState = {
-			...state,
-			[key]: state[key] + 1,
-		};
-
-		// 최대 카테고리 설정
-		const maxCount = Math.max(...Object.values(updatedState));
-		const firstRatedCategory2 = Object.keys(updatedState).find(
-			(key) => updatedState[key] === maxCount
-		);
-
-		return {
-			...updatedState,
-			firstRatedCategory: firstRatedCategory2,
-		};
+		// 중복 아이템인 경우 현재 상태 그대로 반환
+		return state;
 	}),
-	// import {useAnalyze} from '../store/analyzeStore'
-	// const {firstRatedCategory} = useAnalyze()
-	// const targetCategory = firstRatedCategory;
-	// 카테고리별 검색 api이용.
+	addListToCart: (list) => set((state) => {
+		// 현재 카트 리스트에서 중복된 아이템을 필터링
+		const filteredList = list.filter((item) => !state.cartList.some((existingItem) => existingItem.idDrink === item.idDrink));
 
+		// 혹은 다음과 같이 할 수 있다.
+		// const filteredList = list.filter(item => !state.cartList.map(existingItem => existingItem.idDrink).includes(item.idDrink));
+		// item은 객체라서 비교를 할 수 없다. id값으로 비교를 해야 된다.
 
+		// 필터링된 리스트를 cartList에 할당
+		return { cartList: [...state.cartList, ...filteredList] };
+	}),
 
-	// updateA:() => set((state)=> ({ordinaryDrink: state.ordinaryDrink +1 })),
-	// updateB:() => set((state)=> ({cocktail: state.cocktail +1 })),
-	// updateC:() => set((state)=> ({shake: state.shake +1 })),
-	// updateD:() => set((state)=> ({otherUnknown: state.otherUnknown +1 })),
-	// updateE:() => set((state)=> ({cocoa: state.cocoa +1 })),
-	// updateF:() => set((state)=> ({shot: state.shot +1 })),
-	// updateG:() => set((state)=> ({coffeeTea: state.coffeeTea +1 })),
-	// updateH:() => set((state)=> ({homemadeLiqueur: state.homemadeLiqueur +1 })),
-	// updateI:() => set((state)=> ({punch: state.punch +1 })),
-	// updateJ:() => set((state)=> ({beer: state.beer +1 })),
-	// updateK:() => set((state)=> ({softDrink: state.softDrink +1 })),
+	removeFromCart: (id) => set((state) => {
+        const updatedList = state.cartList?.filter(item => item.idDrink !== id);
+        return { cartList: updatedList };
+    }),
+	addCount:(id) => set((state)=>{
+		const updatedList = state.cartList?.map(item => {
+			if (item.idDrink === id) {
+				return {
+					...item,
+					count: item.count + 1
+				};
+			}
+			return item;
+		});
+		return { cartList: updatedList };
+	}),
+	minusCount:(id) => set((state)=>{
+		const updatedList = state.cartList?.map(item => {
+			if (item.idDrink === id) {
+				return {
+					...item,
+					count: item.count - 1
+				};
+			}
+			return item;
+		});
+		return { cartList: updatedList };
+	}),
+
+	emptyCartList:()=>set((state)=>({cartList:[]}))
+
 }))
-
-
-// 아이템에 이벤트 리스너를 달아서 해당 아이템이 클릭되었을 때,
-// analyze 함수를 발동시키게 한다.
-// function analyze(category){   //<--category에 item.strCategory 값 들어간다.
-// 	if (category ==='Ordinary Drink'){
-// 		updateA()
-// 	} else if(category === 'cocktail'){
-// 		updateB()
-// 	}
-// }
