@@ -4,13 +4,13 @@ import DetailPage from "./pages/DetailPage";
 import UserPage from "./pages/UserPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AppLayout from "./components/AppLayout";
-import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
 import LoginPage from "./pages/LoginPage";
 import GamePage from "./pages/GamePage";
 import SearchPage from "./pages/SearchPage";
 import CustomRecipePage from "./pages/CustomRecipePage";
 import CustomListPage from "./pages/CustomListPage";
-
+import NotFoundPage from "./pages/NotFoundPage";
+import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
 function App() {
 	return (
 		<Routes>
@@ -25,6 +25,7 @@ function App() {
 				<Route path="game" element={<GamePage />} />
 				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 				<Route path="search" element={<SearchPage />} />
+				<Route path="*" element={<NotFoundPage />} />
 			</Route>
 		</Routes>
 	);
