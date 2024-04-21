@@ -44,11 +44,12 @@ const WishCard = ({item, addToCart}) => {
 		style={{
 			border: '1px solid grey', borderRadius:'10px',
 			marginTop:'10px', padding:'10px',
-			boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)'
+			boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+			width:"250px"
 		}}
 	>
 		<div className='card-img' >
-			<img width="40%"
+			<img width="250x"
 				src={item.strDrinkThumb} alt=""/>
 			<DeleteIcon className="trash" style={{zIndex:'2'}}
 				onClick={(e)=>{

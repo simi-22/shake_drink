@@ -11,6 +11,7 @@ import CustomRecipePage from "./pages/CustomRecipePage";
 import CustomListPage from "./pages/CustomListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
+import Ingredient from './pages/Ingredient'
 function App() {
 	return (
 		<Routes>
@@ -25,6 +26,7 @@ function App() {
 				<Route path="game" element={<GamePage />} />
 				<Route path="favor-category/:id" element={<FavorCategoryDrinks />} />
 				<Route path="search" element={<SearchPage />} />
+				<Route path="ingredient" element={<Ingredient />} />
 				<Route path="*" element={<NotFoundPage />} />
 			</Route>
 		</Routes>

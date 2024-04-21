@@ -1,8 +1,8 @@
 import {create} from 'zustand'
 
 const initialState={
-		"Ordinary Drink":0, //A
-		"Cocktail":0, //B
+		"Ordinary Drink":2, //A
+		"Cocktail":1, //B
 		"Shake":0, //C
 		"Other / Unknown":0, //D
 		"Cocoa":0, //E
@@ -12,18 +12,25 @@ const initialState={
 		"Punch / Party Drink":0, //I
 		"Beer":0,  //J
 		"Soft Drink":0, //K
-		"firstRatedCategory": 'cocktail'
+		"firstRatedCategory": 'Cocktail'
 }
 
 export const useAnalyze = create((set)=>({
 	...initialState,
 	updateState: (key) => set((state) => ({ [key]: state[key] + 1 })),
 	setFirstRatedCategory: () => set((state) => {
-		// 모든 카테고리 중 value최대값 찾기
-        const maxCount = Math.max(...Object.values(state)); 
-		// 최대값과 일치하는 카테고리 찾기
+    // 각 값이 유효한 숫자인지 확인하고 숫자로 변환하기
+    const numericValues = Object.values(state).map(value => {
+      const numericValue = parseInt(value, 10);
+      return isNaN(numericValue) ? 0 : numericValue; // 숫자로 변환할 수 없는 경우 0으로 처리
+    });
+    // 숫자로 변환된 값들 중 최대값 찾기
+    const maxCount = Math.max(...numericValues);//! value로 반환되는 값은 문자열이다. 그리고 firstRatedCategory value는 문자열이다. 이건 제외해야 된다.!!
+		console.log('최대치:', maxCount )
+
         const firstRatedCategory2 = Object.keys(state).find(key => state[key] === maxCount); 
-        return { firstRatedCategory: firstRatedCategory2 }; // 일등 카테고리 반환
+		console.log('최애 카테고리 :', firstRatedCategory2)
+        return { ...state, firstRatedCategory: firstRatedCategory2 }; // 일등 카테고리 반환
     })
 	// import {useAnalyze} from '../store/analyzeStore'
 	// const {firstRatedCategory} = useAnalyze()

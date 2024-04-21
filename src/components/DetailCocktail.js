@@ -20,6 +20,8 @@ import coc1 from "../assets/cocktail1.png";
 import coc2 from "../assets/cocktail2.png";
 import coc3 from "../assets/cocktail3.png";
 import coc4 from "../assets/cocktail4.png";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { useBookmark } from "../store/bookmarkStore";
 
 const style = {
 	position: "absolute",
@@ -62,6 +64,7 @@ const DetailCocktail = ({ detailData }) => {
 	}
 
 	console.log("customImg", customImg);
+	const { addBookmark } = useBookmark();
 
 	return (
 		<div>
@@ -165,6 +168,20 @@ const DetailCocktail = ({ detailData }) => {
 						{/* <FormGroup>
 							<FormControlLabel control={<Switch defaultChecked />} label="한글 번역" />
 						</FormGroup> */}
+
+						{/* <FormGroup>
+							<FormControlLabel control={<Switch defaultChecked />} label="한글 번역" />
+						</FormGroup> */}
+						<div style={{ width: "200px" }}>
+							<BookmarkIcon
+								id="bookmarkIcon"
+								sx={{ "&:hover": { color: "#004cff" } }}
+								onClick={() => {
+									addBookmark(detailData);
+								}}
+							/>{" "}
+							북마크 추가
+						</div>
 					</div>
 				</Grid>
 			</Grid>

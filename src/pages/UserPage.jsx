@@ -39,17 +39,17 @@ function UserPage() {
 	const { orderList, addListToOrder, removeListFromOrder, totalMoney, addTotalMoney } = useOrder();
 	const { id, email, password, nickName, editUser } = useUser();
 	const {
-		firstRatedCategory,
+		"firstRatedCategory": firstRatedCategory,
 		"Ordinary Drink": ordinaryDrink,
-		Cocktail: cocktail,
-		Shake: shake,
+		"Cocktail": cocktail,
+		"Shake": shake,
 		"Other / Unknown": otherUnknown,
-		Cocoa: cocoa,
-		Shot: shot,
+		"Cocoa": cocoa,
+		"Shot": shot,
 		"Coffee / Tea": coffeeTea,
 		"Homemade Liqueur": homemadeLiqueur,
 		"Punch / Party Drink": punch,
-		Beer: beer,
+		"Beer": beer,
 		"Soft Drink": softDrink,
 		updateState,
 		setFirstRatedCategory,
@@ -180,6 +180,9 @@ function UserPage() {
 			[name]: value, //변수의 값으로 프로퍼티를 만들 경우
 		}));
 	};
+	function showIngredient(){
+		navigate('/ingredient')
+	}
 
 	useEffect(() => {
 		//수량이 바뀔 때마다 총액계산 다시 하게 한다.
@@ -256,15 +259,21 @@ function UserPage() {
 										</div>
 									</div>
 								</div>
-								<div style={{ margin: "20px 0" }}>
-									<Button variant="contained" onClick={changeUserInfo}>
+								<div>
+									<Button variant="contained"
+									sx={{ marginTop: "20px" }}
+									onClick={changeUserInfo}>
 										정보변경
 									</Button>
-									<Button variant="contained" onClick={showFavorCategory} sx={{ ml: "10px" }}>
+									<Button variant="contained"
+									onClick={showFavorCategory} sx={{ ml: "10px", marginTop: "20px" }}>
 										Favor Category
 									</Button>
-									<Button variant="contained" onClick={showOrder} sx={{ ml: "10px" }}>
+									<Button variant="contained" onClick={showOrder} sx={{ mx: "10px", marginTop: "20px" }}>
 										주문내역
+									</Button>
+									<Button variant="contained" onClick={showIngredient} sx={{ marginTop: "20px" }}>
+										번역API
 									</Button>
 								</div>
 							</div>
@@ -282,7 +291,7 @@ function UserPage() {
 							<Button onClick={addFavsToCart} variant="contained" color="error" sx={{ ml: "10px" }}>
 								Cart에 담기
 							</Button>
-							<div style={{ display: "flex", gap: "10px" }}>
+							<div style={{ display: "flex", gap: "10px", flexWrap:'wrap' }}>
 								{favoriteList.map((item) => (
 									<WishCard key={item.idDrink} item={item} addToCart={addToCart} />
 								))}
