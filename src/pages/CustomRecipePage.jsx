@@ -126,7 +126,6 @@ const CustomRecipePage = () => {
 		const newDrink = {
 			idDrink: Math.floor(Math.random() * 1000000), // 임의의 아이디 생성
 			strDrink: cocktailName,
-			ingredients:[{'ddd':'1'}],
 			strCategory: selectedCategory, // 카테고리 입력 필요
 			strAlcoholic: alcohol, // 알코올 유무 입력 필요
 			strGlass: selectedGlass, // 사용하는 글래스 입력 필요
@@ -145,12 +144,29 @@ const CustomRecipePage = () => {
 			strMeasure6: `${ingredients[5]?.amount || null} ${ingredients[5]?.unit || null}`,
 			strImageSource: selectedFile !== null ? selectedFile : clickedImageIndex,
 			strRecipe: recipeDescription,
-			strVideo : null
+			strVideo: null,
 		};
+
 		// 새로운 객체를 기존 데이터에 추가
+		let ingredientsMapping = [];
+
+		// strIngredient1부터 strIngredient15까지 반복하여 데이터를 추출
+		for (let i = 1; i <= 6; i++) {
+			const ingredient = newDrink[`strIngredient${i}`];
+			const measure = newDrink[`strMeasure${i}`];
+
+			// 재료와 양이 존재하고, null이 아닌 경우에만 배열에 추가
+			if (ingredient) {
+				ingredientsMapping.push({ ingredient, measure });
+			}
+			console.log("ingredientsMapping", ingredientsMapping);
+		}
+		newDrink.ingredientsMapping = ingredientsMapping;
 		const updatedData = {
 			drinks: [...existingData.drinks, newDrink],
 		};
+		console.log("updatedData", updatedData);
+
 		// JSON 형태로 변환하여 로컬 스토리지에 저장
 		localStorage.setItem("drinkData", JSON.stringify(updatedData));
 		navigate("/customlist");

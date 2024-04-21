@@ -13,11 +13,11 @@ const RecommendCocktail = ({ searchByIngredientData, base }) => {
 
 	const responsive = {
 		desktop: {
-			breakpoint: { max: 3000, min: 1024 },
-			items: 2.6,
+			breakpoint: { max: 3000, min: 1450 },
+			items: 2.9,
 		},
 		tablet: {
-			breakpoint: { max: 1024, min: 464 },
+			breakpoint: { max: 1449, min: 464 },
 			items: 2,
 		},
 		mobile: {
@@ -41,8 +41,9 @@ const RecommendCocktail = ({ searchByIngredientData, base }) => {
 						<CardContent>
 							{searchByIngredientData && searchByIngredientData.length > 0 ? (
 								<>
-									
-									<div id="container"><h1 class="style-1">Similar</h1></div>
+									<div id="container">
+										<h1 class="style-1">Similar</h1>
+									</div>
 									<Carousel
 										responsive={responsive}
 										infinite={true}
