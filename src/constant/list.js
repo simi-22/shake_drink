@@ -2,15 +2,15 @@ export const category = [
 	"All",
 	"Ordinary Drink",
 	"Cocktail",
-	"Shake",
-	"Other / Unknown",
-	"Cocoa",
+	// "Shake",
+	// "Other / Unknown",
+	// "Cocoa",
 	"Shot",
 	"Coffee / Tea",
-	"Homemade Liqueur",
+	// "Homemade Liqueur",
 	"Punch / Party Drink",
 	"Beer",
-	"Soft Drink",
+	// "Soft Drink",
 ];
 
 export const glass = [
