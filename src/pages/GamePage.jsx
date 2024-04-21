@@ -5,6 +5,8 @@ import SelectList from "../components/GamePage/SelectList";
 import GameTitle from "../components/GamePage/GameTitle";
 import LevelComponent from "../components/GamePage/LevelComponent";
 import GameSuccess from "../components/GamePage/GameSuccess";
+import LoadingPage from "../pages/loadingPage/LoadingPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function GamePage() {
 	const { data, isLoading, isError } = useRandomCocktail();
@@ -12,9 +14,6 @@ function GamePage() {
 	const [level, setLevel] = useState(0);
 	const [correctNumber, setCorrectNumber] = useState(null);
 	const [levelName, setLevelName] = useState();
-
-	console.log("level", level);
-	console.log("correctNumber", correctNumber);
 
 	useEffect(() => {
 		switch (level) {
@@ -41,11 +40,10 @@ function GamePage() {
 	}, []);
 
 	if (isLoading) {
-		return <div>Loading...</div>;
-	}
-
-	if (isError) {
-		return <div>Error fetching data</div>;
+		return <LoadingPage />;
+	} else if (isError) {
+		console.error(isError);
+		return <NotFoundPage />;
 	}
 
 	return (
