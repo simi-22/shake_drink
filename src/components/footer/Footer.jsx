@@ -1,7 +1,6 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, Typography, Link, GlobalStyles, Box, Stack } from "@mui/material";
-// import flogo from "../assets/images/flogo.svg";
 
 function Copyright(props) {
 	return (

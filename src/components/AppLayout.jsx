@@ -13,6 +13,7 @@ import {
 	Menu,
 	Container,
 	Avatar,
+	Link,
 } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -110,7 +111,22 @@ function AppLayout() {
 							as={NavLink}
 							to="/"
 						>
-							<img src={Logo} alt="logo" />
+							{/* <img src={Logo} alt="logo" /> */}
+							<Typography
+								component="h1"
+								// variant="h4"
+								noWrap
+								// flexGrow="1"
+								sx={{ textAlign: "center", fontSize: "2.2rem" }}
+							>
+								<Link
+									href="/"
+									underline="none"
+									sx={{ color: "#FD4926", fontWeight: 900, WebkitTextStroke: "1px #FD4926" }}
+								>
+									Shake & Drink
+								</Link>
+							</Typography>
 						</Box>
 						<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 							<IconButton
@@ -180,7 +196,22 @@ function AppLayout() {
 							as={NavLink}
 							to="/"
 						>
-							<img src={Logo} alt="logo" />
+							{/* <img src={Logo} alt="logo" /> */}
+							<Typography
+								component="h1"
+								// variant="h4"
+								noWrap
+								// flexGrow="1"
+								sx={{ textAlign: "center", fontSize: "2.2rem" }}
+							>
+								<Link
+									href="/"
+									underline="none"
+									sx={{ color: "#FD4926", fontWeight: 900, WebkitTextStroke: "1px #FD4926" }}
+								>
+									Shake & Drink
+								</Link>
+							</Typography>
 						</Box>
 						<Box
 							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
