@@ -5,6 +5,9 @@ import EmptyHeartIcon from "../../assets/ic-emptyHeart.svg";
 import { useNavigate } from "react-router-dom";
 import { Chip } from "@mui/material";
 import { container, contentWrap, imgWrap, labelWrap } from "./Card.style";
+import { useFavorite } from "../../store/favoriteStore";
+import { useAnalyze } from '../../store/analyzeStore';
+import OriginalDrink from '../../filter/category/OriginalDrink';
 
 // 재료가져오는 함수
 function getNonNullIngredients(data) {
@@ -19,8 +22,10 @@ function getNonNullIngredients(data) {
 }
 
 function Card({ cockTailData, labelText }) {
+	const {addItem, favoriteList} = useFavorite()
+	const {updateState, "Ordinary Drink":ordinaryDrink, "Cocktail":cocktail} = useAnalyze()
 	const navigate = useNavigate();
-	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb } = cockTailData;
+	const { idDrink, strDrink, strAlcoholic, strInstructions, strDrinkThumb, strCategory } = cockTailData;
 
 	// localStorage에서 'likes' 데이터 가져오기 및 초기 like 상태 설정
 	const likesData = JSON.parse(localStorage.getItem("likes") || "[]");
@@ -46,6 +51,7 @@ function Card({ cockTailData, labelText }) {
 		<li
 			css={container}
 			onClick={() => {
+				updateState(strCategory)
 				navigate(`/${idDrink}`);
 			}}
 		>
@@ -69,6 +75,7 @@ function Card({ cockTailData, labelText }) {
 						onClick={(e) => {
 							e.stopPropagation();
 							setLike((prev) => !prev);
+							addItem(cockTailData)
 						}}
 					/>
 				</div>

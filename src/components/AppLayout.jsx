@@ -18,8 +18,8 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import useLogin from "../store/loginStore";
 import Logo from "../assets/image/Logo.png";
+import loginStore from "../store/loginStore";
 
 const pages = ["search", "community", "game"];
 const settings = ["My Page", "Logout"];
@@ -72,12 +72,13 @@ function AppLayout() {
 	const navigate = useNavigate();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	const { isLogin, setIsLogin } = useLogin();
 	const [keyword, setKeyword] = useState("");
+
+	const { isLogin, setIsLogin, setIsLogout } = loginStore((state) => state);
 
 	const handleLogout = () => {
 		setAnchorElUser(null);
-		setIsLogin(false); // 로그아웃 처리
+		setIsLogout();
 	};
 
 	const handleSubmit = (e) => {
@@ -102,16 +103,27 @@ function AppLayout() {
 			>
 				<Container maxWidth="xl">
 					<Toolbar disableGutters>
-						<Box
-							noWrap
-							sx={{
-								display: { xs: "none", md: "flex" },
-							}}
+						<Typography
 							as={NavLink}
 							to="/"
+							variant="h6"
+							noWrap
+							component="h1"
+							href="#app-bar-with-responsive-menu"
+							sx={{
+								mr: 2,
+								textAlign: "center",
+								fontSize: "2.2rem",
+								display: { xs: "none", md: "flex" },
+								letterSpacing: ".1rem",
+								color: "#FD4926",
+								borderBottom: "2px solid transparent",
+								fontWeight: 900,
+								WebkitTextStroke: "1px #FD4926",
+							}}
 						>
-							<img src={Logo} alt="logo" />
-						</Box>
+							Shake & Drink
+						</Typography>
 						<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 							<IconButton
 								size="large"
@@ -171,17 +183,29 @@ function AppLayout() {
 								))}
 							</Menu>
 						</Box>
-						<Box
-							noWrap
-							sx={{
-								display: { xs: "flex", md: "none" },
-								flexGrow: 1,
-							}}
+						<Typography
 							as={NavLink}
 							to="/"
+							variant="h5"
+							noWrap
+							component="a"
+							href="#app-bar-with-responsive-menu"
+							sx={{
+								fontFamily: "Noto Sans, sans-serif",
+								mr: 2,
+								display: { xs: "flex", md: "none" },
+								textAlign: "center",
+								fontSize: "2.2rem",
+								flexGrow: 1,
+								letterSpacing: ".1rem",
+								color: "#FD4926",
+								textDecoration: "none",
+								fontWeight: 900,
+								WebkitTextStroke: "1px #FD4926",
+							}}
 						>
-							<img src={Logo} alt="logo" />
-						</Box>
+							Shake & Drink
+						</Typography>
 						<Box
 							sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, justifyContent: "flex-end" }}
 						>

@@ -11,6 +11,7 @@ import MainSlider from "../components/Slider/MainSlider";
 import midBanner from "../assets/image/jazzbanner.png";
 import MainBanner from "../components/banner/MainBanner";
 import MainGrid from "../components/grid/MainGrid";
+import Footer from "../components/Footer/Footer";
 
 function HomePage() {
 	return (
@@ -23,6 +24,7 @@ function HomePage() {
 			</div>
 			<LatestList />
 			<MainGrid />
+			<Footer />
 		</div>
 	);
 }

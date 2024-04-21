@@ -6,7 +6,7 @@ export const useOrder = create((set)=>({
 	addTotalMoney:(val)=>set((state)=>({totalMoney: state.totalMoney + val})),
 	minusTotalMoney:(val)=>set((state)=>({totalMoney: state.totalMoney -val})),
 
-	addToOrder: (item)=> set((state)=>({orderList: [...state.orderList, item]})),
+	addToOrder: (item)=> set((state)=>({orderList: [...state.orderList, {...item}]})),
 	addListToOrder:(list)=> set((state)=>({orderList: [...state.orderList, ...list]})),
 	// 주문은 계속해서 중복 주문해도 된다.
 	// addToOrder: (item) => set((state) => {
@@ -30,7 +30,7 @@ export const useOrder = create((set)=>({
 	// 	return { orderList: [...state.orderList, ...filteredList] };
 	// }),
 	removeListFromOrder:(list) => set((state) => {
-		const updatedList = state.orderList.filter(item => !list.some(listItem => listItem.id === item.id));
+		const updatedList = state.orderList.filter(item => !list.some(listItem => listItem.idDrink === item.idDrink));
 		return { orderList: updatedList };
 	}),
 	
