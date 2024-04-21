@@ -28,8 +28,8 @@ const CustomListPage = () => {
 	const [isLiked, setIsLiked] = useState(new Array(drinkData.drinks.length).fill(false));
 
 	// 함수
-	const handleLikeClick = (idx) => {
-		idx.stopPropagation(); // 이벤트 버블링 방지
+	const handleLikeClick = (idx, e) => {
+		e.stopPropagation(); // 이벤트 버블링 방지
 		setIsLiked((prevState) => {
 			const newState = [...prevState];
 			newState[idx] = !newState[idx];
@@ -89,7 +89,7 @@ const CustomListPage = () => {
 							<div className="customsTitle">{index.strDrink}</div>
 							<div className="customsScript">
 								<div>{index.strInstructions}</div>
-								<button className="faHeart" onClick={() => handleLikeClick(idx + 13)}>
+								<button className="faHeart" onClick={(e) => handleLikeClick(idx + 13, e)}>
 									<FontAwesomeIcon
 										icon={isLiked[idx + 13] ? faSolidHeart : faHeart}
 										color={isLiked[idx + 13] ? "red" : "white"}
