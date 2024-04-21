@@ -16,6 +16,10 @@ import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import LocalBarRoundedIcon from "@mui/icons-material/LocalBarRounded";
 import SubscriptionsRoundedIcon from "@mui/icons-material/SubscriptionsRounded";
 import Video from "./Video/Video";
+import coc1 from "../assets/cocktail1.png";
+import coc2 from "../assets/cocktail2.png";
+import coc3 from "../assets/cocktail3.png";
+import coc4 from "../assets/cocktail4.png";
 
 const style = {
 	position: "absolute",
@@ -31,11 +35,13 @@ const style = {
 	// p: 10,
 };
 
-const DetailCocktail = ({ detailData , detailsData }) => {
+const DetailCocktail = ({ detailData }) => {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	console.log("detailData", detailData);
+	const tags = detailData.strTags ? detailData.strTags.split(",") : null;
+	console.log(tags);
 	const inputForm1 = useRef();
 	const inputForm2 = useRef();
 	const onMoveToForm1 = () => {
@@ -44,6 +50,19 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 	const onMoveToForm2 = () => {
 		inputForm2.current.scrollIntoView({ behavior: "smooth", block: "start" });
 	};
+
+	let customImg = "cocktail1"; // 기본 이미지
+
+	if (detailData && detailData.strImageSource !== null && !isNaN(detailData.strImageSource)) {
+		customImg = `cocktail${detailData.strImageSource + 1}`;
+	}
+	let myImg = "";
+	if (detailData && detailData.strImageSource !== null && isNaN(detailData.strImageSource)) {
+		myImg = detailData.strImageSource;
+	}
+
+	console.log("customImg", customImg);
+
 	return (
 		<div>
 			<Modal
@@ -53,15 +72,28 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 				aria-describedby="modal-modal-description"
 			>
 				<Box sx={style}>
-					<Video strVideo={detailData.strVideo?detailData.strVideo:null} />
+					<Video strVideo={detailData.strVideo ? detailData.strVideo : null} />
 					{/* <Typography id="modal-modal-title" variant="h6" component="h2"></Typography>
 					<Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography> */}
 				</Box>
 			</Modal>
 			<Grid container className="detail-information-container" spacing={2}>
 				<Grid item xs={12} sm={6}>
+					{/* <div id="middle-banner">
+				<img src={midBanner} alt="재즈페스티벌" />
+			</div> */}
 					<div className="cocktail-image-wrap">
-						<img src={detailData?.strDrinkThumb} alt="cocktail" className="cocktail-image" />
+						{detailData && detailData.strDrinkThumb ? (
+							<img src={detailData?.strDrinkThumb} alt="cocktail" className="cocktail-image" />
+						) : !isNaN(detailData.strImageSource) ? (
+							<img
+								src={require(`../assets/${customImg}.png`)}
+								alt="cocktail"
+								className="cocktail-image"
+							/>
+						) : (
+							<img src={myImg} alt="cocktail" className="cocktail-image" />
+						)}
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={6}>
@@ -72,8 +104,8 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 						</div>
 
 						<div>
-							<span className="title">한글칵테일</span>
-							<span className="secondTitle">{detailData?.strDrink}</span>
+							<span className="title">{detailData?.strDrink}</span>
+							{/* <span className="secondTitle">한글칵테일</span> */}
 						</div>
 						<div className="str-glass">Cup : {detailData?.strGlass}</div>
 						<div className="buttonWrap">
@@ -88,20 +120,21 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 									ingredient
 								</Button>
 							</div>
-							<div><Button
-								variant="contained"
-								onClick={onMoveToForm2}
-								endIcon={<ChecklistRtlIcon />}
-								color="warning"
-								className="recipe-btn"
-							>
-								recipe
-							</Button></div>
-							
+							<div>
+								<Button
+									variant="contained"
+									onClick={onMoveToForm2}
+									endIcon={<ChecklistRtlIcon />}
+									color="warning"
+									className="recipe-btn"
+								>
+									recipe
+								</Button>
+							</div>
 						</div>
-						<div>
+						<div className="button-tag-wrap">
+							<div>
 								{detailData.strVideo ? (
-									
 									<Button
 										onClick={handleOpen}
 										variant="contained"
@@ -112,16 +145,26 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 										Youtube recipe
 									</Button>
 								) : (
-									<Button variant="contained" disabled endIcon={<SubscriptionsRoundedIcon />}className="disabled-btn">
+									<Button
+										variant="contained"
+										disabled
+										endIcon={<SubscriptionsRoundedIcon />}
+										className="disabled-btn"
+									>
 										No recipe
 									</Button>
 								)}
 							</div>
+							<div className="tags">
+								{tags?.map((tag) => (
+									<div className="tag">{`#${tag}`}</div>
+								))}
+							</div>
+						</div>
 
-						
-						<FormGroup>
+						{/* <FormGroup>
 							<FormControlLabel control={<Switch defaultChecked />} label="한글 번역" />
-						</FormGroup>
+						</FormGroup> */}
 					</div>
 				</Grid>
 			</Grid>
@@ -129,10 +172,9 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 				<div className="explanation-paper-img-container">
 					<img src={ingredientCocktail} className="ingredient-paper-img" />
 					<div id="ingredient-container">
-							<h1 class="style-1">Ingredient</h1>
-						</div>
+						<h1 class="style-1">Ingredient</h1>
+					</div>
 					<div className="ingredient-list">
-				
 						{detailData?.ingredients.map((item) => (
 							<div className="ingredient-row" key={item.id}>
 								<div className="item-ingredient">{item.ingredient}</div>
@@ -149,7 +191,9 @@ const DetailCocktail = ({ detailData , detailsData }) => {
 			<Paper elevation={12} className="explanation-paper" ref={inputForm2}>
 				<div className="explanation-paper-img-container">
 					<img src={receiptCocktail2} className="explanation-paper-img" />
-					<div className="recipe-container"><h1 class="style-1">Recipe</h1></div>
+					<div className="recipe-container">
+						<h1 class="style-1">Recipe</h1>
+					</div>
 					<div className="explanation-div">{detailData?.strInstructions}</div>
 				</div>
 			</Paper>

@@ -11,13 +11,16 @@ import { useRef } from "react";
 
 const DetailPage = () => {
 	const location = useLocation();
-    const detailsData = location.state;
+	const detailsData = location.state;
 	const { id } = useParams();
 	let { data: detailData, isLoading: detailLoading } = useDetailCocktail(id);
-	if(detailData==undefined){
-		detailData=detailsData
+	if (detailData == undefined) {
+		detailData = detailsData;
 	}
-	console.log('detailData10',detailData)
+	if (detailData && detailData.ingredientsMapping) {
+		detailData.ingredients = detailData.ingredientsMapping;
+	}
+	console.log("detailData10", detailData);
 	const {
 		data: searchByIngredientData,
 		isLoading,
@@ -34,7 +37,7 @@ const DetailPage = () => {
 				<LoadingPage />
 			) : (
 				<div>
-					<DetailCocktail detailData={detailData} detailsData={detailsData} />
+					<DetailCocktail detailData={detailData} />
 					<RecommendCocktail searchByIngredientData={searchByIngredientData} base={base} />
 				</div>
 			)}
