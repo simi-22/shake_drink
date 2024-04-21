@@ -49,4 +49,7 @@ export const latestCocktailApi = axios.create({
 
 export const searchApi = axios.create({
 	baseURL: "https://www.thecocktaildb.com/api/json/v1/1",
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
