@@ -8,10 +8,10 @@ const CartCard = ({item}) => {
 	}}>
 		<div className='card-img' style={{paddingLeft: '10px', }} >
 			<img width="100px"
-				src={item.image} alt=""/>
+				src={item.strDrinkThumb} alt=""/>
 		</div>
 		<div className='card-text' style={{marginRight:'20px', fontSize:'20px'}}>
-			<div>{item.drink}</div>
+			<div>{item.strDrink}</div>
 		</div>
 	</div>
   )
