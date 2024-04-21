@@ -18,6 +18,9 @@ const CustomListPage = () => {
     console.log(drinkData);
 
     const navigate = useNavigate();
+    const goToDetails = (index)=>{
+      navigate(`/${index.idDrink}`, {state: {...index}})
+    }
     const goToCustomPage = ()=>{
         navigate('/custom');
     }
@@ -50,7 +53,7 @@ const CustomListPage = () => {
       <div className='customItemSection'>
         {/* 업로드된 데이터 */}
         {drinkData.drinks.reverse().map((index, idx) => (
-            <div key={index} className='sample'>
+            <div key={index} onClick={()=>goToDetails(index)} className='sample'>
             <div className='imageBox'>
             <img 
                 src={

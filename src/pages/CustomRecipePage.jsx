@@ -126,6 +126,7 @@ const CustomRecipePage = () => {
 		const newDrink = {
 			idDrink: Math.floor(Math.random() * 1000000), // 임의의 아이디 생성
 			strDrink: cocktailName,
+			ingredients:[{'ddd':'1'}],
 			strCategory: selectedCategory, // 카테고리 입력 필요
 			strAlcoholic: alcohol, // 알코올 유무 입력 필요
 			strGlass: selectedGlass, // 사용하는 글래스 입력 필요
@@ -144,6 +145,7 @@ const CustomRecipePage = () => {
 			strMeasure6: `${ingredients[5]?.amount || null} ${ingredients[5]?.unit || null}`,
 			strImageSource: selectedFile !== null ? selectedFile : clickedImageIndex,
 			strRecipe: recipeDescription,
+			strVideo : null
 		};
 		// 새로운 객체를 기존 데이터에 추가
 		const updatedData = {
