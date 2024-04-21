@@ -37,26 +37,6 @@ const SearchButtons = ({ onCategoryChange }) => {
 						onCategoryChange?.(categoryItem);
 					}}
 					sx={buttonStyle(selected === index)}
-					// sx={{
-					// backgroundColor: "white",
-					// borderColor: "lightgray",
-					// color: "#FD4926",
-					// borderRadius: "8px",
-					// border: "1px solid #FD4926",
-
-					// "& .MuiButton-root": {
-					// 	borderRadius: 5,
-					// },
-
-					// "& .MuiButtonBase-root": {
-					// 	borderRadius: 5,
-					// },
-					// "&:-webkit-autofill": {
-					// 	borderRadius: 5,
-					// 	WebkitBoxShadow: "0 0 0 1000px #FD4926 inset;",
-					// 	WebkitTextFillColor: "#FD4926",
-					// },
-					// }}
 				>
 					{categoryItem}
 				</Button>
