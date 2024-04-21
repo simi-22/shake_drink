@@ -277,7 +277,7 @@ function UserPage() {
 								checked={checked}
 								onChange={handleChange}
 								inputProps={{ "aria-label": "controlled" }}
-							/>{" "}
+							/>
 							전체선택
 							<Button onClick={addFavsToCart} variant="contained" color="error" sx={{ ml: "10px" }}>
 								Cart에 담기
