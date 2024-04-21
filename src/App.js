@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
 import UserPage from "./pages/UserPage";
@@ -11,6 +12,7 @@ import CustomRecipePage from "./pages/CustomRecipePage";
 import CustomListPage from "./pages/CustomListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import FavorCategoryDrinks from "./pages/FavorCategoryDrinks";
+import Footer from "./components/footer/Footer";
 function App() {
 	return (
 		<Routes>

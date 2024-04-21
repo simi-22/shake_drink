@@ -11,6 +11,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faSolidHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Typography } from "@mui/material";
+import Footer from "../components/footer/Footer";
 
 const CustomListPage = () => {
 	// 로컬저장소 데이터 가져오기
@@ -125,6 +126,7 @@ const CustomListPage = () => {
 					))}
 				</div>
 			</Container>
+			<Footer />
 		</div>
 	);
 };

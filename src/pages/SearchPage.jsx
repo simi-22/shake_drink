@@ -11,6 +11,7 @@ import YoutubeSearchedForIcon from "@mui/icons-material/YoutubeSearchedFor";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import LoadingPage from "./loadingPage/LoadingPage";
+import Footer from "../components/footer/Footer";
 
 const ContainerSx = styled(Container)(({ theme, paddingTop = 8, paddingBottom = 2 }) => ({
 	// pt: 8,
@@ -208,6 +209,7 @@ const SearchPage = () => {
 				</Box>
 				{/* Card data list Area E */}
 			</Box>
+			<Footer />
 		</>
 	);
 };
