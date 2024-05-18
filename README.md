@@ -1,16 +1,16 @@
 # React Team Project
-
-### Period
+칵테일api를 이용한 쇼핑몰 제작
+# Period
 2024.4.14 ~ 2024.4.21
-### Skill
+# Skills
 React, Javascript, Zustand, ReactQuery, MUI, Emotion
-### Data
+# Api
 thecocktaildb
-### Tools
+# Tools
 Github, Figma, Notion, Slack, Discord
-### Deploy
+# Deploy
 [Netlify](https://shakedrink.netlify.app/), [vercel](https://shake-drink.vercel.app/)
-### Member
+# Members
 [조용주](https://github.com/pizzaYami) 
 [최병권](https://github.com/shanghanrun) 
 [심재은](https://github.com/simi-22) 
