@@ -5,7 +5,7 @@
 # Skills
 React, Javascript, Zustand, ReactQuery, MUI, Emotion
 # Api
-thecocktaildb
+[TheCocktailDb](https://www.thecocktaildb.com/)
 # Tools
 Github, Figma, Notion, Slack, Discord
 # Deploy
