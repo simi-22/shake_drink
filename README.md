@@ -17,3 +17,6 @@ Github, Figma, Notion, Slack, Discord
 [최석원](https://github.com/tjrdnjs123) 
 [김진한](https://github.com/MR-Gnani) 
 [강예영](https://github.com/hey-anna)
+
+# Features
+
