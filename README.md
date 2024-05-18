@@ -1,5 +1,7 @@
 # React Team Project
 
+### Period
+2024.4.14 ~ 2024.4.21
 ### Skill
 React, Javascript, Zustand, ReactQuery, MUI, Emotion
 ### Data
