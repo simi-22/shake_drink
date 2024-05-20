@@ -10,7 +10,7 @@ React, Javascript, Zustand, ReactQuery, MUI, Emotion
 Github, Figma, Notion, Slack, Discord
 # Deploy
 [Netlify](https://shakedrink.netlify.app/), [vercel](https://shake-drink.vercel.app/)
-# Work
+# Features
 메인페이지(심재은), 로그인페이지(심재은), 검색페이지(강예영),상세페이지(최석원), 커뮤니티게시판(김진한), 게임페이지(조용주), 마이페이지(최병권)
 ### 메인페이지
 SlickSlide 활용해 스와이퍼구현
@@ -46,5 +46,5 @@ api에서 제공하는 특정칵테일 검색 가능
 [김진한](https://github.com/MR-Gnani) 
 [강예영](https://github.com/hey-anna)
 
-# Features
+
 
